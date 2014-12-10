@@ -1,15 +1,27 @@
 package webmanager;
 
-import patterneditor.PatternManagerFacade;
-import datamanager.DAOFacade;
-import datamanager.DTOFacade;
+import patterneditor.PatternEditorFacade;
+import patternselector.PatternSelectorFacade;
+import datamanager.dao.DAOFacade;
+import datamanager.dto.DTOFacade;
 
 public class FacadeFactory {
+	
+	private DAOFacade accessObjects;
+	private DTOFacade targetObjects;
+	
+	public FacadeFactory(){
+		accessObjects = new DAOFacade();
+		targetObjects = new DTOFacade();
+	}
 
-	public PatternManagerFacade initiateProgram(){
-		DAOFacade accessObjects = new DAOFacade();
-		DTOFacade targetObjects = new DTOFacade();
-		PatternManagerFacade manager = new PatternManagerFacade(accessObjects, targetObjects);
-		return manager;
+	public PatternEditorFacade initiateEditor(){
+		PatternEditorFacade editor = new PatternEditorFacade(accessObjects, targetObjects);
+		return editor;
+	}
+	
+	public PatternSelectorFacade initiateSelector(){
+		PatternSelectorFacade selector = new PatternSelectorFacade(accessObjects, targetObjects);
+		return selector;
 	}
 }

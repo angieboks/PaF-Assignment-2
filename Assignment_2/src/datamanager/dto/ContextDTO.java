@@ -1,7 +1,5 @@
 package datamanager.dto;
 
-import javax.lang.model.element.Element;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -19,8 +17,8 @@ public class ContextDTO implements IDTOAdapter {
 		
 		//Description
 		Node description = doc.createElement("Description");
-		String descript = obj.description;
-		description.appendChild(doc.createTextNode(obj));
+		String descript = obj.toString();
+		description.appendChild(doc.createTextNode((String)obj));
 		rootElement.appendChild(description);
 		
 		
