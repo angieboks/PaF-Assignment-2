@@ -1,5 +1,6 @@
 package patterneditor;
 
+import patternselector.FinderFactory;
 import datamanager.DAOFacade;
 import datamanager.DTOFacade;
 
