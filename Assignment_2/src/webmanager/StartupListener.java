@@ -4,7 +4,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import patternmanager.PatternManagerFacade;
+import patterneditor.PatternManagerFacade;
 
 public class StartupListener implements ServletContextListener {
 

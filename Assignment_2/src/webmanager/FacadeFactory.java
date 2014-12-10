@@ -1,6 +1,6 @@
 package webmanager;
 
-import patternmanager.PatternManagerFacade;
+import patterneditor.PatternManagerFacade;
 import datamanager.DAOFacade;
 import datamanager.DTOFacade;
 
