@@ -1,8 +1,8 @@
 package webmanager;
 
 import patternmanager.PatternManagerFacade;
-import datamanager.dao.DAOFacade;
-import datamanager.dto.DTOFacade;
+import datamanager.DAOFacade;
+import datamanager.DTOFacade;
 
 public class FacadeFactory {
 

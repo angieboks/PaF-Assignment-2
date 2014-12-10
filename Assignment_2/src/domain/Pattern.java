@@ -3,7 +3,7 @@ package domain;
 import java.io.File;
 import java.util.ArrayList;
 
-public abstract class Pattern extends Solution {
+public class Pattern extends Solution {
 	
 	private String name;
 	private File diagram;
@@ -15,5 +15,9 @@ public abstract class Pattern extends Solution {
 	private ArrayList<Context> contexts = new ArrayList<Context>();
 	private ArrayList<Participant> participants = new ArrayList<Participant>();
 	
+	public Pattern(String name){
+		super();
+		this.name = name;
+	}
 	
 }
