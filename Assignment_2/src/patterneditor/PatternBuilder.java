@@ -1,9 +1,10 @@
 package patterneditor;
 
-import domain.Category;
-import domain.Context;
-import domain.Participant;
-import domain.Pattern;
+import java.io.File;
+import java.util.ArrayList;
+
+import datamanager.dao.DAOFacade;
+import datamanager.dto.DTOFacade;
 import domain.Solution;
 
 public interface PatternBuilder {
@@ -13,7 +14,7 @@ public interface PatternBuilder {
 	void addAKA(ArrayList<String> aka);
 	void addPro(ArrayList<String> pro);
 	void addCon(ArrayList<String> con);
-	void addCategory(Arraylist<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
+	void addCategory(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
 	void addContext(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
 	void addParticipant(ArrayList<String> p, DAOFacade accessObjects, DTOFacade targetObjects);
 	Solution getPattern();

@@ -1,11 +1,11 @@
 package patterneditor;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import patternselector.FinderFactory;
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
-import domain.Category;
-import domain.Context;
-import domain.Participant;
 
 public class PatternEditorFacade {
 
