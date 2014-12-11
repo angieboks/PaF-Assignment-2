@@ -1,27 +1,63 @@
 package datamanager.dto;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import domain.Category;
+import domain.Context;
+import domain.Force;
+import domain.Participant;
+import domain.Pattern;
+import domain.Problem;
+import domain.Solution;
 
 public class ContextDTO implements IDTOAdapter {
 
-	public ContextDTO(){
-		
-	}
+	private IDTOAdapter nextInChain;
+	private static ContextDTO instance;
 	
-	public void write(Object obj, Document doc) {
-		
-		//Root
-		Node rootElement = doc.createElement("Context");
-		doc.appendChild(rootElement);
-		
-		//Description
-		Node description = doc.createElement("Description");
-		String descript = obj.toString();
-		description.appendChild(doc.createTextNode((String)obj));
-		rootElement.appendChild(description);
-		
+	private ContextDTO(){
 		
 	}
 
+	public static ContextDTO getInstance(){
+		if(instance == null){
+			instance = new ContextDTO();
+		}
+		return instance;
+	}
+	
+	@Override
+	public void write(Object obj, Document doc, String step) {
+		// TODO Auto-generated method stub
+		if(step != "context"){
+			nextInChain.write(obj, doc, step);
+		}
+		else{
+			
+			Context context = (Context) obj;
+			//Root
+			Element contextElement = doc.createElement("context");
+			doc.appendChild(contextElement);
+			
+				//description
+				Element description = doc.createElement("description");
+				description.appendChild(doc.createTextNode(/*context.getDescription()*/ "omschrijving"));
+				contextElement.appendChild(description);
+				
+				//example
+				Element example = doc.createElement("example");
+				description.appendChild(doc.createTextNode(/*context.getExample()*/ "voorbeeld"));
+				contextElement.appendChild(example);
+			
+		}
+		
+	}
+
+	public void setNextInChain(IDTOAdapter adapter) {
+		// TODO Auto-generated method stub
+		nextInChain = adapter;
+		
+	}
 }
