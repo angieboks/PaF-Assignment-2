@@ -5,19 +5,19 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class ProblemDAO implements IDAOAdapter {
+public class ForceDAO implements IDAOAdapter {
 
-	private static ProblemDAO instance;
+	private static ForceDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
 	
-	private ProblemDAO(){
+	private ForceDAO(){
 		
 	}
 	
-	public static ProblemDAO getInstance(){
+	public static ForceDAO getInstance(){
 		if(instance == null){
-			instance = new ProblemDAO();
+			instance = new ForceDAO();
 			return instance;
 		}
 		else{
@@ -26,8 +26,8 @@ public class ProblemDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "problem_description"){
-			NodeList nList = doc.getElementsByTagName("problem");
+		if(step == "force_description"){
+			NodeList nList = doc.getElementsByTagName("force");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -40,6 +40,7 @@ public class ProblemDAO implements IDAOAdapter {
 			nextChain.read(doc, step);
 		}
 		return obj;
+		
 	}
 
 	@Override

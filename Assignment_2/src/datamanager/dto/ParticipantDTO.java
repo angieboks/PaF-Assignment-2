@@ -36,7 +36,7 @@ public class ParticipantDTO implements IDTOAdapter {
 			doc.appendChild(participantElement);
 			
 				//isClass
-				Element isClass = doc.createElement("isClass");
+				Element isClass = doc.createElement("isclass");
 				isClass.appendChild(doc.createTextNode(/*participant.getisClass()*/ "isClass"));
 				participantElement.appendChild(isClass);
 				

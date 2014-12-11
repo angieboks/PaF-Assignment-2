@@ -17,8 +17,9 @@ public class DTOFacade {
 	public void createDocument(Object obj){
 		dtoFactory = new DTOFactory();
 		doc = dtoFactory.createDocument();
+		
 	}
-	public void writeDocument(Object obj, Document doc, String step){
+	public void writeDocument(Object obj, String step){
 		adapter.write(obj, doc, step);
 	}
 	/*

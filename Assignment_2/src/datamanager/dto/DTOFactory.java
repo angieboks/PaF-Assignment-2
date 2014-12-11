@@ -52,7 +52,9 @@ public class DTOFactory {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			Document doc = docBuilder.newDocument();
-		
+			if(doc == null){
+				System.out.println("Error: Document is leeg");
+			}
 			return doc;
 			
 		} catch (ParserConfigurationException e) {

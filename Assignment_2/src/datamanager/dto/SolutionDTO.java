@@ -35,7 +35,7 @@ public class SolutionDTO implements IDTOAdapter {
 			doc.appendChild(solutionElement);
 			
 				//isPrimary
-				Element isPrimary = doc.createElement("isPrimary");
+				Element isPrimary = doc.createElement("isprimary");
 				isPrimary.appendChild(doc.createTextNode(/*solution.getIsPrimary()*/ "isPrimary"));
 				solutionElement.appendChild(isPrimary);
 				

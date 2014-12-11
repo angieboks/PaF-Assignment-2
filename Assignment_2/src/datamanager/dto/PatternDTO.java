@@ -40,7 +40,7 @@ public class PatternDTO implements IDTOAdapter {
 				patternElement.appendChild(name);
 				
 				//AKA
-				Element aka = doc.createElement("Also known as");
+				Element aka = doc.createElement("aka");
 				//int lengthAKA = pattern.getLengthAKA();
 				int lengthAKA = 5;
 				for(int i = 0; i < lengthAKA; i++){
