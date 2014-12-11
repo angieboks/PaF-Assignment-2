@@ -23,7 +23,8 @@ public class DAOFacade {
 	public Object readDocument(Document doc, String step){
 		return adapter.read(doc, step);
 	}
-	/*
+	/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
+	 *
 	 * 	        Parameter String  			  Parameter Object			returns (in Object file); Just cast it. So for example: pattern.name = (String) Object;
 	 * 1.0 Step "pattern_name" 				= Pattern.name 				String
 	 * 1.1 Step "pattern_aka" 				= Pattern.also_known_as 	ArrayList<String>

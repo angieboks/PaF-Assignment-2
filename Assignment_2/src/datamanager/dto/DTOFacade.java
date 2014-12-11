@@ -22,7 +22,8 @@ public class DTOFacade {
 	public void writeDocument(Object obj, String step){
 		adapter.write(obj, doc, step);
 	}
-	/*
+	/* !!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
+	 * 
 	 * 	        Parameter String  Parameter Object
 	 * 1. Step "pattern" 		= Pattern -
 	 * 2. Step "category"		= Category -
