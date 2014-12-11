@@ -21,7 +21,7 @@ public class DAOFacade {
 		
 	}
 	
-	public Object readDocument(Document doc, String step){
+	public Object readDocument(String step){
 		return adapter.read(doc, step);
 	}
 	/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
