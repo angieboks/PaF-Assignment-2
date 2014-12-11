@@ -119,4 +119,13 @@ public class Pattern extends Solution {
 		}
 		return b;
 	}
+
+	public boolean isReady(){
+		if(name != null && categories.size() != 0 && contexts.size() != 0 && participants.size() != 0){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 }

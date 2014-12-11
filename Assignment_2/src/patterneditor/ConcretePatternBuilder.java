@@ -22,43 +22,66 @@ public class ConcretePatternBuilder implements PatternBuilder {
 	}
 
 	@Override
-	public void addAKA(String aka) {
-		product.addAKA(aka);
+	public void addAKA(ArrayList<String> aka) {
+		for(String s: aka){
+			product.addAKA(s);
+		}
 
 	}
 
 	@Override
-	public void addPro(String pro) {
-		product.addPro(pro);
+	public void addPro(ArrayList<String> pro) {
+		for(String s: pro){
+			product.addPro(s);
+		}
+	}
+
+	@Override
+	public void addCon(ArrayList<String> con) {
+		for(String s: con){
+			product.addCon(s);
+		}
+	}
+
+	@Override
+	public void addCategory(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects) {
+		for(String s: c){
+			if(!accessObjects.hasCategory(s)){
+				targetObjects.makeCategory(s);
+			}
+			product.addCategory(new Category(s));
+		}
 
 	}
 
 	@Override
-	public void addCon(String con) {
-		product.addCon(con);
+	public void addContext(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects) {
+		for(String s: c){
+			if(!accessObjects.hasContext(s)){
+				targetObjects.makeContext(s);
+			}
+			product.addContext(new Context(s));
+		}
 
 	}
 
 	@Override
-	public void addCategory(Category c) {
-		product.addCategory(c);
-
-	}
-
-	@Override
-	public void addContext(Context c) {
-		product.addContext(c);
-
-	}
-
-	@Override
-	public void addParticipant(Participant p) {
-		product.addParticipant(p);
-
+	public void addParticipant(ArrayList<String> p, DAOFacade accessObjects, DTOFacade targetObjects) {
+		for(String s: p){
+			if(!accessObjects.hasParticipant(s)){
+				targetObjects.makeParticipant(s);
+			}
+			product.addParticipant(new Participant(s));
+		}
 	}
 
 	@Override
 	public Solution getPattern(){
-		return product;
+		if(product != null && product.isReady()){
+			return product;
+		}
+		else{
+			return null;
+		}
 	}
 }

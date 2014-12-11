@@ -10,11 +10,11 @@ public interface PatternBuilder {
 
 	void makePattern(String name, boolean isPrimary, String description);
 	void addDia(File f);
-	void addAKA(String aka);
-	void addPro(String pro);
-	void addCon(String con);
-	void addCategory(Category c);
-	void addContext(Context c);
-	void addParticipant(Participant p);
+	void addAKA(ArrayList<String> aka);
+	void addPro(ArrayList<String> pro);
+	void addCon(ArrayList<String> con);
+	void addCategory(Arraylist<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
+	void addContext(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
+	void addParticipant(ArrayList<String> p, DAOFacade accessObjects, DTOFacade targetObjects);
 	Solution getPattern();
 }
