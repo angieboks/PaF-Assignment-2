@@ -16,5 +16,5 @@ public interface PatternBuilder {
 	void addCategory(Category c);
 	void addContext(Context c);
 	void addParticipant(Participant p);
-	Solution savePattern();
+	Solution getPattern();
 }
