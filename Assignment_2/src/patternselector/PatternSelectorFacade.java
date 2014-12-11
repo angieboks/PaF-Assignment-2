@@ -1,9 +1,6 @@
 package patternselector;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 
 import datamanager.dao.DAOFacade;
 import domain.Pattern;
@@ -22,10 +19,10 @@ public class PatternSelectorFacade {
 	 */
 	private DAOFacade accessObjects;
 	/**
-	 * Variable finder, type FinderFactory
-	 * The finder is the Facade's point of access to the rest of the package's classes. It will be responsible for the concrete handling of any commands given to the Facade.
+	 * Variable finder, type Finder
+	 * The finder is the Facade's point of access to the rest of the package's classes. It will be responsible for the concrete handling of any search-related commands given to the Facade.
 	 */
-	private FinderFactory finder;
+	private Finder finder;
 	
 	/**
 	 * Constructor PatternSelectorFacade
@@ -34,27 +31,16 @@ public class PatternSelectorFacade {
 	 */
 	public PatternSelectorFacade(DAOFacade accessObjects) {
 		this.accessObjects = accessObjects;
-		finder = new FinderFactory();
+		finder = new Finder();
 	}
 	
 	/**
 	 * Method search
-	 * Orders FinderFactory to search for Patterns matching the search criteria provided by the user.
-	 * @param parameters contains a list of <identifier, content> that the FinderFactory can use as filters.
-	 * @return a list of found Patterns arranged according to how well they match the search criteria.
+	 * Orders Finder to search for Patterns matching the search criteria provided by the user.
+	 * @param parameters contains a list of <identifier, content> that the Finder can use as filters.
+	 * @return an array of found Patterns arranged according to how well they match the search criteria.
 	 */
-	public Map<Pattern, Integer> search(HashMap<String, String> parameters){
-		Map<Pattern, Integer> results = new TreeMap<Pattern, Integer>();
-		Iterator it = parameters.entrySet().iterator();
-	    while (it.hasNext()) {
-	        Map.Entry param = (Map.Entry)it.next();
-	        Map<Pattern, Integer> search = finder.findPattern(param.getKey().toString(), param.getValue().toString());
-			Iterator it2 = search.entrySet().iterator();
-			while(it2.hasNext()){
-		        Map.Entry found = (Map.Entry)it2.next();
-				results.put((Pattern)found.getKey(), (int)found.getValue());
-			}
-	    }
-		return results;
+	public Pattern[] search(Map<String, String> parameters){
+		return finder.findPatterns(parameters);
 	}
 }

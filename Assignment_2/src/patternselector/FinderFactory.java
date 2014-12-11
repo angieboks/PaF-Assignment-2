@@ -28,10 +28,20 @@ public class FinderFactory {
 	 */
 	public Map<Pattern, Integer> findPattern(String identifier, String content) {
 		Map<Pattern, Integer> results = new TreeMap<Pattern, Integer>();
+		int priority = 0;
 		switch(identifier){
-			case "name": finder = new FindByName(); finder.setPriority(10); break;
+			case "name": finder = new FindByName(); priority = 100; break;
+			case "problem": finder = new FindByProblem(); priority = 90; break;
+			case "purpose": finder = new FindByPurpose(); priority = 80; break;
+			case "scope": finder = new FindByScope(); priority = 70; break;
+			case "force": finder = new FindByForce(); priority = 60; break;
+			case "context": finder = new FindByContext(); priority = 50; break;
+			case "participant": finder = new FindByParticipant(); priority = 40; break;
 		}
 		results = finder.findPattern(content);
+		for(Map.Entry<Pattern, Integer> entry : results.entrySet()){
+			entry.setValue(entry.getValue() + priority);
+		}
 		return results;
 	}
 

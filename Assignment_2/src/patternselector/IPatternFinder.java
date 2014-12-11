@@ -20,10 +20,4 @@ public interface IPatternFinder {
 	 */
 	Map<Pattern, Integer> findPattern(String content);
 	
-	/**
-	 * Method setPriority
-	 * Determines the relevance of the class's search function.
-	 * @param prio sets the priority.
-	**/
-	void setPriority(int prio);
 }

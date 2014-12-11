@@ -5,22 +5,22 @@ import java.util.Map;
 import domain.Pattern;
 
 /**
- * Class FindByName
- * Searches for Patterns based on their name
+ * Class FindByProblem
+ * Searches for Patterns based on which Problem(s) they solve.
  * @author Angie
  * Version 1
  */
-public class FindByName implements IPatternFinder {
+public class FindByProblem implements IPatternFinder {
 	
 	/**
-	 * Constructor FindByName
+	 * Constructor FindByProblem
 	 * Empty constructor.
 	 */
-	public FindByName(){}
+	public FindByProblem(){}
 	
 	/**
 	 * Method findPattern
-	 * Searches Pattern names and aka lists for the given content.
+	 * Searches through each Problem for the given content and then returns all associated Patterns.
 	 */
 	@Override
 	public Map<Pattern, Integer> findPattern(String content) {
