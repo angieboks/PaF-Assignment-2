@@ -14,11 +14,6 @@ import domain.Pattern;
 public class PatternSelectorFacade {
 	
 	/**
-	 * Variable _instance
-	 * Stores the existing instance of this class (since this is a Singleton).
-	 */
-	private static PatternSelectorFacade _instance = null;
-	/**
 	 * Variable accessObjects, type DAOFacade
 	 * This Facade handles access to stored Pattern data.
 	 */
@@ -31,33 +26,11 @@ public class PatternSelectorFacade {
 	
 	/**
 	 * Constructor PatternSelectorFacade
-	 * This constructor is called once to start the Facade. At this point finder is initiated as a new FinderFactory.
-	 * @param accessObjects gives access to the stored Pattern data.
+	 * Initiates finder as a new FinderFactory and locates the required DAOFacade object.
 	 */
-	private PatternSelectorFacade(DAOFacade accessObjects) {
-		this.accessObjects = accessObjects;
+	public PatternSelectorFacade() {
+		this.accessObjects = DAOFacade.getInstance();
 		finder = new Finder();
-	}
-	
-	/**
-	 * Method createInstance
-	 * Responsible for the creation of exactly one instance of this class.
-	 */
-	private synchronized static void createInstance (DAOFacade accessObjects) { 
-		if (_instance == null) {
-			_instance = new PatternSelectorFacade(accessObjects); 
-		}
-	} 
-
-	/**
-	 * Method getInstance
-	 * Calls createInstance
-	 * @param accessObjects contains the DAOFacade object that will be used by this class.
-	 * @return the one instance of PatternSelectorFacade.
-	 */
-	public static PatternSelectorFacade getInstance(DAOFacade accessObjects){
-		createInstance(accessObjects);
-		return _instance;
 	}
 	
 	/**
