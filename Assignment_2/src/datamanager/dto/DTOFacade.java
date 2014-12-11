@@ -4,6 +4,9 @@ import java.io.File;
 
 import org.w3c.dom.Document;
 
+import datamanager.dto.task.IDTOAdapter;
+import datamanager.dto.task.factory.DTOFactory;
+
 public class DTOFacade {
 
 // Alle variabelen in package Domain moeten een get-functie krijgen..!

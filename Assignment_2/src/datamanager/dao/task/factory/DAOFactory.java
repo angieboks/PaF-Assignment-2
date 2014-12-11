@@ -1,4 +1,4 @@
-package datamanager.dao;
+package datamanager.dao.task.factory;
 
 import java.io.File;
 import java.io.IOException;
@@ -10,17 +10,17 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-import datamanager.dto.CategoryDTO;
-import datamanager.dto.ContextDTO;
-import datamanager.dto.ForceDTO;
-import datamanager.dto.IDTOAdapter;
-import datamanager.dto.ParticipantDTO;
-import datamanager.dto.PatternDTO;
-import datamanager.dto.ProblemDTO;
-import datamanager.dto.SolutionDTO;
+import datamanager.dao.task.IDAOAdapter;
+import datamanager.dao.task.read.CategoryDAO;
+import datamanager.dao.task.read.ContextDAO;
+import datamanager.dao.task.read.ForceDAO;
+import datamanager.dao.task.read.ParticipantDAO;
+import datamanager.dao.task.read.PatternDAO;
+import datamanager.dao.task.read.ProblemDAO;
+import datamanager.dao.task.read.SolutionDAO;
 
 public class DAOFactory {
-	
+
 	IDAOAdapter pattern;
 	IDAOAdapter category;
 	IDAOAdapter context;
@@ -28,35 +28,37 @@ public class DAOFactory {
 	IDAOAdapter solution;
 	IDAOAdapter problem;
 	IDAOAdapter force;
-	
-	public DAOFactory(){
+
+	public DAOFactory() {
 		createClasses();
 	}
-	
-	private void createClasses(){
+
+	private void createClasses() {
 		pattern = PatternDAO.getInstance();
 		category = CategoryDAO.getInstance();
 		context = ContextDAO.getInstance();
 		participant = ParticipantDAO.getInstance();
-		solution = SolutionDAO.getInstance();		
+		solution = SolutionDAO.getInstance();
 		problem = ProblemDAO.getInstance();
 		force = ForceDAO.getInstance();
-		
+
 		pattern.setNextInChain(category);
 		category.setNextInChain(context);
 		context.setNextInChain(participant);
 		participant.setNextInChain(solution);
-		solution.setNextInChain(problem);		
+		solution.setNextInChain(problem);
 		problem.setNextInChain(force);
 		force.setNextInChain(pattern);
-	
+
 	}
-	public Document readDocument(File file){
+
+	public Document readDocument(File file) {
 		try {
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder= dbFactory.newDocumentBuilder();
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
+					.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 			Document doc = dBuilder.parse(file);
-			if(doc == null){
+			if (doc == null) {
 				System.out.println("Error: Document is leeg");
 			}
 			doc.getDocumentElement().normalize();
@@ -72,7 +74,7 @@ public class DAOFactory {
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
-	
+
 }

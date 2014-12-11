@@ -1,8 +1,9 @@
-package datamanager.dto;
+package datamanager.dto.task.write;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import datamanager.dto.task.IDTOAdapter;
 import domain.Pattern;
 
 

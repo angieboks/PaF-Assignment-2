@@ -4,7 +4,8 @@ import java.io.File;
 
 import org.w3c.dom.Document;
 
-import datamanager.dao.DAOFactory;
+import datamanager.dao.task.IDAOAdapter;
+import datamanager.dao.task.factory.DAOFactory;
 
 public class DAOFacade {
 	

@@ -1,9 +1,10 @@
-package datamanager.dto;
+package datamanager.dto.task.write;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
+import datamanager.dto.task.IDTOAdapter;
 import domain.Category;
 import domain.Context;
 import domain.Force;

@@ -1,4 +1,4 @@
-package datamanager.dto;
+package datamanager.dto.task.factory;
 
 import java.io.File;
 
@@ -13,6 +13,15 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+
+import datamanager.dto.task.IDTOAdapter;
+import datamanager.dto.task.write.CategoryDTO;
+import datamanager.dto.task.write.ContextDTO;
+import datamanager.dto.task.write.ForceDTO;
+import datamanager.dto.task.write.ParticipantDTO;
+import datamanager.dto.task.write.PatternDTO;
+import datamanager.dto.task.write.ProblemDTO;
+import datamanager.dto.task.write.SolutionDTO;
 
 public class DTOFactory {
 

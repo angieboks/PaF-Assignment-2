@@ -1,9 +1,11 @@
-package datamanager.dao;
+package datamanager.dao.task.read;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+
+import datamanager.dao.task.IDAOAdapter;
 
 public class SolutionDAO implements IDAOAdapter {
 

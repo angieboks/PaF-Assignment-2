@@ -1,4 +1,4 @@
-package datamanager.dto;
+package datamanager.dto.task;
 
 import org.w3c.dom.Document;
 

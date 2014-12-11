@@ -1,23 +1,25 @@
-package datamanager.dao;
+package datamanager.dao.task.read;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class ContextDAO implements IDAOAdapter {
+import datamanager.dao.task.IDAOAdapter;
 
-	private static ContextDAO instance;
+public class ParticipantDAO implements IDAOAdapter {
+
+	private static ParticipantDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
 	
-	private ContextDAO(){
+	private ParticipantDAO(){
 		
 	}
 	
-	public static ContextDAO getInstance(){
+	public static ParticipantDAO getInstance(){
 		if(instance == null){
-			instance = new ContextDAO();
+			instance = new ParticipantDAO();
 			return instance;
 		}
 		else{
@@ -26,23 +28,23 @@ public class ContextDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "context_description"){
-			NodeList nList = doc.getElementsByTagName("context");
+		if(step == "participant_isclass" ){
+			NodeList nList = doc.getElementsByTagName("participant");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("description").item(i).getTextContent();
+					obj = (Object) element.getElementsByTagName("isclass").item(i).getTextContent();
 				}
 			}
 		}
-		else if(step == "context_example"){
-			NodeList nList = doc.getElementsByTagName("context");
+		else if( step == "participant_role"){
+			NodeList nList = doc.getElementsByTagName("participant");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("example").item(i).getTextContent();
+					obj = (Object) element.getElementsByTagName("role").item(i).getTextContent();
 				}
 			}
 		}
