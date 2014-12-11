@@ -35,4 +35,16 @@ public class DTOFacade {
 	public void finishDocument(Document doc, File file){
 		dtoFactory.finishDocument(doc, file);
 	}
+	public void makeCategory(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void makeContext(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void makeParticipant(String s) {
+		// TODO Auto-generated method stub
+		
+	}
 }

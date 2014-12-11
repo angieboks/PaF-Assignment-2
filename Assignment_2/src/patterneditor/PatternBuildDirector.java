@@ -4,9 +4,9 @@ import domain.Pattern;
 
 public class PatternBuildDirector {
 
-	private PatternBuilder builder = new ConcretePatternBuilder();
+	private IPatternBuilder builder = new ConcretePatternBuilder();
 
-	public PatternBuilder getBuilder(){
+	public IPatternBuilder getBuilder(){
 		return builder;
 	}
 }

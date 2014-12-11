@@ -20,106 +20,82 @@ public class Pattern extends Solution {
 		this.name = name;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public File getDiagram() {
+		return diagram;
+	}
+
+	public ArrayList<Pattern> getRelatedPatterns() {
+		return relatedPatterns;
+	}
+
+	public ArrayList<String> getAka() {
+		return aka;
+	}
+
+	public ArrayList<String> getPros() {
+		return pros;
+	}
+
+	public ArrayList<String> getCons() {
+		return cons;
+	}
+
+	public ArrayList<Category> getCategories() {
+		return categories;
+	}
+
+	public ArrayList<Context> getContexts() {
+		return contexts;
+	}
+
+	public ArrayList<Participant> getParticipants() {
+		return participants;
+	}
+
 	public void addDia(File f){
 		diagram = f;
 	}
 
 	public void addAKA(String nweAKA){
-		if(!hasAKA(nweAKA)){
+		if(!aka.contains(nweAKA)){
 			aka.add(nweAKA);
 		}
 	}
 
-	public boolean hasAKA(String a){
-		boolean b = false;
-		for(String s: aka){
-			if(s.equals(a)){
-				b = true;
-			}
-		}
-		return b;
-	}
-
 	public void addPro(String nwePro){
-		if(!hasPro(nwePro)){
+		if(!pros.contains(nwePro)){
 			pros.add(nwePro);
 		}
 	}
 
-	public boolean hasPro(String pro){
-		boolean b = false;
-		for(String s: pros){
-			if(s.equals(pro)){
-				b = true;
-			}
-		}
-		return b;
-	}
-
 	public void addCon(String nweCon){
-		if(!hasCon(nweCon)){
+		if(!cons.contains(nweCon)){
 			cons.add(nweCon);
 		}
 	}
 
-	public boolean hasCon(String con){
-		boolean b = false;
-		for(String s: cons){
-			if(s.equals(con)){
-				b = true;
-			}
-		}
-		return b;
-	}
-
 	public void addCategory(Category nweC){
-		if(!hasCategory(nweC)){
+		if(!categories.contains(nweC)){
 			categories.add(nweC);
 		}
 	}
 
-	public boolean hasCategory(Category c){
-		boolean b = false;
-		for(Category s: categories){
-			if(s.getName().equals(c.getName())){
-				b = true;
-			}
-		}
-		return b;
-	}
-
 	public void addContext(Context nweC){
-		if(!hasContext(nweC)){
+		if(!contexts.contains(nweC)){
 			contexts.add(nweC);
 		}
 	}
 
-	public boolean hasContext(Context c){
-		boolean b = false;
-		for(Context s: contexts){
-			if(s.getName().equals(c.getName())){
-				b = true;
-			}
-		}
-		return b;
-	}
-
 	public void addParticipant(Participant nweP){
-		if(!hasParticipant(nweP)){
+		if(!participants.contains(nweP)){
 			participants.add(nweP);
 		}
 	}
-
-	public boolean hasParticipant(Participant p){
-		boolean b = false;
-		for(Participant s: participants){
-			if(s.getName().equals(p.getName())){
-				b = true;
-			}
-		}
-		return b;
-	}
-
+	
 	public boolean isReady(){
 		if(name != null && categories.size() != 0 && contexts.size() != 0 && participants.size() != 0){
 			return true;
@@ -127,5 +103,19 @@ public class Pattern extends Solution {
 		else{
 			return false;
 		}
+	}
+	
+	public boolean equals(Object o){
+		if(o instanceof Pattern){
+			Pattern p = (Pattern)o;
+			if(p.getName().equals(this.name)){
+				if(p.getAka().equals(this.aka)){
+					if(p.getDiagram().equals(this.diagram)){
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }

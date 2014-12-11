@@ -12,7 +12,6 @@ public class PatternEditorFacade {
 	private DAOFacade accessObjects;
 	private DTOFacade targetObjects;
 	private PatternBuildDirector boss;
-	private FinderFactory finder;
 
 	public PatternEditorFacade(DAOFacade accessObjects, DTOFacade targetObjects) {
 		this.accessObjects = accessObjects;
