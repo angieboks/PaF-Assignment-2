@@ -13,4 +13,5 @@ public class PatternBuildDirector {
 	public void buildPattern(Pattern p){
 		builder.selectPattern(p);
 	}
+	
 }

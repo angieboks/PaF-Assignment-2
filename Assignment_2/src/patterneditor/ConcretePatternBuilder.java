@@ -1,5 +1,6 @@
 package patterneditor;
 
+import datamanager.dao.DAOFacade;
 import domain.Category;
 import domain.Context;
 import domain.Participant;
@@ -7,56 +8,62 @@ import domain.Pattern;
 
 public class ConcretePatternBuilder implements PatternBuilder {
 
-	private Pattern product;
+	private Solution product;
 	
 	public Pattern getProduct(){
 		return product;
 	}
 
 	@Override
-	public void makePattern(String name) {
-		product = new Pattern(name);
+	public void makePattern(String name, boolean isPrimary, String description) {
+		product = new Pattern(name, isPrimary, description);
 	}
 
 	@Override
 	public void selectPattern(Pattern p) {
-		// TODO Auto-generated method stub
+		product = p;
 		
 	}
 
 	@Override
 	public void addAKA(String aka) {
-		// TODO Auto-generated method stub
+		product.addAKA(aka);
 		
 	}
 
 	@Override
 	public void addPro(String pro) {
-		// TODO Auto-generated method stub
+		product.addPro(DAOFacade.getPro(pro));
 		
 	}
 
 	@Override
 	public void addCon(String con) {
-		// TODO Auto-generated method stub
+		product.addCon(DAOFacade.getCon(con));
 		
 	}
 
 	@Override
 	public void addCategory(Category c) {
-		// TODO Auto-generated method stub
+		product.addCategory(c);
 		
 	}
 
 	@Override
 	public void addContext(Context c) {
-		// TODO Auto-generated method stub
+		product.addContext(c);
 		
 	}
 
 	@Override
 	public void addParticipant(Participant p) {
-		// TODO Auto-generated method stub
+		product.addParticipant(p);
 		
+	}
+	
+	@Override
+	public Solution getPattern(){
+		return product;
+	}
 	}
 }
