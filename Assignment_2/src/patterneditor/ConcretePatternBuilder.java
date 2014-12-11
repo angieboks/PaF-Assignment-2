@@ -13,7 +13,7 @@ import domain.Solution;
 
 public class ConcretePatternBuilder implements PatternBuilder {
 
-	private Solution product;
+	private Pattern product;
 
 	@Override
 	public void makePattern(String name, boolean isPrimary, String description) {
@@ -22,7 +22,7 @@ public class ConcretePatternBuilder implements PatternBuilder {
 
 	@Override
 	public void addDia(File f){
-		product.add(f);
+		product.addDia(f);
 	}
 
 	@Override
