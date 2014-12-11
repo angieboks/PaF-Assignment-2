@@ -6,12 +6,7 @@ public class PatternBuildDirector {
 
 	private PatternBuilder builder = new ConcretePatternBuilder();
 	
-	public void buildPattern(String name){
-		builder.makePattern(name);
+	public PatternBuilder getBuilder(){
+		return builder;
 	}
-	
-	public void buildPattern(Pattern p){
-		builder.selectPattern(p);
-	}
-	
 }

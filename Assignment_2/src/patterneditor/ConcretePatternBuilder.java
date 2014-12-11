@@ -5,6 +5,7 @@ import domain.Category;
 import domain.Context;
 import domain.Participant;
 import domain.Pattern;
+import domain.Solution;
 
 public class ConcretePatternBuilder implements PatternBuilder {
 
@@ -20,26 +21,26 @@ public class ConcretePatternBuilder implements PatternBuilder {
 	}
 
 	@Override
-	public void selectPattern(Pattern p) {
-		product = p;
-		
+	public void addDia(File f){
+		product.add(f);
 	}
-
+	
 	@Override
 	public void addAKA(String aka) {
+		//check of die er al in zit
 		product.addAKA(aka);
 		
 	}
 
 	@Override
 	public void addPro(String pro) {
-		product.addPro(DAOFacade.getPro(pro));
+		product.addPro(pro);
 		
 	}
 
 	@Override
 	public void addCon(String con) {
-		product.addCon(DAOFacade.getCon(con));
+		product.addCon(con);
 		
 	}
 
@@ -62,8 +63,7 @@ public class ConcretePatternBuilder implements PatternBuilder {
 	}
 	
 	@Override
-	public Solution getPattern(){
+	public Solution savePattern(){
 		return product;
-	}
 	}
 }
