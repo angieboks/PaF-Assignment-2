@@ -9,14 +9,26 @@ import datamanager.dto.DTOFacade;
 
 public class PatternEditorFacade {
 
+	private static PatternEditorFacade _instance;
 	private DAOFacade accessObjects;
 	private DTOFacade targetObjects;
 	private PatternBuildDirector boss;
 
-	public PatternEditorFacade(DAOFacade accessObjects, DTOFacade targetObjects) {
+	private PatternEditorFacade(DAOFacade accessObjects, DTOFacade targetObjects) {
 		this.accessObjects = accessObjects;
 		this.targetObjects = targetObjects;
 		boss = new PatternBuildDirector();
+	}
+	
+	private synchronized static void createInstance(DAOFacade accessObjects, DTOFacade targetObjects) { 
+		if (_instance == null) {
+	    	_instance = new PatternEditorFacade(accessObjects, targetObjects); 
+		}
+	} 
+	
+	public static PatternEditorFacade getInstance(DAOFacade accessObjects, DTOFacade targetObjects){
+		createInstance(accessObjects, targetObjects);
+		return _instance;
 	}
 
 	public void makePattern(String name, boolean isPrimary, String description){

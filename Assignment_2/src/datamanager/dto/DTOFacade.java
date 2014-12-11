@@ -9,10 +9,23 @@ public class DTOFacade {
 // Alle variabelen in package Domain moeten een get-functie krijgen..!
 // Alle ArrayLists moeten een methode krijgen waarmee ze de lengte geven.
 
-	
+	private static DTOFacade _instance = null;
 	private DTOFactory dtoFactory;
 	private IDTOAdapter adapter;
 	private Document doc;
+	
+	private DTOFacade(){}
+	
+	private synchronized static void createInstance (){ 
+		if (_instance == null) {
+			_instance = new DTOFacade(); 
+		}
+	}
+	
+	public static DTOFacade getInstance(){
+		createInstance();
+		return _instance;
+	}
 	
 	public void createDocument(Object obj){
 		dtoFactory = new DTOFactory();

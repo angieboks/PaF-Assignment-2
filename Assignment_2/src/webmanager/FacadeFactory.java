@@ -15,23 +15,42 @@ import datamanager.dto.DTOFacade;
 public class FacadeFactory {
 	
 	/**
+	 * Variable _instance, type FacadeFactory
+	 * Maintains single instance of this class.
+	 */
+	private static FacadeFactory _instance = null;
+	/**
 	 * Variable accessObjects, type DAOFacade
 	 * Default DAOFacade for use by the rest of the application.
 	 */
-	private DAOFacade accessObjects;
+	private static DAOFacade accessObjects;
 	/**
 	 * Variable targetObjects, type DTOFacade
 	 * Default DTOFacade for use by the rest of the application.
 	 */
-	private DTOFacade targetObjects;
+	private static DTOFacade targetObjects;
+
+	/**
+	 * Private Constructor FacadeFactory
+	 * Since this is a Singleton class.
+	 */
+	private FacadeFactory(){}
 	
 	/**
-	 * Constructor FacadeFactory
-	 * Initiates accessObjects and targetObjects.
+	 * Method createFactory triggers the creation of a new FacadeFactory only once.
+	 * Also initiates accessObjects and targetObjects.
 	 */
-	public FacadeFactory(){
-		accessObjects = new DAOFacade();
-		targetObjects = new DTOFacade();
+	private synchronized static void createFactory(){
+		if (_instance == null) {
+	         _instance = new FacadeFactory(); 
+	    }
+		accessObjects = DAOFacade.getInstance();
+		targetObjects = DTOFacade.getInstance();
+	}
+	
+	public static FacadeFactory getInstance(){
+		createFactory();
+		return _instance;
 	}
 
 	/**
@@ -40,7 +59,7 @@ public class FacadeFactory {
 	 * @return created PatternEditorFacade.
 	 */
 	public PatternEditorFacade initiateEditor(){
-		PatternEditorFacade editor = new PatternEditorFacade(accessObjects, targetObjects);
+		PatternEditorFacade editor = PatternEditorFacade.getInstance(accessObjects, targetObjects);
 		return editor;
 	}
 	/**
@@ -49,7 +68,7 @@ public class FacadeFactory {
 	 * @return created PatternSelectorFacade
 	 */
 	public PatternSelectorFacade initiateSelector(){
-		PatternSelectorFacade selector = new PatternSelectorFacade(accessObjects);
+		PatternSelectorFacade selector = PatternSelectorFacade.getInstance(accessObjects);
 		return selector;
 	}
 }

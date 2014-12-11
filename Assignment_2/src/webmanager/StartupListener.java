@@ -21,7 +21,7 @@ public class StartupListener implements ServletContextListener {
 		try{
 			ServletContext sc = sce.getServletContext();
 			synchronized(sc){
-				FacadeFactory ff = new FacadeFactory();
+				FacadeFactory ff = FacadeFactory.getInstance();
 				sc.setAttribute("patterneditor", ff.initiateEditor());
 				sc.setAttribute("patternselector", ff.initiateSelector());
 			}
