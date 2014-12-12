@@ -1,5 +1,6 @@
 package patternselector;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import datamanager.dao.DAOFacade;
@@ -39,7 +40,7 @@ public class PatternSelectorFacade {
 	 * @param parameters contains a list of <identifier, content> that the Finder can use as filters.
 	 * @return an array of found Patterns arranged according to how well they match the search criteria.
 	 */
-	public Pattern[] search(Map<String, String> parameters){
+	public Pattern[] search(Map<String, ArrayList<String>> parameters){
 		return finder.findPatterns(parameters);
 	}
 }

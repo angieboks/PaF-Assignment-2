@@ -6,7 +6,7 @@ import org.w3c.dom.Element;
 import domain.Pattern;
 import domain.Solution;
 
-public class SolutionDTO implements IDTOAdapter {
+class SolutionDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static SolutionDTO instance;
@@ -15,7 +15,7 @@ public class SolutionDTO implements IDTOAdapter {
 		
 	}
 	
-	public static SolutionDTO getInstance(){
+	protected static SolutionDTO getInstance(){
 		if(instance == null){
 			instance = new SolutionDTO();
 		}

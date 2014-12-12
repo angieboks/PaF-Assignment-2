@@ -12,7 +12,7 @@ import domain.Pattern;
 import domain.Problem;
 import domain.Solution;
 
-public class ContextDTO implements IDTOAdapter {
+class ContextDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static ContextDTO instance;
@@ -21,7 +21,7 @@ public class ContextDTO implements IDTOAdapter {
 		
 	}
 
-	public static ContextDTO getInstance(){
+	protected static ContextDTO getInstance(){
 		if(instance == null){
 			instance = new ContextDTO();
 		}

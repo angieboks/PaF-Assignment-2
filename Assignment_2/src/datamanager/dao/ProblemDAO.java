@@ -1,5 +1,5 @@
 package datamanager.dao;
 
-public class ProblemDAO implements IDAOAdapter {
+class ProblemDAO implements IDAOAdapter {
 
 }

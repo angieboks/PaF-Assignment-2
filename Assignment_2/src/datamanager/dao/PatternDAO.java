@@ -1,6 +1,6 @@
 package datamanager.dao;
 
-public class PatternDAO implements IDAOAdapter {
+class PatternDAO implements IDAOAdapter {
 	
 	
 }

@@ -10,7 +10,7 @@ import domain.Pattern;
  * @author Angie
  * Version 1
  */
-public interface IPatternFinder {
+interface IPatternFinder {
 	
 	/**
 	 * Method findPattern

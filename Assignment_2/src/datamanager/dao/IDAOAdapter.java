@@ -1,5 +1,5 @@
 package datamanager.dao;
 
-public interface IDAOAdapter {
+interface IDAOAdapter {
 
 }

@@ -11,7 +11,7 @@ import domain.Participant;
 import domain.Pattern;
 import domain.Solution;
 
-public class ConcretePatternBuilder implements IPatternBuilder {
+class ConcretePatternBuilder implements IPatternBuilder {
 
 	private Pattern product;
 

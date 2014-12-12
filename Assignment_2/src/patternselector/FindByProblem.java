@@ -10,13 +10,13 @@ import domain.Pattern;
  * @author Angie
  * Version 1
  */
-public class FindByProblem implements IPatternFinder {
+class FindByProblem implements IPatternFinder {
 	
 	/**
 	 * Constructor FindByProblem
 	 * Empty constructor.
 	 */
-	public FindByProblem(){}
+	protected FindByProblem(){}
 	
 	/**
 	 * Method findPattern

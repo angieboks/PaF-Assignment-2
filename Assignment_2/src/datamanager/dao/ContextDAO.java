@@ -1,5 +1,5 @@
 package datamanager.dao;
 
-public class ContextDAO implements IDAOAdapter {
+class ContextDAO implements IDAOAdapter {
 
 }

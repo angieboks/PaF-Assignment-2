@@ -6,7 +6,7 @@ import org.w3c.dom.Element;
 import domain.Force;
 import domain.Problem;
 
-public class ForceDTO implements IDTOAdapter {
+class ForceDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static ForceDTO instance;
@@ -15,7 +15,7 @@ public class ForceDTO implements IDTOAdapter {
 		
 	}
 	
-	public static ForceDTO getInstance(){
+	protected static ForceDTO getInstance(){
 		if(instance == null){
 			instance = new ForceDTO();
 		}

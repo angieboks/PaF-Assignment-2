@@ -14,7 +14,7 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
 
-public class DTOFactory {
+class DTOFactory {
 
 	IDTOAdapter pattern;
 	IDTOAdapter category;
@@ -24,7 +24,7 @@ public class DTOFactory {
 	IDTOAdapter problem;
 	IDTOAdapter force;
 	
-	public DTOFactory(){
+	protected DTOFactory(){
 		createClasses();
 	}
 	
@@ -47,7 +47,7 @@ public class DTOFactory {
 	
 	}
 	
-	public Document createDocument(){
+	protected Document createDocument(){
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
@@ -63,7 +63,7 @@ public class DTOFactory {
 			
 	}
 	
-	public void finishDocument(Document doc, File file){
+	protected void finishDocument(Document doc, File file){
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();

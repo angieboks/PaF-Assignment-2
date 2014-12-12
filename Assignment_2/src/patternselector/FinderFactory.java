@@ -11,7 +11,7 @@ import domain.Pattern;
  * @author Angie
  * Version 1
  */
-public class FinderFactory {
+class FinderFactory {
 	
 	/**
 	 * Variable finder, type IPatternFinder
@@ -26,7 +26,7 @@ public class FinderFactory {
 	 * @param content determines what to search for within the given filter.
 	 * @return A Map of Patterns with assigned Integers to indicate how good of a match they are for the search parameters.
 	 */
-	public Map<Pattern, Integer> findPattern(String identifier, String content) {
+	protected Map<Pattern, Integer> findPattern(String identifier, String content) {
 		Map<Pattern, Integer> results = new TreeMap<Pattern, Integer>();
 		int priority = 0;
 		switch(identifier){

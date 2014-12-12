@@ -7,7 +7,7 @@ import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
 import domain.Solution;
 
-public interface IPatternBuilder {
+interface IPatternBuilder {
 
 	void makePattern(String name, boolean isPrimary, String description);
 	void addDia(File f);

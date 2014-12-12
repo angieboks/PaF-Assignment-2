@@ -6,14 +6,14 @@ import org.w3c.dom.Element;
 import domain.Pattern;
 import domain.Problem;
 
-public class ProblemDTO implements IDTOAdapter {
+class ProblemDTO implements IDTOAdapter {
 	private IDTOAdapter nextInChain;
 	private static ProblemDTO instance;
 	
 	private ProblemDTO(){
 		
 	}
-	public static ProblemDTO getInstance(){
+	protected static ProblemDTO getInstance(){
 		if(instance == null){
 			instance = new ProblemDTO();
 		}
