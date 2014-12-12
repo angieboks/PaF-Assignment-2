@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 
 import datamanager.dto.task.IDTOAdapter;
 import datamanager.dto.task.factory.DTOFactory;
+import datamanager.dto.task.write.PatternDTO;
 
 public class DTOFacade {
 
@@ -17,13 +18,17 @@ public class DTOFacade {
 	private IDTOAdapter adapter;
 	private Document doc;
 	
-	public void createDocument(Object obj){
+	public void createDocument(){
 		dtoFactory = new DTOFactory();
+		adapter = PatternDTO.getInstance();
 		doc = dtoFactory.createDocument();
 		
 	}
 	public void writeDocument(Object obj, String step){
+		
 		adapter.write(obj, doc, step);
+		System.out.println("write");
+		
 	}
 	/* !!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
 	 * 
@@ -37,7 +42,8 @@ public class DTOFacade {
 	 * 7. Step "force" 			= Force
 	 */
 	
-	public void finishDocument(Document doc, File file){
+	public void finishDocument(File file){
 		dtoFactory.finishDocument(doc, file);
+		System.out.println("finish");
 	}
 }

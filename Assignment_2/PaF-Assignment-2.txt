@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><pattern><name>naam</name><aka>aka0aka1aka2aka3aka4</aka><diagram>file</diagram><pros>Pros0Pros1Pros2Pros3Pros4</pros><cros>Cons0Cons1Cons2Cons3Cons4</cros></pattern>

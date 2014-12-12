@@ -64,7 +64,7 @@ public class PatternDTO implements IDTOAdapter {
 				patternElement.appendChild(pros);
 				
 				//cons
-				Element cons = doc.createElement("cros");
+				Element cons = doc.createElement("cons");
 				//int lengthCons = pattern.getLengthCons();
 				int lengthCons = 5;
 				for(int i = 0; i < lengthCons; i++){
