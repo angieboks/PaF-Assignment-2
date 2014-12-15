@@ -9,4 +9,20 @@ public class Solution {
 		isPrimary = iP;
 		description = d;
 	}
+
+	public boolean isPrimary() {
+		return isPrimary;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public boolean equals(Object o){
+		if(o instanceof Solution){
+			Solution s = (Solution)o;
+			return (s.getDescription().equals(this.description) && (s.isPrimary == this.isPrimary)) ? true : false;
+		}
+		return false;
+	}
 }

@@ -4,9 +4,6 @@ import java.io.File;
 
 import org.w3c.dom.Document;
 
-import datamanager.dao.task.IDAOAdapter;
-import datamanager.dao.task.factory.DAOFactory;
-
 public class DAOFacade {
 	
 	private DAOFactory daoFactory;
@@ -24,6 +21,8 @@ public class DAOFacade {
 	public Object readDocument(String step){
 		return adapter.read(doc, step);
 	}
+	
+	
 	/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
 	 *
 	 * 	        Parameter String  			  Parameter Object			returns (in Object file); Just cast it. So for example: pattern.name = (String) Object;
@@ -42,6 +41,18 @@ public class DAOFacade {
 	 * 6.0 Step "problem_description" 		= Problem.description		String
 	 * 7.0 Step "force_description" 		= Force.description			String
 	 */
-	
-	
+	public boolean hasCategory(String s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean hasContext(String s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public boolean hasParticipant(String s) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }

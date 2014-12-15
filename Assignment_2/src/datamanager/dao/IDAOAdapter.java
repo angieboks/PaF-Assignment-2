@@ -1,4 +1,4 @@
-package datamanager.dao.task;
+package datamanager.dao;
 
 import org.w3c.dom.Document;
 

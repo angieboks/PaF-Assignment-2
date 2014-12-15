@@ -1,23 +1,21 @@
 package patterneditor;
 
-import patternselector.FinderFactory;
+import java.io.File;
+import java.util.ArrayList;
+
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
-import domain.Category;
-import domain.Context;
-import domain.Participant;
 
 public class PatternEditorFacade {
 
 	private DAOFacade accessObjects;
 	private DTOFacade targetObjects;
 	private PatternBuildDirector boss;
-	private FinderFactory finder;
 
-	public PatternEditorFacade(DAOFacade accessObjects, DTOFacade targetObjects) {
-		this.accessObjects = accessObjects;
-		this.targetObjects = targetObjects;
-		boss = new PatternBuildDirector();
+	public PatternEditorFacade() {
+		this.accessObjects = DAOFacade.getInstance();
+		this.targetObjects = DTOFacade.getInstance();
+		this.boss = new PatternBuildDirector();
 	}
 
 	public void makePattern(String name, boolean isPrimary, String description){
@@ -28,31 +26,36 @@ public class PatternEditorFacade {
 		boss.getBuilder().addDia(f);
 	}
 
-	public void addAKA(String aka){
+	public void addAKA(ArrayList<String> aka){
 		boss.getBuilder().addAKA(aka);
 	}
 
-	public void addPro(String pro){
+	public void addPro(ArrayList<String> pro){
 		boss.getBuilder().addPro(pro);
 	}
 
-	public void addCon(String con){
+	public void addCon(ArrayList<String> con){
 		boss.getBuilder().addCon(con);
 	}
 
-	public void addCategory(Category c){
-		boss.getBuilder().addCategory(c);
+	public void addCategory(ArrayList<String> c){
+		boss.getBuilder().addCategory(c, accessObjects, targetObjects);
 	}
 
-	public void addContext(Context c){
-		boss.getBuilder().addContext(c);
+	public void addContext(ArrayList<String> c){
+		boss.getBuilder().addContext(c, accessObjects, targetObjects);
 	}
 
-	public void addParticipant(Participant p){
-		boss.getBuilder().addParticipant(p);
+	public void addParticipant(ArrayList<String> p){
+		boss.getBuilder().addParticipant(p, accessObjects, targetObjects);
 	}
 
-	public void savePattern(){
-		DTOFacade.savePattern(boss.getBuilder().getPattern());
+	public boolean savePattern(){
+		if(boss.getBuilder().getPattern() == null){
+			return false;
+		}
+		else{
+			return targetObjects.savePattern(boss.getBuilder().getPattern());
+		}
 	}
 }

@@ -2,11 +2,11 @@ package patterneditor;
 
 import domain.Pattern;
 
-public class PatternBuildDirector {
+class PatternBuildDirector {
 
-	private PatternBuilder builder = new ConcretePatternBuilder();
-	
-	public PatternBuilder getBuilder(){
+	private IPatternBuilder builder = new ConcretePatternBuilder();
+
+	public IPatternBuilder getBuilder(){
 		return builder;
 	}
 }

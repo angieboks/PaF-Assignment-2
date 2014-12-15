@@ -4,22 +4,29 @@ import java.io.File;
 
 import org.w3c.dom.Document;
 
-import datamanager.dto.task.IDTOAdapter;
-import datamanager.dto.task.factory.DTOFactory;
-import datamanager.dto.task.write.PatternDTO;
-
 public class DTOFacade {
 
 // Alle variabelen in package Domain moeten een get-functie krijgen..!
 // Alle ArrayLists moeten een methode krijgen waarmee ze de lengte geven.
 
-	
+	private static DTOFacade _instance = null;
 	private DTOFactory dtoFactory;
 	private IDTOAdapter adapter;
 	private Document doc;
+	private DTOWriteFacade writeFacade = new DTOWriteFacade();
+	
+	private DTOFacade(){}
+	
+	public synchronized static DTOFacade getInstance (){ 
+		if (_instance == null) {
+			_instance = new DTOFacade(); 
+		}
+		return _instance;
+	}
+	
 	
 	public void createDocument(){
-		dtoFactory = new DTOFactory();
+		dtoFactory = writeFacade.getDTOFactory();
 		adapter = PatternDTO.getInstance();
 		doc = dtoFactory.createDocument();
 		

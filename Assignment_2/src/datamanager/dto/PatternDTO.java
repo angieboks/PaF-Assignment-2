@@ -1,13 +1,12 @@
-package datamanager.dto.task.write;
+package datamanager.dto;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import datamanager.dto.task.IDTOAdapter;
 import domain.Pattern;
 
 
-public class PatternDTO implements IDTOAdapter {
+class PatternDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static PatternDTO instance;
@@ -16,7 +15,7 @@ public class PatternDTO implements IDTOAdapter {
 		
 	}
 	
-	public static PatternDTO getInstance(){
+	protected static PatternDTO getInstance(){
 		if(instance == null){
 			instance = new PatternDTO();
 		}

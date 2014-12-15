@@ -8,7 +8,7 @@ public class DToTest {
 
 	public static void main(String[] args) {
 		Pattern pattern = new Pattern(null, false, null);
-		DTOFacade dtoFacade = new DTOFacade();
+		DTOFacade dtoFacade = DTOFacade.getInstance();
 		File file = new File("PaF-Assignment-2.txt");
 		dtoFacade.createDocument();
 		dtoFacade.writeDocument( pattern, "pattern");

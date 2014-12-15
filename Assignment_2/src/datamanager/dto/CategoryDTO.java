@@ -1,13 +1,11 @@
-package datamanager.dto.task.write;
+package datamanager.dto;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import datamanager.dto.task.IDTOAdapter;
 import domain.Category;
-import domain.Pattern;
 
-public class CategoryDTO implements IDTOAdapter {
+class CategoryDTO implements IDTOAdapter {
 
 
 	private IDTOAdapter nextInChain;
@@ -16,7 +14,7 @@ public class CategoryDTO implements IDTOAdapter {
 		
 	}
 	
-	public static CategoryDTO getInstance(){
+	protected static CategoryDTO getInstance(){
 		if(instance == null){
 			instance = new CategoryDTO();
 		}

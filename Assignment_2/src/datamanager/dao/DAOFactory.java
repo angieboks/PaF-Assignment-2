@@ -1,4 +1,4 @@
-package datamanager.dao.task.factory;
+package datamanager.dao;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,15 +9,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
-import datamanager.dao.task.IDAOAdapter;
-import datamanager.dao.task.read.CategoryDAO;
-import datamanager.dao.task.read.ContextDAO;
-import datamanager.dao.task.read.ForceDAO;
-import datamanager.dao.task.read.ParticipantDAO;
-import datamanager.dao.task.read.PatternDAO;
-import datamanager.dao.task.read.ProblemDAO;
-import datamanager.dao.task.read.SolutionDAO;
 
 public class DAOFactory {
 
