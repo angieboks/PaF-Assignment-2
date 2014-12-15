@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 
 class DTOFactory {
-	DTOWriteFacade writeFacade = new DTOWriteFacade();
+	DTOFacade writeFacade = new DTOFacade();
 	IDTOAdapter pattern;
 	IDTOAdapter category;
 	IDTOAdapter context;
@@ -24,6 +24,7 @@ class DTOFactory {
 	IDTOAdapter problem;
 	IDTOAdapter force;
 	static DTOFactory instance;
+	Document doc;
 	
 	protected DTOFactory(){
 		createClasses();
@@ -57,26 +58,27 @@ class DTOFactory {
 		force.setNextInChain(pattern);
 	
 	}
+	protected Document getDocument(){
+		return doc;
+	}
 	
-	protected Document createDocument(){
+	protected void createDocument(){
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			Document doc = docBuilder.newDocument();
+			doc = docBuilder.newDocument();
 			if(doc == null){
 				System.out.println("Error: Document is leeg");
 			}
-			return doc;
 			
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
 			
 	}
 	
-	protected void finishDocument(Document doc, File file){
+	protected void finishDocument(File file){
 		try {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();

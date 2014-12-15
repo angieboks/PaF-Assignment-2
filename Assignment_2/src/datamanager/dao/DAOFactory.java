@@ -19,9 +19,23 @@ public class DAOFactory {
 	IDAOAdapter solution;
 	IDAOAdapter problem;
 	IDAOAdapter force;
+	private static DAOFactory instance;
+	Document doc;
+	File file;
 
-	public DAOFactory() {
+	private DAOFactory() {
 		createClasses();
+	}
+	
+	public static DAOFactory getInstance(){
+		if(instance == null){
+			instance = new DAOFactory();
+		}
+		return instance;
+	}
+	
+	public void setFile(File file){
+		this.file = file;
 	}
 
 	private void createClasses() {
@@ -43,12 +57,12 @@ public class DAOFactory {
 
 	}
 
-	public Document readDocument(File file) {
+	public Document readDocument() {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc = dBuilder.parse(file);
+			doc = dBuilder.parse(file);
 			if (doc == null) {
 				System.out.println("Error: Document is leeg");
 			}

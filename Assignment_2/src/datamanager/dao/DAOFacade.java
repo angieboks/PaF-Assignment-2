@@ -6,20 +6,18 @@ import org.w3c.dom.Document;
 
 public class DAOFacade {
 	
-	private DAOFactory daoFactory;
-	private File file;
-	private Document doc;
-	private IDAOAdapter adapter;
 	
-	public void createDocument(File f){
-		file = f;
-		daoFactory = new DAOFactory();
-		doc = daoFactory.readDocument(file);
+	public DAOFacade(){}
+	
+	public void createDocument(File file){
+		DAOFactory.getInstance().setFile(file);
+		DAOFactory.getInstance().readDocument();
 		
 	}
 	
 	public Object readDocument(String step){
-		return adapter.read(doc, step);
+		Document doc = DAOFactory.getInstance().readDocument();
+		return PatternDAO.getInstance().read(doc, step);
 	}
 	
 	
@@ -41,18 +39,5 @@ public class DAOFacade {
 	 * 6.0 Step "problem_description" 		= Problem.description		String
 	 * 7.0 Step "force_description" 		= Force.description			String
 	 */
-	public boolean hasCategory(String s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean hasContext(String s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean hasParticipant(String s) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 }
