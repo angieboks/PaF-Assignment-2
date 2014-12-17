@@ -6,11 +6,11 @@
 	version="2.4">
 	
 	<servlet>
-		<servlet-name></servlet-name>
-		<servlet-class>servlets.</servlet-class>
+		<servlet-name>SelectorServlet</servlet-name>
+		<servlet-class>servlets.SelectorServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name></servlet-name>
-		<url-pattern>/.do</url-pattern>
+		<servlet-name>SelectorServlet</servlet-name>
+		<url-pattern>/SelectorServlet.do</url-pattern>
 	</servlet-mapping>
 </web-app>
