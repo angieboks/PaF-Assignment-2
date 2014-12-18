@@ -43,12 +43,12 @@ class ContextDTO implements IDTOAdapter {
 			
 				//description
 				Element description = doc.createElement("description");
-				description.appendChild(doc.createTextNode(/*context.getDescription()*/ "omschrijving"));
+				description.appendChild(doc.createTextNode(context.getDescription()));
 				contextElement.appendChild(description);
 				
 				//example
 				Element example = doc.createElement("example");
-				description.appendChild(doc.createTextNode(/*context.getExample()*/ "voorbeeld"));
+				description.appendChild(doc.createTextNode(context.getExample()));
 				contextElement.appendChild(example);
 			
 		}

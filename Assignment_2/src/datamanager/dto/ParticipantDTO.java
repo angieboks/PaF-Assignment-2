@@ -37,12 +37,17 @@ class ParticipantDTO implements IDTOAdapter {
 			
 				//isClass
 				Element isClass = doc.createElement("isclass");
-				isClass.appendChild(doc.createTextNode(/*participant.getisClass()*/ "isClass"));
+				if(participant.isClass()){
+					isClass.appendChild(doc.createTextNode("true"));
+				}
+				else{
+					isClass.appendChild(doc.createTextNode("false"));
+				}
 				participantElement.appendChild(isClass);
 				
 				//Role
 				Element role = doc.createElement("role");
-				role.appendChild(doc.createTextNode(/*role.getRole()*/ "role"));
+				role.appendChild(doc.createTextNode(participant.getRole()));
 				participantElement.appendChild(role);
 			
 		}

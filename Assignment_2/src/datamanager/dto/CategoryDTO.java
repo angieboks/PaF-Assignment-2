@@ -35,7 +35,7 @@ class CategoryDTO implements IDTOAdapter {
 			
 				//Name
 				Element name = doc.createElement("name");
-				name.appendChild(doc.createTextNode(/*category.getName()*/ "naam"));
+				name.appendChild(doc.createTextNode(category.getName()));
 				categoryElement.appendChild(name);
 		}
 		
