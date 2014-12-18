@@ -1,10 +1,10 @@
 package patternselector;
 
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
 import datamanager.dao.DAOFacade;
 import domain.Category;
+import domain.Pattern;
 import domain.Purpose;
 import domain.Scope;
 
@@ -57,18 +57,28 @@ public class PatternSelectorFacade {
 		
 	}
 	public String getPros(Pattern pattern) {
-		return pattern.getPros();
+		StringBuilder builder = new StringBuilder();
+		for(String s : pattern.getPros()){
+			builder.append(s);
+			builder.append(System.lineSeparator());
+		}
+		return builder.toString();
 	}
 	public String getCons(Pattern pattern) {
-		return pattern.getCons();
+		StringBuilder builder = new StringBuilder();
+		for(String s : pattern.getCons()){
+			builder.append(s);
+			builder.append(System.lineSeparator());
+		}
+		return builder.toString();
 	}
 	public Pattern findPatternByName(String name) {
 		
 	}
 	public String getImage(Pattern p) {
-		return p.getDiagram().getFilePath();
+		return p.getDiagram().getPath();
 	}
 	public String getDescription(Pattern p) {
-		
+		return ;
 	}
 }
