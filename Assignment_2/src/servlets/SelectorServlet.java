@@ -17,7 +17,7 @@ public class SelectorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		PatternSelectorFacade selector = new PatternSelectorFacade();
-		String knop = req.getParameter("knop");
+		String button = req.getParameter("button");
 		RequestDispatcher rd = req.getRequestDispatcher(".jsp");
 		rd.forward(req, resp);
 	}
