@@ -1,6 +1,7 @@
 package patterneditor;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
@@ -62,5 +63,65 @@ class ConcretePatternBuilder implements IPatternBuilder {
 		else{
 			return null;
 		}
+	}
+
+	@Override
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean getIsPrimary() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getDia() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getAKA() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getPro() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> getCon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Category> getCategory() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Context> getContext() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ArrayList<Participant> getParticipant() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
