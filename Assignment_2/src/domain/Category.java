@@ -1,6 +1,6 @@
 package domain;
 
-public class Category {
+public abstract class Category {
 
 	protected String name;
 

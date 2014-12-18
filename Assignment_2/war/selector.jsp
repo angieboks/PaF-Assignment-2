@@ -24,6 +24,7 @@
 	</form>
 	<%}%>
 	<% if(request.getAttribute("contextselected") != null){
+		String[] names = (String[])request.getAttribute("names");
 		String[] problems = (String[])request.getAttribute("problems");
 		String[] pros = (String[])request.getAttribute("pros");
 		String[] cons = (String[])request.getAttribute("cons");%>
@@ -32,7 +33,7 @@
 		<table id="patternstable">
 			<tr><th></th><th>Problems</th><th>Pros</th><th>Cons</th></tr>
 			<%for(int i = 0; i < problems.length; i++){ %>
-			<tr><td><input type="radio" name="selectpattern" value="pattern<%=i%>" /></td><td><%=problems[i]%></td><td><%=pros[i]%></td><td><%=cons[i]%></td></tr>
+			<tr><td><input type="radio" name="selectpattern" value="<%=names[i]%>" /></td><td><%=problems[i]%></td><td><%=pros[i]%></td><td><%=cons[i]%></td></tr>
 			<%}%>
 		</table>
 		<input type="submit" name="button" value="Select pattern" />
