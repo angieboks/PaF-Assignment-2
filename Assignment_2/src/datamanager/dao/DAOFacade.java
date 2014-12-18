@@ -1,13 +1,22 @@
 package datamanager.dao;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 
+import domain.Pattern;
+
 public class DAOFacade {
 	
+	private static DAOFacade _instance;
 	
-	public DAOFacade(){}
+	public static DAOFacade getInstance(){
+		if(_instance == null){
+			_instance = new DAOFacade();
+		}
+		return _instance;
+	}
 	
 	public void createDocument(File file){
 		DAOFactory.getInstance().setFile(file);
