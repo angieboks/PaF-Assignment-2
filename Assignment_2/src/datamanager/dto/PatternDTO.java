@@ -1,5 +1,7 @@
 package datamanager.dto;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -36,38 +38,37 @@ class PatternDTO implements IDTOAdapter {
 			
 				//Name
 				Element name = doc.createElement("name");
-				name.appendChild(doc.createTextNode(/*pattern.getName()*/ "naam"));
+				name.appendChild(doc.createTextNode(pattern.getName()));
 				patternElement.appendChild(name);
 				
 				//AKA
 				Element aka = doc.createElement("aka");
-				//int lengthAKA = pattern.getLengthAKA();
-				int lengthAKA = 5;
+				int lengthAKA = pattern.getAka().size();
+				ArrayList<String> also_known_as = new ArrayList<String>();
+				also_known_as = pattern.getAka();
 				for(int i = 0; i < lengthAKA; i++){
-					aka.appendChild(doc.createTextNode(/*pattern.getAKA(i)*/ "aka" + i));
+					aka.appendChild(doc.createTextNode(also_known_as.get(i)));
 				}
 				patternElement.appendChild(aka);
 				
 				//diagram
 				Element diagram = doc.createElement("diagram");
-				diagram.appendChild(doc.createTextNode(/*pattern.getFile()*/ "file"));
+				diagram.appendChild(doc.createTextNode(pattern.getDiagram().getPath()));
 				patternElement.appendChild(diagram);
 				
 				//pros
 				Element pros = doc.createElement("pros");
-				//int lengthPros = pattern.getLengthPros();
-				int lengthPros = 5;
+				int lengthPros = pattern.getPros().size();
 				for(int i = 0; i < lengthPros; i++){
-					pros.appendChild(doc.createTextNode(/*pattern.getPros(i)*/ "Pros" + i));
+					pros.appendChild(doc.createTextNode(pattern.getPros().get(i)));
 				}
 				patternElement.appendChild(pros);
 				
 				//cons
 				Element cons = doc.createElement("cons");
-				//int lengthCons = pattern.getLengthCons();
-				int lengthCons = 5;
+				int lengthCons = pattern.getCons().size();
 				for(int i = 0; i < lengthCons; i++){
-					cons.appendChild(doc.createTextNode(/*pattern.getCons(i)*/ "Cons" + i));
+					cons.appendChild(doc.createTextNode(pattern.getCons().get(i)));
 				}
 				patternElement.appendChild(cons);			
 		}

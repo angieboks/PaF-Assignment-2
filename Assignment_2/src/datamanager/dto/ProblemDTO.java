@@ -33,7 +33,7 @@ class ProblemDTO implements IDTOAdapter {
 			
 				//Description
 				Element description = doc.createElement("description");
-				description.appendChild(doc.createTextNode(/*problem.getDescription()*/ "omschrijving"));
+				description.appendChild(doc.createTextNode(problem.getDescription() ));
 				problemElement.appendChild(description);
 		}
 	}

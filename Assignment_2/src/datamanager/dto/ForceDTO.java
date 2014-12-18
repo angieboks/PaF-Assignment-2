@@ -36,7 +36,7 @@ class ForceDTO implements IDTOAdapter {
 			
 				//Description
 				Element description = doc.createElement("description");
-				description.appendChild(doc.createTextNode(/*force.getDescription()*/ "omschrijving"));
+				description.appendChild(doc.createTextNode(force.getDescription()));
 				forceElement.appendChild(description);
 		}
 		
