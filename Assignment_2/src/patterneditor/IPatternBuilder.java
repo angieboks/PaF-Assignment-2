@@ -1,7 +1,6 @@
 package patterneditor;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
@@ -11,11 +10,11 @@ interface IPatternBuilder {
 
 	void makePattern(String name, boolean isPrimary, String description);
 	void addDia(File f);
-	void addAKA(ArrayList<String> aka);
-	void addPro(ArrayList<String> pro);
-	void addCon(ArrayList<String> con);
-	void addCategory(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
-	void addContext(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects);
-	void addParticipant(ArrayList<String> p, DAOFacade accessObjects, DTOFacade targetObjects);
+	void addAKA(String aka);
+	void addPro(String pro);
+	void addCon(String con);
+	void addCategory(String na, DAOFacade accessObjects, DTOFacade targetObjects);
+	void addContext(String de, String ex, DAOFacade accessObjects, DTOFacade targetObjects);
+	void addParticipant(boolean iC, String r, DAOFacade accessObjects, DTOFacade targetObjects);
 	Solution getPattern();
 }

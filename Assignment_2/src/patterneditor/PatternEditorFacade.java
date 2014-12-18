@@ -1,7 +1,6 @@
 package patterneditor;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
@@ -13,8 +12,8 @@ public class PatternEditorFacade {
 	private PatternBuildDirector boss;
 
 	public PatternEditorFacade() {
-		this.accessObjects = DAOFacade.getInstance();
-		this.targetObjects = DTOFacade.getInstance();
+		this.accessObjects = new DAOFacade();
+		this.targetObjects = new DTOFacade();
 		this.boss = new PatternBuildDirector();
 	}
 
@@ -26,36 +25,31 @@ public class PatternEditorFacade {
 		boss.getBuilder().addDia(f);
 	}
 
-	public void addAKA(ArrayList<String> aka){
+	public void addAKA(String aka){
 		boss.getBuilder().addAKA(aka);
 	}
 
-	public void addPro(ArrayList<String> pro){
+	public void addPro(String pro){
 		boss.getBuilder().addPro(pro);
 	}
 
-	public void addCon(ArrayList<String> con){
+	public void addCon(String con){
 		boss.getBuilder().addCon(con);
 	}
 
-	public void addCategory(ArrayList<String> c){
-		boss.getBuilder().addCategory(c, accessObjects, targetObjects);
+	public void addCategory(String na){
+		boss.getBuilder().addCategory(na, accessObjects, targetObjects);
 	}
 
-	public void addContext(ArrayList<String> c){
-		boss.getBuilder().addContext(c, accessObjects, targetObjects);
+	public void addContext(String de, String ex){
+		boss.getBuilder().addContext(de, ex, accessObjects, targetObjects);
 	}
 
-	public void addParticipant(ArrayList<String> p){
-		boss.getBuilder().addParticipant(p, accessObjects, targetObjects);
+	public void addParticipant(boolean iC, String r){
+		boss.getBuilder().addParticipant(iC, r, accessObjects, targetObjects);
 	}
 
-	public boolean savePattern(){
-		if(boss.getBuilder().getPattern() == null){
-			return false;
-		}
-		else{
-			return targetObjects.savePattern(boss.getBuilder().getPattern());
-		}
+	public void savePattern(){
+		targetObjects.writeDocument(boss.getBuilder().getPattern(), "pattern");
 	}
 }

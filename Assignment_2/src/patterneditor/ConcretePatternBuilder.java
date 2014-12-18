@@ -1,7 +1,6 @@
 package patterneditor;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
@@ -26,57 +25,33 @@ class ConcretePatternBuilder implements IPatternBuilder {
 	}
 
 	@Override
-	public void addAKA(ArrayList<String> aka) {
-		for(String s: aka){
-			product.addAKA(s);
-		}
-
+	public void addAKA(String aka) {
+		product.addAKA(aka);
 	}
 
 	@Override
-	public void addPro(ArrayList<String> pro) {
-		for(String s: pro){
-			product.addPro(s);
-		}
+	public void addPro(String pro) {
+		product.addPro(pro);
 	}
 
 	@Override
-	public void addCon(ArrayList<String> con) {
-		for(String s: con){
-			product.addCon(s);
-		}
+	public void addCon(String con) {
+		product.addCon(con);
 	}
 
 	@Override
-	public void addCategory(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects) {
-		for(String s: c){
-			if(!accessObjects.hasCategory(s)){
-				targetObjects.makeCategory(s);
-			}
-			product.addCategory(new Category(s));
-		}
-
+	public void addCategory(String na, DAOFacade accessObjects, DTOFacade targetObjects) {
+		product.addCategory(new Category(na));
 	}
 
 	@Override
-	public void addContext(ArrayList<String> c, DAOFacade accessObjects, DTOFacade targetObjects) {
-		for(String s: c){
-			if(!accessObjects.hasContext(s)){
-				targetObjects.makeContext(s);
-			}
-			product.addContext(new Context(s));
-		}
-
+	public void addContext(String de, String ex, DAOFacade accessObjects, DTOFacade targetObjects) {
+		product.addContext(new Context(de, ex));
 	}
 
 	@Override
-	public void addParticipant(ArrayList<String> p, DAOFacade accessObjects, DTOFacade targetObjects) {
-		for(String s: p){
-			if(!accessObjects.hasParticipant(s)){
-				targetObjects.makeParticipant(s);
-			}
-			product.addParticipant(new Participant(s));
-		}
+	public void addParticipant(boolean iC, String r, DAOFacade accessObjects, DTOFacade targetObjects) {
+		product.addParticipant(new Participant(iC, r));
 	}
 
 	@Override
