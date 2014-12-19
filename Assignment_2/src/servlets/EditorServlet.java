@@ -11,6 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import patterneditor.PatternEditorFacade;
+import domain.Category;
+import domain.Context;
+import domain.Participant;
+import domain.Purpose;
+import domain.Scope;
 
 public class EditorServlet extends HttpServlet {
 
@@ -24,15 +29,7 @@ public class EditorServlet extends HttpServlet {
 			editor = new PatternEditorFacade();
 		}		
 		String knop = req.getParameter("knop");
-		if(knop.equals("Pattern properties")){
-			req.getSession().setAttribute("patternName", req.getParameter("patternName"));
-			req.getSession().setAttribute("isPrimary", req.getParameter("isPrimary"));
-			req.getSession().setAttribute("patternDescription", req.getParameter("patternDescription"));
-		}
-		if(knop.equals("Add diagram")){
-			req.getSession().setAttribute("diagram", req.getParameter("diagram"));
-		}
-		else if(knop.equals("Add also known as")){
+		if(knop.equals("Add also known as")){
 			ArrayList<String> aka = (ArrayList<String>) req.getSession().getAttribute("aka");
 			if(aka == null){
 				aka = new ArrayList<String>();
@@ -57,25 +54,51 @@ public class EditorServlet extends HttpServlet {
 			req.getSession().setAttribute("con", con);
 		}
 		else if(knop.equals("Add category")){
-			
+			ArrayList<Category> category = (ArrayList<Category>) req.getSession().getAttribute("category");
+			if(category == null){
+				category = new ArrayList<Category>();
+			}
+			String type = req.getParameter("categoryType");
+			String name = req.getParameter("categoryName");
+			Category c = null;
+			switch(type){
+			case "Purpose" : c = new Purpose(name); break;
+			case "Scope" : c = new Scope(name); break;
+			}
+			category.add(c);
+			req.getSession().setAttribute("category", category);
 		}
 		else if(knop.equals("Add context")){
-			
+			ArrayList<Context> context = (ArrayList<Context>) req.getSession().getAttribute("context");
+			if(context == null){
+				context = new ArrayList<Context>();
+			}
+			context.add(new Context(req.getParameter("contextDescription"), req.getParameter("contextExample")));
+			req.getSession().setAttribute("context", context);
 		}
 		else if(knop.equals("Add participant")){
-			
+			ArrayList<Participant> participant = (ArrayList<Participant>) req.getSession().getAttribute("participant");
+			if(participant == null){
+				participant = new ArrayList<Participant>();
+			}
+			boolean b = true;
+			if(req.getParameter("isClass").equals("false")){
+				b = false;
+			}
+			participant.add(new Participant(b, req.getParameter("participantName")));
+			req.getSession().setAttribute("participant", participant);
 		}
 		else if(knop.equals("Save pattern")){
 			boolean b;
-			if(req.getSession().getAttribute("isPrimary").equals("true")){
+			if(req.getParameter("isPrimary").equals("true")){
 				b = true;
 			}
 			else{
 				b = false;
 			}
-			editor.makePattern((String) req.getSession().getAttribute("patterName"), b, (String) req.getSession().getAttribute("patterDescription"));
+			editor.makePattern(req.getParameter("patternName"), b, req.getParameter("patternDescription"));
 			//diagram
-			editor.addDia(new File((String) req.getSession().getAttribute("diagram")));
+			editor.addDia(new File( req.getParameter("diagram")));
 			//aka
 			for(String s : (ArrayList<String>) req.getSession().getAttribute("aka")){
 				editor.addAKA(s);
@@ -89,11 +112,17 @@ public class EditorServlet extends HttpServlet {
 				editor.addCon(s);
 			}
 			//category
-			
+			for(Category c : (ArrayList<Category>) req.getSession().getAttribute("category")){
+				editor.addCategory(c.getName(), c.getClass().getName());
+			}
 			//context
-			
+			for(Context c : (ArrayList<Context>) req.getSession().getAttribute("context")){
+				editor.addContext(c.getDescription(), c.getExample());
+			}
 			//participants
-			
+			for(Participant p : (ArrayList<Participant>) req.getSession().getAttribute("participant")){
+				editor.addParticipant(p.isClass(), p.getRole());
+			}
 			//save pattern
 			editor.savePattern();
 		}
