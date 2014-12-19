@@ -17,57 +17,57 @@ public class EditorServlet extends HttpServlet {
 
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		PatternEditorFacade editor = (PatternEditorFacade) req.getSession().getAttribute("editor");
 		if(editor == null){
 			editor = new PatternEditorFacade();
 		}		
 		String knop = req.getParameter("knop");
 		if(knop.equals("Pattern properties")){
-			boolean b;
-			if(req.getParameter("isPrimary").equals("true")){
-				b = true;
-			} 
-			else{
-				b = false;
-			}
 			req.getSession().setAttribute("patternName", req.getParameter("patternName"));
-			req.getSession().setAttribute("isPrimary", b);
+			req.getSession().setAttribute("isPrimary", req.getParameter("isPrimary"));
 			req.getSession().setAttribute("patternDescription", req.getParameter("patternDescription"));
 		}
 		if(knop.equals("Add diagram")){
 			req.getSession().setAttribute("diagram", req.getParameter("diagram"));
 		}
-		else if(knop.equals("addAKA")){
+		else if(knop.equals("Add also known as")){
 			ArrayList<String> aka = (ArrayList<String>) req.getSession().getAttribute("aka");
+			if(aka == null){
+				aka = new ArrayList<String>();
+			}
 			aka.add(req.getParameter("aka"));
 			req.getSession().setAttribute("aka", aka);
 		}
 		else if(knop.equals("Add pro")){
-			editor.addPro(req.getParameter("pro"));			
+			ArrayList<String> pro = (ArrayList<String>) req.getSession().getAttribute("pro");
+			if(pro == null){
+				pro = new ArrayList<String>();
+			}
+			pro.add(req.getParameter("pro"));
+			req.getSession().setAttribute("pro", pro);	
 		}
 		else if(knop.equals("Add con")){
-			editor.addCon(req.getParameter("con"));
+			ArrayList<String> con = (ArrayList<String>) req.getSession().getAttribute("con");
+			if(con == null){
+				con = new ArrayList<String>();
+			}
+			con.add(req.getParameter("con"));
+			req.getSession().setAttribute("con", con);
 		}
 		else if(knop.equals("Add category")){
-			editor.addCategory(req.getParameter("category"), req.getParameter("type"));
+			
 		}
 		else if(knop.equals("Add context")){
-			editor.addContext(req.getParameter("contextDescription"), req.getParameter("contextExample"));
+			
 		}
 		else if(knop.equals("Add participant")){
-			boolean b;
-			if(req.getParameter("isClass").equals("true")){
-				b = true;
-			} 
-			else{
-				b = false;
-			}
-			editor.addParticipant(b, req.getParameter("role"));
+			
 		}
 		else if(knop.equals("Save pattern")){
 			editor.savePattern();
 		}
-		RequestDispatcher rd = req.getRequestDispatcher(".jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		rd.forward(req, resp);
 	}
 }
