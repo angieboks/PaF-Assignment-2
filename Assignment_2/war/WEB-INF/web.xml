@@ -9,14 +9,14 @@
 		<servlet-name>SelectorServlet</servlet-name>
 		<servlet-class>servlets.SelectorServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>EditorServlet</servlet-name>
+		<servlet-class>servlets.EditorServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>SelectorServlet</servlet-name>
 		<url-pattern>/SelectorServlet.do</url-pattern>
 	</servlet-mapping>
-	<servlet>
-		<servlet-name>EditorServlet</servlet-name>
-	<servlet-class>servlets.EditorServlet</servlet-class>
-	</servlet>
 	<servlet-mapping>
 		<servlet-name>EditorServlet</servlet-name>
 		<url-pattern>/EditorServlet.do</url-pattern>

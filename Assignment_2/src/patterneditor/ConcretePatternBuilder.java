@@ -1,7 +1,6 @@
 package patterneditor;
 
 import java.io.File;
-import java.util.ArrayList;
 
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
@@ -9,6 +8,8 @@ import domain.Category;
 import domain.Context;
 import domain.Participant;
 import domain.Pattern;
+import domain.Purpose;
+import domain.Scope;
 import domain.Solution;
 
 class ConcretePatternBuilder implements IPatternBuilder {
@@ -41,8 +42,13 @@ class ConcretePatternBuilder implements IPatternBuilder {
 	}
 
 	@Override
-	public void addCategory(String na, DAOFacade accessObjects, DTOFacade targetObjects) {
-		product.addCategory(new Category(na));
+	public void addCategory(String na, String type, DAOFacade accessObjects, DTOFacade targetObjects) {
+		Category c = null;
+		switch(type){
+			case "type": c = new Scope(na); break;
+			case "purpose": c = new Purpose(na); break;
+		}
+		product.addCategory(c);
 	}
 
 	@Override
@@ -63,65 +69,5 @@ class ConcretePatternBuilder implements IPatternBuilder {
 		else{
 			return null;
 		}
-	}
-
-	@Override
-	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean getIsPrimary() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public String getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getDia() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getAKA() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getPro() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<String> getCon() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Category> getCategory() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Context> getContext() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ArrayList<Participant> getParticipant() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

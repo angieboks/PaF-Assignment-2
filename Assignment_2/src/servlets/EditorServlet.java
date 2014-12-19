@@ -1,7 +1,7 @@
 package servlets;
 
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,12 +15,12 @@ public class EditorServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		PatternEditorFacade editor = (PatternEditorFacade) req.getSession().getAttribute("editor");
 		if(editor == null){
 			editor = new PatternEditorFacade();
-		}
-		
+		}		
 		String knop = req.getParameter("knop");
 		if(knop.equals("Pattern properties")){
 			boolean b;
@@ -30,13 +30,17 @@ public class EditorServlet extends HttpServlet {
 			else{
 				b = false;
 			}
-			editor.makePattern(req.getParameter("patternName"), b, req.getParameter("patternDescription"));
+			req.getSession().setAttribute("patternName", req.getParameter("patternName"));
+			req.getSession().setAttribute("isPrimary", b);
+			req.getSession().setAttribute("patternDescription", req.getParameter("patternDescription"));
 		}
 		if(knop.equals("Add diagram")){
-			editor.addDia(new File(req.getParameter("diagram")));
+			req.getSession().setAttribute("diagram", req.getParameter("diagram"));
 		}
-		else if(knop.equals("Add also known as")){
-			editor.addAKA(req.getParameter("aka"));
+		else if(knop.equals("addAKA")){
+			ArrayList<String> aka = (ArrayList<String>) req.getSession().getAttribute("aka");
+			aka.add(req.getParameter("aka"));
+			req.getSession().setAttribute("aka", aka);
 		}
 		else if(knop.equals("Add pro")){
 			editor.addPro(req.getParameter("pro"));			
@@ -45,7 +49,7 @@ public class EditorServlet extends HttpServlet {
 			editor.addCon(req.getParameter("con"));
 		}
 		else if(knop.equals("Add category")){
-			editor.addCategory(req.getParameter("category"));
+			editor.addCategory(req.getParameter("category"), req.getParameter("type"));
 		}
 		else if(knop.equals("Add context")){
 			editor.addContext(req.getParameter("contextDescription"), req.getParameter("contextExample"));
