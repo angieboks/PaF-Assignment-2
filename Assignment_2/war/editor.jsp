@@ -160,7 +160,7 @@
 		</div>
 		<div>
 			<p>
-				<input type="submit" name="button" value="Save" />
+				<input type="submit" name="knop" value="Save" />
 			</p>
 		</div>
 	</form>

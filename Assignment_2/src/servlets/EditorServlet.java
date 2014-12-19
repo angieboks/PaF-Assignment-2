@@ -1,5 +1,6 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -65,6 +66,35 @@ public class EditorServlet extends HttpServlet {
 			
 		}
 		else if(knop.equals("Save pattern")){
+			boolean b;
+			if(req.getSession().getAttribute("isPrimary").equals("true")){
+				b = true;
+			}
+			else{
+				b = false;
+			}
+			editor.makePattern((String) req.getSession().getAttribute("patterName"), b, (String) req.getSession().getAttribute("patterDescription"));
+			//diagram
+			editor.addDia(new File((String) req.getSession().getAttribute("diagram")));
+			//aka
+			for(String s : (ArrayList<String>) req.getSession().getAttribute("aka")){
+				editor.addAKA(s);
+			}
+			//pro
+			for(String s : (ArrayList<String>) req.getSession().getAttribute("pro")){
+				editor.addPro(s);
+			}
+			//con
+			for(String s : (ArrayList<String>) req.getSession().getAttribute("con")){
+				editor.addCon(s);
+			}
+			//category
+			
+			//context
+			
+			//participants
+			
+			//save pattern
 			editor.savePattern();
 		}
 		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
