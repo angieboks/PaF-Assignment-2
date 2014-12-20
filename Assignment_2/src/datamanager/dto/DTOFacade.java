@@ -37,12 +37,12 @@ public class DTOFacade {
 	}
 	public void writeDocument(Object obj, String step){
 		Document doc = DTOFactory.getInstance().getDocument();
-		getPatternDTO().getInstance().write(obj, doc, step);
+		PatternDTO.getInstance().write(obj, doc, step);
 	}
 	/* !!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
 	 * 
 	 * 	        Parameter String  Parameter Object
-	 * 1. Step "pattern" 		= Pattern -
+	 * 1. Step "pattern" 		= Pattern - (Diagram is er uit gehaald)
 	 * 2. Step "category"		= Category -
 	 * 3. Step "context" 		= Context -
 	 * 4. Step "participant" 	= Participant

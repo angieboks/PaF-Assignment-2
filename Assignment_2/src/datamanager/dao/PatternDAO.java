@@ -1,5 +1,7 @@
 package datamanager.dao;
 
+import java.util.ArrayList;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -37,16 +39,27 @@ public class PatternDAO implements IDAOAdapter {
 			}
 		}
 		else if(step == "pattern_aka"){
+			ArrayList<String> array = new ArrayList<String>();
 			NodeList nList = doc.getElementsByTagName("pattern");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("aka").item(i).getTextContent();
+					for(int index = 0; index < 5; index++){
+						try{
+							if(element.getElementsByTagName("aka" + index).item(i).getTextContent() != null){
+								array.add(element.getElementsByTagName("aka" + index).item(i).getTextContent());
+							}
+						}catch(NullPointerException e){
+							System.out.println(e);
+						}
+					}
+					obj = (Object) array;
+					
 				}
 			}
 		}
-		else if(step == "pattern_diagram"){
+		/*else if(step == "pattern_diagram"){
 			NodeList nList = doc.getElementsByTagName("pattern");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
@@ -55,25 +68,46 @@ public class PatternDAO implements IDAOAdapter {
 					obj = (Object) element.getElementsByTagName("diagram").item(i).getTextContent();
 				}
 			}
-		}
+		}*/
 		else if(step == "pattern_pros"){
-			
-		NodeList nList = doc.getElementsByTagName("pattern");
-		for (int i = 0; i < nList.getLength(); i++) {
-			Node node = nList.item(i);
-			if (node.getNodeType() == Node.ELEMENT_NODE) {
-				Element element = (Element) node;
-				obj = (Object) element.getElementsByTagName("pros").item(i).getTextContent();
-			}
-		}
-		}
-		else if( step== "pattern_cons"){
+			ArrayList<String> array = new ArrayList<String>();
 			NodeList nList = doc.getElementsByTagName("pattern");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("cons").item(i).getTextContent();
+					for(int index = 0; index < 5; index++){
+						try{
+							if(element.getElementsByTagName("pros" + index).item(i).getTextContent() != null){
+								array.add(element.getElementsByTagName("pros" + index).item(i).getTextContent());
+							}
+						}catch(NullPointerException e){
+							System.out.println(e);
+						}
+					}
+					obj = (Object) array;
+					
+				}
+			}
+		}
+		else if(step == "pattern_cons"){
+			ArrayList<String> array = new ArrayList<String>();
+			NodeList nList = doc.getElementsByTagName("pattern");
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node node = nList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					for(int index = 0; index < 5; index++){
+						try{
+							if(element.getElementsByTagName("cons" + index).item(i).getTextContent() != null){
+								array.add(element.getElementsByTagName("cons" + index).item(i).getTextContent());
+							}
+						}catch(NullPointerException e){
+							System.out.println(e);
+						}
+					}
+					obj = (Object) array;
+					
 				}
 			}
 		}

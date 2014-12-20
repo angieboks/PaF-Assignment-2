@@ -7,12 +7,22 @@ import domain.Pattern;
 public class DToTest {
 
 	public static void main(String[] args) {
-		Pattern pattern = new Pattern(null, false, null);
+		Pattern pattern = new Pattern("Test", true, "test");
+		pattern.setAka("test1");
+		pattern.setAka("test2");
+		pattern.setAka("test3");
+		pattern.setPros("test1");
+		pattern.setPros("test2");
+		pattern.setPros("test3");
+		pattern.setCons("test1");
+		pattern.setCons("test2");
+		pattern.setCons("test3");
 		DTOFacade dtoFacade = new DTOFacade();
-		File file = new File("PaF-Assignment-2.txt");
 		dtoFacade.createDocument();
 		dtoFacade.writeDocument( pattern, "pattern");
-		dtoFacade.finishDocument(file);
+		File file = new File("test.xml");
+		pattern.setDiagram(file);
+		dtoFacade.finishDocument(pattern.getDiagram());
 	}
 
 }

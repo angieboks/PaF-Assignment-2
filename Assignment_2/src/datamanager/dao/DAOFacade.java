@@ -35,7 +35,7 @@ public class DAOFacade {
 	 * 	        Parameter String  			  Parameter Object			returns (in Object file); Just cast it. So for example: pattern.name = (String) Object;
 	 * 1.0 Step "pattern_name" 				= Pattern.name 				String
 	 * 1.1 Step "pattern_aka" 				= Pattern.also_known_as 	ArrayList<String>
-	 * 1.2 Step "pattern_diagram" 			= Pattern.diagram			String (File path)
+	 * 1.2 Step "pattern_diagram" 			= Pattern.diagram			String (File path) ----- Eruit gehaald!!
 	 * 1.2 Step "pattern_pros" 				= Pattern.pros				ArrayList<String>
 	 * 1.3 Step "pattern_cons" 				= Pattern.cons				ArrayList<String>
 	 * 2.0 Step "category"					= Category 					String

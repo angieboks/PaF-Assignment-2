@@ -42,35 +42,41 @@ class PatternDTO implements IDTOAdapter {
 				patternElement.appendChild(name);
 				
 				//AKA
-				Element aka = doc.createElement("aka");
+				
 				int lengthAKA = pattern.getAka().size();
 				ArrayList<String> also_known_as = new ArrayList<String>();
 				also_known_as = pattern.getAka();
 				for(int i = 0; i < lengthAKA; i++){
+					Element aka = doc.createElement("aka" + i);
 					aka.appendChild(doc.createTextNode(also_known_as.get(i)));
+					patternElement.appendChild(aka);
 				}
-				patternElement.appendChild(aka);
+				
 				
 				//diagram
-				Element diagram = doc.createElement("diagram");
-				diagram.appendChild(doc.createTextNode(pattern.getDiagram().getPath()));
-				patternElement.appendChild(diagram);
+				/*Element diagram = doc.createElement("diagram");
+				diagram.appendChild(doc.createTextNode(pattern.getDiagram().getName()));
+				patternElement.appendChild(diagram);*/
 				
 				//pros
-				Element pros = doc.createElement("pros");
+				
 				int lengthPros = pattern.getPros().size();
 				for(int i = 0; i < lengthPros; i++){
+					Element pros = doc.createElement("pros" + i);
 					pros.appendChild(doc.createTextNode(pattern.getPros().get(i)));
+					patternElement.appendChild(pros);
 				}
-				patternElement.appendChild(pros);
+				
 				
 				//cons
-				Element cons = doc.createElement("cons");
+				
 				int lengthCons = pattern.getCons().size();
 				for(int i = 0; i < lengthCons; i++){
+					Element cons = doc.createElement("cons" + i);
 					cons.appendChild(doc.createTextNode(pattern.getCons().get(i)));
+					patternElement.appendChild(cons);
 				}
-				patternElement.appendChild(cons);			
+							
 		}
 		
 	}
