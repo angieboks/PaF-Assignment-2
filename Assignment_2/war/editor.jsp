@@ -57,10 +57,19 @@
 						for(String s: aka){
 							%>
 							<tr>
-								<td><%=s %></td>
+								<td><input type="radio" name="delaka" value="<%=s %>"><%=s %></td>
 							</tr>
 							<%
 						}
+					}
+					if(aka.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delaka" value="Delete also known as" />
+						</td>
+					</tr>
+					<%
 					}
 					%>
 				</table>
@@ -77,10 +86,19 @@
 						for(String s: pro){
 							%>
 							<tr>
-								<td><%=s %></td>
+								<td><input type="radio" name="delpro" value="<%=s %>"><%=s %></input></td>
 							</tr>
 							<%
 						}
+					}
+					if(pro.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delpro" value="Delete pro" />
+						</td>
+					</tr>
+					<%
 					}
 					%>
 				</table>
@@ -97,10 +115,19 @@
 						for(String s: con){
 							%>
 							<tr>
-								<td><%=s %></td>
+								<td><input type="radio" name="delcon" value="<%=s %>"><%=s %></input></td>
 							</tr>
 							<%
 						}
+					}
+					if(con.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delcon" value="Delete con" />
+						</td>
+					</tr>
+					<%
 					}
 					%>
 				</table>
@@ -120,11 +147,20 @@
 						for(Category c: category){
 							%>
 							<tr>
-								<td><%=c.getName() %></td>
+								<td><input type="radio" name="delcategory" value="<%=c.getName() %>"> <%=c.getName() %></td>
 								<td><%=c.getClass().getName() %></td>
 							</tr>
 							<%
 						}
+					}
+					if(category.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delcategory" value="Delete category" />
+						</td>
+					</tr>
+					<%
 					}
 					%>
 				</table>
@@ -136,6 +172,7 @@
 				Description: <input type="text" name="contextDescription" />
 				Example: <input type="text" name="contextDescription" />
 				<input type="submit" name="knop" value="Add context" />
+				<table>
 				<%
 					ArrayList<Context> context = (ArrayList<Context>) request.getSession().getAttribute("context");
 					if(context == null){context = new ArrayList<Context>();}
@@ -143,13 +180,23 @@
 						for(Context c : context){
 							%>
 							<tr>
-								<td><%=c.getDescription() %></td>
+								<td><input type="radio" name="delcontext" value="<%=c.getDescription() %>"> <%=c.getDescription() %></td>
 								<td><%=c.getExample() %></td>
 							</tr>
 							<%
 						}
 					}
-				%>
+					if(context.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delcontext" value="Delete context" />
+						</td>
+					</tr>
+					<%
+					}
+					%>
+				</table>
 			</p>			
 		</div>
 		<div>
@@ -157,8 +204,9 @@
 			<p>
 				Name: <input type="text" name="participantName" />
 				Is class: <input type="radio" name="isClass" value="true">Yes</input>
-				<input type="radio" name="isclass" value="false" checked>No</input>
+				<input type="radio" name="isClass" value="false" checked>No</input>
 				<input type="submit" name="knop" value="Add participant" />
+				<table>
 				<%
 					ArrayList<Participant> participant = (ArrayList<Participant>) request.getSession().getAttribute("participant");
 					if(participant == null){participant = new ArrayList<Participant>();}
@@ -166,13 +214,23 @@
 						for(Participant p : participant){
 							%>
 							<tr>
-								<td><%=p.getRole() %></td>
+								<td><input type="radio" name="delparticipant" value="<%=p.getRole()%>"><%=p.getRole() %></td>
 								<td><%=p.isClass() %></td>
 							</tr>
 							<%
 						}
 					}
-				%>
+					if(participant.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delparticipant" value="Delete participant" />
+						</td>
+					</tr>
+					<%
+					}
+					%>
+				</table>
 			</p>			
 		</div>
 		<div>
