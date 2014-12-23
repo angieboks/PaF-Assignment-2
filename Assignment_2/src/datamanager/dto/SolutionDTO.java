@@ -10,7 +10,7 @@ class SolutionDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static SolutionDTO instance;
-	
+	private static int index;
 	private SolutionDTO(){
 		
 	}
@@ -23,16 +23,17 @@ class SolutionDTO implements IDTOAdapter {
 	}
 
 	@Override
-	public void write(Object obj, Document doc, String step) {
+	public Document write(Object obj, Document doc, String step, Element root) {
 		// TODO Auto-generated method stub
 		if(step != "solution"){
-			nextInChain.write(obj, doc, step);
+			nextInChain.write(obj, doc, step, root);
 		}
 		else{
 			Solution solution = (Solution) obj;
 			//Root
-			Element solutionElement = doc.createElement("solution");
-			doc.appendChild(solutionElement);
+			Element solutionElement = doc.createElement("solution" + index);
+			index++;
+			root.appendChild(solutionElement);
 			
 				//isPrimary
 				Element isPrimary = doc.createElement("isprimary");
@@ -51,7 +52,7 @@ class SolutionDTO implements IDTOAdapter {
 				
 				
 		}
-		
+		return doc;
 	}
 
 	@Override

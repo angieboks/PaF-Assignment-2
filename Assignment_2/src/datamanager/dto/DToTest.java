@@ -1,28 +1,26 @@
 package datamanager.dto;
 
-import java.io.File;
+import java.util.ArrayList;
 
 import domain.Pattern;
+
 
 public class DToTest {
 
 	public static void main(String[] args) {
-		Pattern pattern = new Pattern("Test", true, "test");
-		pattern.setAka("test1");
-		pattern.setAka("test2");
-		pattern.setAka("test3");
-		pattern.setPros("test1");
-		pattern.setPros("test2");
-		pattern.setPros("test3");
-		pattern.setCons("test1");
-		pattern.setCons("test2");
-		pattern.setCons("test3");
-		DTOFacade dtoFacade = new DTOFacade();
-		dtoFacade.createDocument();
-		dtoFacade.writeDocument( pattern, "pattern");
-		File file = new File("test.xml");
-		pattern.setDiagram(file);
-		dtoFacade.finishDocument(pattern.getDiagram());
+		Pattern c0 = new Pattern("pattern0", true, "blabla0");
+		Pattern c1 = new Pattern("pattern1", true, "blabla1");
+		Pattern c2 = new Pattern("pattern2", true, "blabla2");
+		Pattern c3 = new Pattern("pattern3", true, "blabla3");
+		Pattern c4 = new Pattern("pattern4", true, "blabla4");
+		ArrayList<Pattern> patterns = new ArrayList<Pattern>();
+		patterns.add(c0);
+		patterns.add(c1);
+		patterns.add(c2);
+		patterns.add(c3);
+		patterns.add(c4);
+		DTOFacade facade = new DTOFacade();
+		facade.writeAllPatternNames(patterns);
 	}
 
 }

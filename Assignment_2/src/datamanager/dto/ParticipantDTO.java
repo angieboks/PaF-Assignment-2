@@ -10,7 +10,7 @@ class ParticipantDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static ParticipantDTO instance;
-	
+	private static int index;
 	private ParticipantDTO(){
 		
 	}
@@ -23,17 +23,18 @@ class ParticipantDTO implements IDTOAdapter {
 	}
 
 	@Override
-	public void write(Object obj, Document doc, String step) {
+	public Document write(Object obj, Document doc, String step, Element root) {
 		// TODO Auto-generated method stub
 		if(step != "participant"){
-			nextInChain.write(obj, doc, step);
+			nextInChain.write(obj, doc, step, root);
 		}
 		else{
 			
 			Participant participant = (Participant) obj;
 			//Root
-			Element participantElement = doc.createElement("participant");
-			doc.appendChild(participantElement);
+			Element participantElement = doc.createElement("participant" + index);
+			index++;
+			root.appendChild(participantElement);
 			
 				//isClass
 				Element isClass = doc.createElement("isclass");
@@ -51,7 +52,7 @@ class ParticipantDTO implements IDTOAdapter {
 				participantElement.appendChild(role);
 			
 		}
-		
+		return doc;
 	}
 
 

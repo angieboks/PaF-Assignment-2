@@ -10,6 +10,7 @@ class ForceDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static ForceDTO instance;
+	private static int index;
 	
 	private ForceDTO(){
 		
@@ -23,23 +24,24 @@ class ForceDTO implements IDTOAdapter {
 	}
 
 	@Override
-	public void write(Object obj, Document doc, String step) {
+	public Document write(Object obj, Document doc, String step, Element root) {
 		// TODO Auto-generated method stub
 		if(step != "force"){
-			nextInChain.write(obj, doc, step);
+			nextInChain.write(obj, doc, step, root);
 		}
 		else{
 			Force force = (Force) obj;
 			//Root
-			Element forceElement = doc.createElement("force");
-			doc.appendChild(forceElement);
+			Element forceElement = doc.createElement("force"+ index);
+			index++;
+			root.appendChild(forceElement);
 			
 				//Description
 				Element description = doc.createElement("description");
 				description.appendChild(doc.createTextNode(force.getDescription()));
 				forceElement.appendChild(description);
 		}
-		
+		return doc;
 	}
 
 	@Override

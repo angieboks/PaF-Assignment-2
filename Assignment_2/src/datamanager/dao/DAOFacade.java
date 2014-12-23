@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import org.w3c.dom.Document;
 
+import domain.Category;
+import domain.Context;
 import domain.Pattern;
 
 public class DAOFacade {
@@ -27,7 +29,22 @@ public class DAOFacade {
 	public Object readDocument(String step){
 		Document doc = DAOFactory.getInstance().readDocument();
 		return PatternDAO.getInstance().read(doc, step);
+		/*
+		 * Alleen het hele object ophalen. 
+		 * Alle categories
+		 * Alle contexts
+		 */
 	}
+	public ArrayList<Category> getAllCategories(){
+		return null;
+	}
+	public ArrayList<Context> getAllContexts(){
+		return null;
+	}
+	public ArrayList<String> getAllPatternNames(){
+		return null;
+	}
+	
 	
 	
 	/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!

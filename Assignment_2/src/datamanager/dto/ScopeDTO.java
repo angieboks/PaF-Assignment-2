@@ -4,40 +4,41 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import domain.Category;
+import domain.Scope;
 
-class CategoryDTO implements IDTOAdapter {
+class ScopeDTO implements IDTOAdapter {
 
 
 	private IDTOAdapter nextInChain;
-	private static CategoryDTO instance;
-	private static int index;
-	private CategoryDTO(){
+	private static ScopeDTO instance;
+	private static int index = 0;
+	private ScopeDTO(){
 		
 	}
 	
-	protected static CategoryDTO getInstance(){
+	protected static ScopeDTO getInstance(){
 		if(instance == null){
-			instance = new CategoryDTO();
+			instance = new ScopeDTO();
 		}
 		return instance;
 	
 	}
 	
-	 public Document write(Object obj, Document doc, String step, Element root) {
+	  public Document write(Object obj, Document doc, String step, Element root) {
 		// TODO Auto-generated method stub
-		if(step != "category"){
+		if(step != "scope"){
 			nextInChain.write(obj, doc, step, root);
 		}
 		else{
-			Category category = (Category) obj;
+			Scope scope = (Scope) obj;
 			//Root
-			Element categoryElement = doc.createElement("category" + index);
+			Element categoryElement = doc.createElement("scope" + index);
 			index++;
 			root.appendChild(categoryElement);
 			
 				//Name
 				Element name = doc.createElement("name");
-				name.appendChild(doc.createTextNode(category.getName()));
+				name.appendChild(doc.createTextNode(scope.getName()));
 				categoryElement.appendChild(name);
 		}
 		return doc;

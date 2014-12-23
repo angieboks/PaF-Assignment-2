@@ -13,11 +13,13 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 class DTOFactory {
 	DTOFacade writeFacade = new DTOFacade();
 	IDTOAdapter pattern;
-	IDTOAdapter category;
+	IDTOAdapter scope;
+	IDTOAdapter purpose;
 	IDTOAdapter context;
 	IDTOAdapter participant;
 	IDTOAdapter solution;
@@ -25,7 +27,7 @@ class DTOFactory {
 	IDTOAdapter force;
 	static DTOFactory instance;
 	Document doc;
-	
+	Element root;
 	protected DTOFactory(){
 		createClasses();
 	}
@@ -42,15 +44,17 @@ class DTOFactory {
 	
 	private void createClasses(){
 		pattern = writeFacade.getPatternDTO();
-		category = writeFacade.getCategoryDTO();
+		scope = writeFacade.getScopeDTO();
+		purpose = writeFacade.getPurposeDTO();
 		context = writeFacade.getContextDTO();
 		participant = writeFacade.getParticipantDTO();
 		solution = writeFacade.getSolutionDTO();	
 		problem = writeFacade.getProblemDTO();
 		force = writeFacade.getForceDTO();
-		
-		pattern.setNextInChain(category);
-		category.setNextInChain(context);
+	
+		pattern.setNextInChain(scope);
+		scope.setNextInChain(purpose);
+		purpose.setNextInChain(context);
 		context.setNextInChain(participant);
 		participant.setNextInChain(solution);
 		solution.setNextInChain(problem);		
@@ -61,20 +65,28 @@ class DTOFactory {
 	protected Document getDocument(){
 		return doc;
 	}
+	protected void setDocument(Document doc){
+		this.doc = doc;
+	}
+	protected Element getRoot(){
+		return root;
+	}
 	
-	protected void createDocument(){
+	protected Element createDocument(){
+		
 		try {
 			DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
 			doc = docBuilder.newDocument();
-			if(doc == null){
-				System.out.println("Error: Document is leeg");
-			}
+			root = doc.createElement("root");
+			doc.appendChild(root);
 			
+						
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return root;
 			
 	}
 	

@@ -9,6 +9,7 @@ import domain.Problem;
 class ProblemDTO implements IDTOAdapter {
 	private IDTOAdapter nextInChain;
 	private static ProblemDTO instance;
+	private static int index;
 	
 	private ProblemDTO(){
 		
@@ -20,22 +21,24 @@ class ProblemDTO implements IDTOAdapter {
 		return instance;
 	
 	}
-	public void write(Object obj, Document doc, String step) {
+	public Document write(Object obj, Document doc, String step, Element root) {
 	
 		if(step != "problem"){
-			nextInChain.write(obj, doc, step);
+			nextInChain.write(obj, doc, step, root);
 		}
 		else{
 			Problem problem = (Problem) obj;
 			//Root
-			Element problemElement = doc.createElement("problem");
-			doc.appendChild(problemElement);
+			Element problemElement = doc.createElement("problem" + index);
+			index++;
+			root.appendChild(problemElement);
 			
 				//Description
 				Element description = doc.createElement("description");
 				description.appendChild(doc.createTextNode(problem.getDescription() ));
 				problemElement.appendChild(description);
 		}
+		return doc;
 	}
 
 	@Override
