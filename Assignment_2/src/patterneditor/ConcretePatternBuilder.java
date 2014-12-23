@@ -30,7 +30,12 @@ class ConcretePatternBuilder implements IPatternBuilder {
 	public void addAKA(String aka) {
 		product.addAKA(aka);
 	}
-
+	
+	@Override
+	public void addRelatedPattern(String relPat){
+		product.addRelatedPattern(relPat);
+	}
+	
 	@Override
 	public void addPro(String pro) {
 		product.addPro(pro);

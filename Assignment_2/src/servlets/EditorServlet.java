@@ -60,13 +60,13 @@ public class EditorServlet extends HttpServlet {
 					category = new ArrayList<Category>();
 				}
 				String name = req.getParameter("categoryName");
-				Category theChosenOne = null;
-				for(Category c : editor.getCategorys()){
-					if(c.getName().equals(name)){
-						theChosenOne = c;
-					}
+				String type = req.getParameter("categoryType");
+				Category c = null;
+				switch(type){
+				case "purpose" : c = new Purpose(name); break;
+				case "scope" : c = new Scope(name); break;
 				}
-				category.add(theChosenOne);
+				category.add(c);
 				req.getSession().setAttribute("category", category);
 			}
 			else if(knop.equals("Add context")){
@@ -104,6 +104,10 @@ public class EditorServlet extends HttpServlet {
 				for(String s : (ArrayList<String>) req.getSession().getAttribute("aka")){
 					editor.addAKA(s);
 				}
+				//relatedPatterns
+				for(String s : (ArrayList<String>) req.getSession().getAttribute("relatedPatterns")){
+					editor.addRelatedPattern(s);
+				}
 				//pro
 				for(String s : (ArrayList<String>) req.getSession().getAttribute("pro")){
 					editor.addPro(s);
@@ -128,22 +132,27 @@ public class EditorServlet extends HttpServlet {
 				editor.savePattern();
 			}	
 		}
-		else if(req.getParameter("delaka") != null){
+		else if(req.getParameter("delKnopaka") != null){
 			ArrayList<String> aka = (ArrayList<String>) req.getSession().getAttribute("aka");
 			aka.remove((String) req.getParameter("delaka"));
 			req.getSession().setAttribute("aka", aka);
 		}
-		else if(req.getParameter("delpro") != null){
+		else if(req.getParameter("delKnoprelatedpattern") != null){
+			ArrayList<String> relatedPattern = (ArrayList<String>) req.getSession().getAttribute("relatedPattern");
+			relatedPattern.remove((String) req.getParameter("relatedPattern"));
+			req.getSession().setAttribute("relatedPattern", relatedPattern);
+		}
+		else if(req.getParameter("delKnoppro") != null){
 			ArrayList<String> pro = (ArrayList<String>) req.getSession().getAttribute("pro");
 			pro.remove((String) req.getParameter("delpro"));
 			req.getSession().setAttribute("pro", pro);
 		}
-		else if(req.getParameter("delcon") != null){
+		else if(req.getParameter("delKnopcon") != null){
 			ArrayList<String> con = (ArrayList<String>) req.getSession().getAttribute("con");
 			con.remove((String) req.getParameter("delcon"));
 			req.getSession().setAttribute("con", con);
 		}
-		else if(req.getParameter("delcategory") != null){
+		else if(req.getParameter("delKnopcategory") != null){
 			ArrayList<Category> category = (ArrayList<Category>) req.getSession().getAttribute("category");
 			String delCategory = (String) req.getParameter("delcategory");
 			Category delC = null;
@@ -157,7 +166,7 @@ public class EditorServlet extends HttpServlet {
 			}
 			req.getSession().setAttribute("category", category);
 		}
-		else if(req.getParameter("delcontext") != null){
+		else if(req.getParameter("delKnopcontext") != null){
 			ArrayList<Context> context = (ArrayList<Context>) req.getSession().getAttribute("context");
 			String delContext = (String) req.getParameter("delcontext");
 			Context delC = null;
@@ -171,7 +180,7 @@ public class EditorServlet extends HttpServlet {
 			}
 			req.getSession().setAttribute("context", context);
 		}
-		else if(req.getParameter("delparticipant") != null){
+		else if(req.getParameter("delKnopparticipant") != null){
 			ArrayList<Participant> participant = (ArrayList<Participant>) req.getSession().getAttribute("participant");
 			String delParticipant = (String) req.getParameter("delparticipant");
 			Participant delP = null;
@@ -185,7 +194,39 @@ public class EditorServlet extends HttpServlet {
 			}
 			req.getSession().setAttribute("participant", participant);
 		}
+		else if(req.getParameter("addRelatedPattern") != null){
+			ArrayList<String> relatedPattern = (ArrayList<String>) req.getSession().getAttribute("relatedPattern");
+			if(relatedPattern == null){
+				relatedPattern = new ArrayList<String>();
+			}
+			relatedPattern.add(req.getParameter("relatedPattern"));
+			req.getSession().setAttribute("relatedPattern", relatedPattern);
+		}
+		else if(req.getParameter("addCategory") != null){
+			ArrayList<Category> category = (ArrayList<Category>) req.getSession().getAttribute("category");
+			if(category == null){
+				category = new ArrayList<Category>();
+			}
+			String name = req.getParameter("relatedPattern");
+			Category c = null;
+			switch(req.getParameter("type")){
+			case "domain.Purpose": c = new Purpose(name); break;
+			case "domain.Scope": c = new Scope(name); break;
+			}
+			category.add(c);
+			req.getSession().setAttribute("category", category);
+		}
+		else if(req.getParameter("addContext") != null){
+			ArrayList<Context> context = (ArrayList<Context>) req.getSession().getAttribute("context");
+			if(context == null){
+				context = new ArrayList<Context>();
+			}
+			context.add(new Context((String) req.getAttribute("context"), (String) req.getAttribute("example")));
+			req.getSession().setAttribute("context", context);
+		}
+		
 		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		rd.forward(req, resp);
+		
 	}
 }

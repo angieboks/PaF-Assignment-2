@@ -11,6 +11,7 @@ interface IPatternBuilder {
 	void makePattern(String name, boolean isPrimary, String description);
 	void addDia(File f);
 	void addAKA(String aka);
+	void addRelatedPattern(String relPat);
 	void addPro(String pro);
 	void addCon(String con);
 	void addCategory(String na, String type, DAOFacade accessObjects, DTOFacade targetObjects);

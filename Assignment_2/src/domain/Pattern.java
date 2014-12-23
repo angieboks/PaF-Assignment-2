@@ -7,7 +7,7 @@ public class Pattern extends Solution {
 
 	private String name;
 	private File diagram;
-	private ArrayList<Pattern> relatedPatterns = new ArrayList<Pattern>();
+	private ArrayList<String> relatedPatterns = new ArrayList<String>();
 	private ArrayList<String> aka = new ArrayList<String>();
 	private ArrayList<String> pros = new ArrayList<String>();
 	private ArrayList<String> cons = new ArrayList<String>();
@@ -28,7 +28,7 @@ public class Pattern extends Solution {
 		return diagram;
 	}
 
-	public ArrayList<Pattern> getRelatedPatterns() {
+	public ArrayList<String> getRelatedPatterns() {
 		return relatedPatterns;
 	}
 
@@ -65,7 +65,12 @@ public class Pattern extends Solution {
 			aka.add(nweAKA);
 		}
 	}
-
+	
+	public void addRelatedPattern(String nweRelPat){
+		if(!relatedPatterns.contains(nweRelPat)){
+			relatedPatterns.add(nweRelPat);
+		}
+	}
 	public void addPro(String nwePro){
 		if(!pros.contains(nwePro)){
 			pros.add(nwePro);

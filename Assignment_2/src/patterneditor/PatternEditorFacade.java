@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
 import domain.Category;
+import domain.Context;
 
 public class PatternEditorFacade {
 
@@ -19,9 +20,21 @@ public class PatternEditorFacade {
 		this.boss = new PatternBuildDirector();
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<Category> getCategorys(){
-		return null;
+		return (ArrayList<Category>) accessObjects.readDocument("category");
 	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<Context> getContexts(){
+		return (ArrayList<Context>) accessObjects.readDocument("context");
+	}
+	
+	@SuppressWarnings("unchecked")
+	public ArrayList<String> getPatterns(){
+		return (ArrayList<String>) accessObjects.readDocument("patterns");
+	}
+	
 	public void makePattern(String name, boolean isPrimary, String description){
 		boss.getBuilder().makePattern(name, isPrimary, description);
 	}
@@ -32,6 +45,10 @@ public class PatternEditorFacade {
 
 	public void addAKA(String aka){
 		boss.getBuilder().addAKA(aka);
+	}
+	
+	public void addRelatedPattern(String relPat){
+		boss.getBuilder().addRelatedPattern(relPat);
 	}
 	
 	public void addPro(String pro){

@@ -46,6 +46,45 @@
 					</tr>
 				</table>
 			</p>
+			<h5>Related patterns</h5>
+			<p>
+				<select name="relatedPattern">
+				<%
+				//ArrayList<String> relatedPatterns = editor.getPatterns();
+				ArrayList<String> relatedPatterns = new ArrayList<String>();
+				for(String s : relatedPatterns){
+				%>
+					<option value="<%=s %>"><%=s %></option>
+				<%
+				}
+				%>
+				</select>
+				<input type="submit" name="addRelatedPattern" value="Add related pattern" />
+				<table>
+					<%
+					ArrayList<String> relatedPattern = (ArrayList<String>) request.getSession().getAttribute("relatedPattern");
+					if(relatedPattern == null){relatedPattern = new ArrayList<String>();}
+					if(relatedPattern != null){
+						for(String s: relatedPattern){
+							%>
+							<tr>
+								<td><input type="radio" name="delrelatedpattern" value="<%=s %>"><%=s %></td>
+							</tr>
+							<%
+						}
+					}
+					if(relatedPattern.size() != 0){
+					%>
+					<tr>
+						<td>
+							<input type="submit" name="delKnoprelatedpattern" value="Delete related pattern" />
+						</td>
+					</tr>
+					<%
+					}
+					%>
+				</table>
+			</p>
 			<h5>Also known as</h5>
 			<p>
 				Also known as: <input type="text" name="aka" />
@@ -67,7 +106,7 @@
 					%>
 					<tr>
 						<td>
-							<input type="submit" name="delaka" value="Delete also known as" />
+							<input type="submit" name="delKnopaka" value="Delete also known as" />
 						</td>
 					</tr>
 					<%
@@ -96,7 +135,7 @@
 					%>
 					<tr>
 						<td>
-							<input type="submit" name="delpro" value="Delete pro" />
+							<input type="submit" name="delKnoppro" value="Delete pro" />
 						</td>
 					</tr>
 					<%
@@ -125,7 +164,7 @@
 					%>
 					<tr>
 						<td>
-							<input type="submit" name="delcon" value="Delete con" />
+							<input type="submit" name="delKnopcon" value="Delete con" />
 						</td>
 					</tr>
 					<%
@@ -137,16 +176,22 @@
 		<div>
 			<h3>Category</h3>
 			<p>
-				Name: <input type="text" name="categoryname" />
-				Type: <select id="categoryType">
+				<select name="relatedPattern">
 				<%
-					ArrayList<Category> categorys = ((PatternEditorFacade) request.getSession().getAttribute("editor")).getCategorys();
-					for(Category c : categorys){
+				//ArrayList<String> relatedPatterns = editor.getPatterns();
+				ArrayList<Category> category = new ArrayList<Category>();
+				for(Category c : category){
 				%>
-					<option value="<%=c %>">Type: <%=c.getClass() %>; Name: <%=c %></option>
+					<option value="<%=c.getName() %>"><%=c.getName() %></option>
+					<input type="hidden" name="type" value="<%=c.getClass().getName() %>" />
 				<%
 				}
 				%>
+				</select>
+				Name: <input type="text" name="categoryName" />
+				Type: <select name="categoryType">
+				<option value="purpose">Purpose</option>
+				<option value="scope">Scope</option>
 				</select>
 				<input type="submit" name="knop" value="Add category" />
 				<table>
@@ -167,7 +212,7 @@
 					%>
 					<tr>
 						<td>
-							<input type="submit" name="delcategory" value="Delete category" />
+							<input type="submit" name="delKnopcategory" value="Delete category" />
 						</td>
 					</tr>
 					<%
@@ -179,8 +224,20 @@
 		<div>
 			<h3>Context</h3>
 			<p>
+				<select name="context">
+				<%
+				//ArrayList<Context> context = editor.getContext();
+				ArrayList<Context> context = new ArrayList<Context>();
+				for(Context c : context){
+				%>
+					<option value="<%=c.getDescription() %>"><%=c.getDescription() %></option>
+					<input type="hidden" name="example" value="<%=c.getExample()%>" />
+				<%
+				}
+				%>
+				</select>
 				Description: <input type="text" name="contextDescription" />
-				Example: <input type="text" name="contextDescription" />
+				Example: <input type="text" name="contextExample" />
 				<input type="submit" name="knop" value="Add context" />
 				<table>
 				<%
@@ -200,7 +257,7 @@
 					%>
 					<tr>
 						<td>
-							<input type="submit" name="delcontext" value="Delete context" />
+							<input type="submit" name="delKnopcontext" value="Delete context" />
 						</td>
 					</tr>
 					<%
@@ -234,7 +291,7 @@
 					%>
 					<tr>
 						<td>
-							<input type="submit" name="delparticipant" value="Delete participant" />
+							<input type="submit" name="delKnopparticipant" value="Delete participant" />
 						</td>
 					</tr>
 					<%
