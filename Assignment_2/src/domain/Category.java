@@ -18,4 +18,7 @@ public abstract class Category {
 		}
 		return false;
 	}
+	public String toString(){
+		return name;
+	}
 }

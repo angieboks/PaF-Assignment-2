@@ -1,7 +1,7 @@
 <jsp:include page="header.jsp" > 
 	<jsp:param name="title" value="Editor" /> 
 </jsp:include> 
-	<%@ page import="java.util.ArrayList, domain.Category, domain.Context, domain.Participant" %>
+	<%@ page import="java.util.ArrayList, domain.Category, domain.Context, domain.Participant, patterneditor.PatternEditorFacade" %>
 	<h1>Pattern Editor</h1>
 	<h2>Please edit your pattern and press save</h2>
 	<form action="EditorServlet.do" method="post">
@@ -10,6 +10,7 @@
 			<p>
 				<table>
 				<%
+				PatternEditorFacade editor = (PatternEditorFacade) request.getSession().getAttribute("editor");
 					String patternName = (String) request.getSession().getAttribute("patternName");
 					if(patternName == null){
 						patternName = "";
@@ -137,7 +138,16 @@
 			<h3>Category</h3>
 			<p>
 				Name: <input type="text" name="categoryname" />
-				Type: <input type="text" name="categoryType" />
+				Type: <select id="categoryType">
+				<%
+					ArrayList<Category> categorys = ((PatternEditorFacade) request.getSession().getAttribute("editor")).getCategorys();
+					for(Category c : categorys){
+				%>
+					<option value="<%=c %>">Type: <%=c.getClass() %>; Name: <%=c %></option>
+				<%
+				}
+				%>
+				</select>
 				<input type="submit" name="knop" value="Add category" />
 				<table>
 					<%

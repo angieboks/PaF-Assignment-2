@@ -1,9 +1,11 @@
 package patterneditor;
 
 import java.io.File;
+import java.util.ArrayList;
 
 import datamanager.dao.DAOFacade;
 import datamanager.dto.DTOFacade;
+import domain.Category;
 
 public class PatternEditorFacade {
 
@@ -16,7 +18,10 @@ public class PatternEditorFacade {
 		this.targetObjects = new DTOFacade();
 		this.boss = new PatternBuildDirector();
 	}
-
+	
+	public ArrayList<Category> getCategorys(){
+		return null;
+	}
 	public void makePattern(String name, boolean isPrimary, String description){
 		boss.getBuilder().makePattern(name, isPrimary, description);
 	}

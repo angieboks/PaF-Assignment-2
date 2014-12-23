@@ -59,14 +59,14 @@ public class EditorServlet extends HttpServlet {
 				if(category == null){
 					category = new ArrayList<Category>();
 				}
-				String type = req.getParameter("categoryType");
 				String name = req.getParameter("categoryName");
-				Category c = null;
-				switch(type){
-				case "Purpose" : c = new Purpose(name); break;
-				case "Scope" : c = new Scope(name); break;
+				Category theChosenOne = null;
+				for(Category c : editor.getCategorys()){
+					if(c.getName().equals(name)){
+						theChosenOne = c;
+					}
 				}
-				category.add(c);
+				category.add(theChosenOne);
 				req.getSession().setAttribute("category", category);
 			}
 			else if(knop.equals("Add context")){
