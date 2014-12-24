@@ -3,7 +3,6 @@ package datamanager.dto;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import domain.Pattern;
 import domain.Problem;
 
 class ProblemDTO implements IDTOAdapter {

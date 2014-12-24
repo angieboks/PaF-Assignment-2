@@ -2,12 +2,7 @@ package datamanager.dto;
 
 import java.util.ArrayList;
 
-import domain.Category;
 import domain.Context;
-import domain.Pattern;
-import domain.Purpose;
-import domain.Scope;
-
 
 public class DToTest {
 

@@ -2,9 +2,7 @@ package datamanager.dao;
 
 import java.util.ArrayList;
 
-import domain.Category;
 import domain.Context;
-import datamanager.dto.DTOFacade;
 
 public class DAOTest {
 

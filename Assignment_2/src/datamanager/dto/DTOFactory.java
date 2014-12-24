@@ -48,7 +48,6 @@ class DTOFactory {
 		purpose = writeFacade.getPurposeDTO();
 		context = writeFacade.getContextDTO();
 		participant = writeFacade.getParticipantDTO();
-		solution = writeFacade.getSolutionDTO();	
 		problem = writeFacade.getProblemDTO();
 		force = writeFacade.getForceDTO();
 	
@@ -56,8 +55,7 @@ class DTOFactory {
 		scope.setNextInChain(purpose);
 		purpose.setNextInChain(context);
 		context.setNextInChain(participant);
-		participant.setNextInChain(solution);
-		solution.setNextInChain(problem);		
+		participant.setNextInChain(problem);	
 		problem.setNextInChain(force);
 		force.setNextInChain(pattern);
 	

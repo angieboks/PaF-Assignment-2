@@ -35,9 +35,6 @@ public class DTOFacade {
 	protected ProblemDTO getProblemDTO(){
 		return ProblemDTO.getInstance();
 	}
-	protected SolutionDTO getSolutionDTO(){
-		return SolutionDTO.getInstance();
-	}
 	protected DTOFactory getDTOFactory(){
 		return DTOFactory.getInstance();
 	}
@@ -102,7 +99,6 @@ public class DTOFacade {
 	 * 3. Step "purpose"        = Purpose
 	 * 4. Step "context" 		= Context -
 	 * 5. Step "participant" 	= Participant
-	 * 6. Step "solution" 		= Solution
 	 * 7. Step "problem" 		= Problem -
 	 * 8. Step "force" 			= Force
 	 */

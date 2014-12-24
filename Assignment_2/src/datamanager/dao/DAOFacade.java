@@ -9,7 +9,6 @@ import domain.Category;
 import domain.Purpose;
 import domain.Scope;
 import domain.Context;
-import domain.Pattern;
 
 public class DAOFacade {
 	

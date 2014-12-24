@@ -4,7 +4,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import domain.Force;
-import domain.Problem;
 
 class ForceDTO implements IDTOAdapter {
 

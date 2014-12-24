@@ -4,7 +4,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import domain.Participant;
-import domain.Solution;
 
 class ParticipantDTO implements IDTOAdapter {
 

@@ -42,6 +42,20 @@ class PatternDTO implements IDTOAdapter {
 				name.appendChild(doc.createTextNode(pattern.getName()));
 				patternElement.appendChild(name);
 				
+				//isPrimary
+				Element isPrimary = doc.createElement("isprimary");
+				if(pattern.isPrimary()){
+					isPrimary.appendChild(doc.createTextNode("true"));
+				}
+				else{
+					isPrimary.appendChild(doc.createTextNode("false"));
+				}
+				patternElement.appendChild(isPrimary);
+				
+				//Description
+				Element description = doc.createElement("description");
+				description.appendChild(doc.createTextNode(pattern.getDescription()));
+				patternElement.appendChild(description);
 				//AKA
 				
 				int lengthAKA = pattern.getAka().size();
@@ -55,9 +69,9 @@ class PatternDTO implements IDTOAdapter {
 				
 				
 				//diagram
-				/*Element diagram = doc.createElement("diagram");
+				Element diagram = doc.createElement("diagram");
 				diagram.appendChild(doc.createTextNode(pattern.getDiagram().getName()));
-				patternElement.appendChild(diagram);*/
+				patternElement.appendChild(diagram);
 				
 				//pros
 				
