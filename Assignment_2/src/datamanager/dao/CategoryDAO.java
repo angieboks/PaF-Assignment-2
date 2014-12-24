@@ -9,6 +9,7 @@ public class CategoryDAO implements IDAOAdapter {
 
 	private static CategoryDAO instance;
 	private IDAOAdapter nextChain;
+	private static int index;
 	private Object obj;
 		
 	private CategoryDAO(){
@@ -27,7 +28,12 @@ public class CategoryDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 			if(step == "category_name"){
-				NodeList nList = doc.getElementsByTagName("category");
+				NodeList nList = doc.getElementsByTagName("category" + index);
+				if(nList == null){
+					System.out.println("leeg");
+					return null;
+				}
+				index++;
 				for (int i = 0; i < nList.getLength(); i++) {
 					Node node = nList.item(i);
 					if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -37,7 +43,7 @@ public class CategoryDAO implements IDAOAdapter {
 				}		
 			}
 			else{
-				nextChain.read(doc, step);
+				obj = nextChain.read(doc, step);
 			}
 			return obj;
 	}

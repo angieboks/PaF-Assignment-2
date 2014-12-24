@@ -5,11 +5,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import domain.Force;
+
 public class ForceDAO implements IDAOAdapter {
 
 	private static ForceDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
+	private static int index;
 	
 	private ForceDAO(){
 		
@@ -27,17 +30,23 @@ public class ForceDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "force_description"){
-			NodeList nList = doc.getElementsByTagName("force");
+			NodeList nList = doc.getElementsByTagName("force" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("description").item(i).getTextContent();
+					String description = element.getElementsByTagName("description").item(i).getTextContent();
+					obj = new Force(description);
 				}
 			}
 		}
 		else{
-			nextChain.read(doc, step);
+			obj = nextChain.read(doc, step);
 		}
 		return obj;
 		

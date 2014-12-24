@@ -5,6 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import domain.Solution;
+
 public class SolutionDAO implements IDAOAdapter {
 
 	private static SolutionDAO instance;
@@ -26,28 +28,32 @@ public class SolutionDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "solution_isprimary"){
+		if(step == "solution"){
+			boolean isPrimary = false;
+			String description = null;
 			NodeList nList = doc.getElementsByTagName("solution");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("isprimary").item(i).getTextContent();
+					String temp = null;
+					temp = element.getElementsByTagName("isprimary").item(i).getTextContent();
+					if(temp == "true"){
+						isPrimary = true;
+					}
 				}
 			}
-		}
-		else if (step == "solution_description"){
-			NodeList nList = doc.getElementsByTagName("solution");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("description").item(i).getTextContent();
+					description = element.getElementsByTagName("description").item(i).getTextContent();
 				}
 			}
+			obj = new Solution(isPrimary, description);
 		}
 		else{
-			nextChain.read(doc, step);
+			obj = nextChain.read(doc, step);
 		}
 		return obj;
 		

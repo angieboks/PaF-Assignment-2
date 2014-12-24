@@ -5,11 +5,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import domain.Purpose;
+
 public class PurposeDAO implements IDAOAdapter {
 
 	private static PurposeDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
+	private static int index;
 		
 	private PurposeDAO(){
 		
@@ -27,17 +30,23 @@ public class PurposeDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 			if(step == "purpose"){
-				NodeList nList = doc.getElementsByTagName("purpose");
+				NodeList nList = doc.getElementsByTagName("purpose" + index);
+				if(nList == null){
+					System.out.println("leeg");
+					return null;
+				}
+				index++;
 				for (int i = 0; i < nList.getLength(); i++) {
 					Node node = nList.item(i);
 					if (node.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) node;
-						obj = (Object) element.getElementsByTagName("name").item(i).getTextContent();
+						String name =  element.getElementsByTagName("name").item(i).getTextContent();
+						obj = new Purpose(name);
 					}
 				}		
 			}
 			else{
-				nextChain.read(doc, step);
+				obj = nextChain.read(doc, step);
 			}
 			return obj;
 	}

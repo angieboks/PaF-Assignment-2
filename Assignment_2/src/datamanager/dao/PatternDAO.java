@@ -12,6 +12,7 @@ public class PatternDAO implements IDAOAdapter {
 	private static PatternDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
+	private static int index;
 	
 	private PatternDAO(){
 		
@@ -28,8 +29,13 @@ public class PatternDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "pattern_name"){
-			NodeList nList = doc.getElementsByTagName("pattern");
+		if(step == "patternNames"){
+			NodeList nList = doc.getElementsByTagName("pattern" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -38,9 +44,25 @@ public class PatternDAO implements IDAOAdapter {
 				}
 			}
 		}
-		else if(step == "pattern_aka"){
+		else if(step == "pattern"){
+			String name;
+			boolean isPrimary;
+			String description;
+			
+			NodeList nList = doc.getElementsByTagName("pattern" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
+			for (int i = 0; i < nList.getLength(); i++) {
+				Node node = nList.item(i);
+				if (node.getNodeType() == Node.ELEMENT_NODE) {
+					Element element = (Element) node;
+					name = element.getElementsByTagName("name").item(i).getTextContent();
+				}
+			}
 			ArrayList<String> array = new ArrayList<String>();
-			NodeList nList = doc.getElementsByTagName("pattern");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -113,7 +135,7 @@ public class PatternDAO implements IDAOAdapter {
 		}
 		
 		else{
-			nextChain.read(doc, step);
+			obj = nextChain.read(doc, step);
 		}
 		return obj;
 		
