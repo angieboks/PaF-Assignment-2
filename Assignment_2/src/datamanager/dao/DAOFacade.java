@@ -36,13 +36,25 @@ public class DAOFacade {
 		 */
 	}
 	public ArrayList<Category> getAllCategories(){
-		return null;
+		File file = new File("categories.xml");
+		Document doc = DAOFactory.getInstance().readDocument();
+		ArrayList<Category> categories = new ArrayList<Category>();
+		CategoryDAO.getInstance().read(doc, "category");
+		return categories;
 	}
 	public ArrayList<Context> getAllContexts(){
-		return null;
+		File file = new File("contexts.xml");
+		Document doc = DAOFactory.getInstance().readDocument();
+		ArrayList<Context> contexts = new ArrayList<Context>();
+		CategoryDAO.getInstance().read(doc, "context");
+		return contexts;
 	}
 	public ArrayList<String> getAllPatternNames(){
-		return null;
+		File file = new File("patterns.xml");
+		Document doc = DAOFactory.getInstance().readDocument();
+		ArrayList<String> patternNames = new ArrayList<String>();
+		CategoryDAO.getInstance().read(doc, "pattern_name");
+		return patternNames;
 	}
 	
 	
