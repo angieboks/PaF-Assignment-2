@@ -7,15 +7,6 @@ public class Pattern extends Solution {
 
 	private String name;
 	private File diagram;
-<<<<<<< HEAD
-	private ArrayList<Pattern> relatedPatterns = new ArrayList<Pattern>(5);
-	private ArrayList<String> aka = new ArrayList<String>(5);
-	private ArrayList<String> pros = new ArrayList<String>(5);
-	private ArrayList<String> cons = new ArrayList<String>(5);
-	private ArrayList<Category> categories = new ArrayList<Category>(5);
-	private ArrayList<Context> contexts = new ArrayList<Context>(5);
-	private ArrayList<Participant> participants = new ArrayList<Participant>(5);
-=======
 	private ArrayList<String> relatedPatterns = new ArrayList<String>();
 	private ArrayList<String> aka = new ArrayList<String>();
 	private ArrayList<String> pros = new ArrayList<String>();
@@ -23,7 +14,6 @@ public class Pattern extends Solution {
 	private ArrayList<Category> categories = new ArrayList<Category>();
 	private ArrayList<Context> contexts = new ArrayList<Context>();
 	private ArrayList<Participant> participants = new ArrayList<Participant>();
->>>>>>> origin/master
 
 	public Pattern(String name, boolean iP, String d){
 		super(iP, d);
