@@ -7,6 +7,7 @@ public class Pattern extends Solution {
 
 	private String name;
 	private File diagram;
+<<<<<<< HEAD
 	private ArrayList<Pattern> relatedPatterns = new ArrayList<Pattern>(5);
 	private ArrayList<String> aka = new ArrayList<String>(5);
 	private ArrayList<String> pros = new ArrayList<String>(5);
@@ -14,6 +15,15 @@ public class Pattern extends Solution {
 	private ArrayList<Category> categories = new ArrayList<Category>(5);
 	private ArrayList<Context> contexts = new ArrayList<Context>(5);
 	private ArrayList<Participant> participants = new ArrayList<Participant>(5);
+=======
+	private ArrayList<String> relatedPatterns = new ArrayList<String>();
+	private ArrayList<String> aka = new ArrayList<String>();
+	private ArrayList<String> pros = new ArrayList<String>();
+	private ArrayList<String> cons = new ArrayList<String>();
+	private ArrayList<Category> categories = new ArrayList<Category>();
+	private ArrayList<Context> contexts = new ArrayList<Context>();
+	private ArrayList<Participant> participants = new ArrayList<Participant>();
+>>>>>>> origin/master
 
 	public Pattern(String name, boolean iP, String d){
 		super(iP, d);
@@ -40,7 +50,7 @@ public class Pattern extends Solution {
 		return diagram;
 	}
 
-	public ArrayList<Pattern> getRelatedPatterns() {
+	public ArrayList<String> getRelatedPatterns() {
 		return relatedPatterns;
 	}
 
@@ -77,7 +87,12 @@ public class Pattern extends Solution {
 			aka.add(nweAKA);
 		}
 	}
-
+	
+	public void addRelatedPattern(String nweRelPat){
+		if(!relatedPatterns.contains(nweRelPat)){
+			relatedPatterns.add(nweRelPat);
+		}
+	}
 	public void addPro(String nwePro){
 		if(!pros.contains(nwePro)){
 			pros.add(nwePro);
