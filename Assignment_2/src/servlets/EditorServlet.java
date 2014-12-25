@@ -224,7 +224,9 @@ public class EditorServlet extends HttpServlet {
 			context.add(new Context((String) req.getAttribute("context"), (String) req.getAttribute("example")));
 			req.getSession().setAttribute("context", context);
 		}
-		
+		else if(req.getParameter("editPattern") != null){
+			
+		}
 		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		rd.forward(req, resp);
 		

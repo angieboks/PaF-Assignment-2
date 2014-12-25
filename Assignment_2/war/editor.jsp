@@ -50,8 +50,7 @@
 			<p>
 				<select name="relatedPattern">
 				<%
-				//ArrayList<String> relatedPatterns = editor.getPatterns();
-				ArrayList<String> relatedPatterns = new ArrayList<String>();
+				ArrayList<String> relatedPatterns = editor.getPatterns();
 				for(String s : relatedPatterns){
 				%>
 					<option value="<%=s %>"><%=s %></option>
@@ -59,6 +58,8 @@
 				}
 				%>
 				</select>
+			</p>
+			<p>
 				<input type="submit" name="addRelatedPattern" value="Add related pattern" />
 				<table>
 					<%
@@ -178,9 +179,8 @@
 			<p>
 				<select name="relatedPattern">
 				<%
-				//ArrayList<String> relatedPatterns = editor.getPatterns();
-				ArrayList<Category> category = new ArrayList<Category>();
-				for(Category c : category){
+				ArrayList<Category> existingCategory = editor.getCategorys();
+				for(Category c : existingCategory){
 				%>
 					<option value="<%=c.getName() %>"><%=c.getName() %></option>
 					<input type="hidden" name="type" value="<%=c.getClass().getName() %>" />
@@ -193,6 +193,8 @@
 				<option value="purpose">Purpose</option>
 				<option value="scope">Scope</option>
 				</select>
+			</p>
+			<p>
 				<input type="submit" name="knop" value="Add category" />
 				<table>
 					<%
@@ -226,9 +228,8 @@
 			<p>
 				<select name="context">
 				<%
-				//ArrayList<Context> context = editor.getContext();
-				ArrayList<Context> context = new ArrayList<Context>();
-				for(Context c : context){
+				ArrayList<Context> existingContext = editor.getContexts();
+				for(Context c : existingContext){
 				%>
 					<option value="<%=c.getDescription() %>"><%=c.getDescription() %></option>
 					<input type="hidden" name="example" value="<%=c.getExample()%>" />
@@ -236,6 +237,8 @@
 				}
 				%>
 				</select>
+			</p>
+			<p>
 				Description: <input type="text" name="contextDescription" />
 				Example: <input type="text" name="contextExample" />
 				<input type="submit" name="knop" value="Add context" />

@@ -3,5 +3,8 @@
 </jsp:include> 
 
 	<h1>Homepage</h1>
+	<div>
+		Intro text
+	</div>
 
 <%@ include file="footer.html" %>
