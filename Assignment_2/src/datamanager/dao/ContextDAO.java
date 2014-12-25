@@ -5,10 +5,13 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import domain.Context;
+
 public class ContextDAO implements IDAOAdapter {
 
 	private static ContextDAO instance;
 	private IDAOAdapter nextChain;
+	private static int index;
 	private Object obj;
 	
 	private ContextDAO(){
@@ -26,28 +29,33 @@ public class ContextDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "context_description"){
-			NodeList nList = doc.getElementsByTagName("context");
+		if(step == "context"){
+			String description = null;
+			String example = null;
+			NodeList nList = doc.getElementsByTagName("context" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("description").item(i).getTextContent();
+					description = element.getElementsByTagName("description").item(i).getTextContent();
 				}
 			}
-		}
-		else if(step == "context_example"){
-			NodeList nList = doc.getElementsByTagName("context");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("example").item(i).getTextContent();
+					example = element.getElementsByTagName("example").item(i).getTextContent();
 				}
 			}
+			obj = new Context(description, example);
 		}
 		else{
-			nextChain.read(doc, step);
+			obj = nextChain.read(doc, step);
 		}
 		return obj;
 		

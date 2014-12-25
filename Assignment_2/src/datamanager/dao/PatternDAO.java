@@ -1,5 +1,6 @@
 package datamanager.dao;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.w3c.dom.Document;
@@ -7,11 +8,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import domain.Pattern;
+
 public class PatternDAO implements IDAOAdapter {
 
 	private static PatternDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
+	private static int index;
 	
 	private PatternDAO(){
 		
@@ -28,8 +32,13 @@ public class PatternDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "pattern_name"){
-			NodeList nList = doc.getElementsByTagName("pattern");
+		if(step == "patternNames"){
+			NodeList nList = doc.getElementsByTagName("pattern" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -38,40 +47,62 @@ public class PatternDAO implements IDAOAdapter {
 				}
 			}
 		}
-		else if(step == "pattern_aka"){
-			ArrayList<String> array = new ArrayList<String>();
-			NodeList nList = doc.getElementsByTagName("pattern");
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					for(int index = 0; index < 5; index++){
-						try{
-							if(element.getElementsByTagName("aka" + index).item(i).getTextContent() != null){
-								array.add(element.getElementsByTagName("aka" + index).item(i).getTextContent());
+		
+		else if(step == "pattern"){
+			String name = null;
+			boolean isPrimary = false;
+			String description = null;
+			File diagram = null;
+			
+			ArrayList<String> arrayAKA = new ArrayList<String>();
+			ArrayList<String> arrayPros = new ArrayList<String>();
+			ArrayList<String> arrayCons = new ArrayList<String>();
+			
+			
+			NodeList nList = doc.getElementsByTagName("pattern" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
+			
+			//name
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						name = element.getElementsByTagName("name").item(i).getTextContent();
+					}
+				}
+			//aka
+				
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						for(int index = 0; index < 5; index++){
+							try{
+								if(element.getElementsByTagName("aka" + index).item(i).getTextContent() != null){
+									arrayAKA.add(element.getElementsByTagName("aka" + index).item(i).getTextContent());
+								}
+							}catch(NullPointerException e){
+								System.out.println(e);
 							}
-						}catch(NullPointerException e){
-							System.out.println(e);
 						}
 					}
-					obj = (Object) array;
-					
 				}
-			}
-		}
-		/*else if(step == "pattern_diagram"){
-			NodeList nList = doc.getElementsByTagName("pattern");
+		
+		//diagram
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("diagram").item(i).getTextContent();
+					String temp = element.getElementsByTagName("diagram").item(i).getTextContent();
+					diagram = new File(temp);
 				}
 			}
-		}*/
-		else if(step == "pattern_pros"){
-			ArrayList<String> array = new ArrayList<String>();
-			NodeList nList = doc.getElementsByTagName("pattern");
+		//pattern pros
+			
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -79,20 +110,18 @@ public class PatternDAO implements IDAOAdapter {
 					for(int index = 0; index < 5; index++){
 						try{
 							if(element.getElementsByTagName("pros" + index).item(i).getTextContent() != null){
-								array.add(element.getElementsByTagName("pros" + index).item(i).getTextContent());
+								arrayPros.add(element.getElementsByTagName("pros" + index).item(i).getTextContent());
 							}
 						}catch(NullPointerException e){
 							System.out.println(e);
 						}
 					}
-					obj = (Object) array;
 					
 				}
 			}
-		}
-		else if(step == "pattern_cons"){
-			ArrayList<String> array = new ArrayList<String>();
-			NodeList nList = doc.getElementsByTagName("pattern");
+		
+		//pattern cons
+			
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -100,20 +129,26 @@ public class PatternDAO implements IDAOAdapter {
 					for(int index = 0; index < 5; index++){
 						try{
 							if(element.getElementsByTagName("cons" + index).item(i).getTextContent() != null){
-								array.add(element.getElementsByTagName("cons" + index).item(i).getTextContent());
+								arrayCons.add(element.getElementsByTagName("cons" + index).item(i).getTextContent());
 							}
 						}catch(NullPointerException e){
 							System.out.println(e);
 						}
 					}
-					obj = (Object) array;
 					
 				}
 			}
+			
+			Pattern pattern = new Pattern(name, isPrimary, description);
+			pattern.setDiagram(diagram);
+			pattern.setAka(arrayAKA);
+			pattern.setCons(arrayCons);
+			pattern.setPros(arrayPros);
+			
 		}
 		
 		else{
-			nextChain.read(doc, step);
+			obj = nextChain.read(doc, step);
 		}
 		return obj;
 		

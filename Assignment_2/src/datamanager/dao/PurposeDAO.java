@@ -5,20 +5,22 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-public class CategoryDAO implements IDAOAdapter {
+import domain.Purpose;
 
-	private static CategoryDAO instance;
+public class PurposeDAO implements IDAOAdapter {
+
+	private static PurposeDAO instance;
 	private IDAOAdapter nextChain;
-	private static int index;
 	private Object obj;
+	private static int index;
 		
-	private CategoryDAO(){
+	private PurposeDAO(){
 		
 	}
 	
-	public static CategoryDAO getInstance(){
+	public static PurposeDAO getInstance(){
 		if(instance == null){
-			instance = new CategoryDAO();
+			instance = new PurposeDAO();
 			return instance;
 		}
 		else{
@@ -27,8 +29,8 @@ public class CategoryDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-			if(step == "category_name"){
-				NodeList nList = doc.getElementsByTagName("category" + index);
+			if(step == "purpose"){
+				NodeList nList = doc.getElementsByTagName("purpose" + index);
 				if(nList == null){
 					System.out.println("leeg");
 					return null;
@@ -38,7 +40,8 @@ public class CategoryDAO implements IDAOAdapter {
 					Node node = nList.item(i);
 					if (node.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) node;
-						obj = (Object) element.getElementsByTagName("name").item(i).getTextContent();
+						String name =  element.getElementsByTagName("name").item(i).getTextContent();
+						obj = new Purpose(name);
 					}
 				}		
 			}

@@ -12,7 +12,7 @@ class PatternDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static PatternDTO instance;
-	
+	private static int index;
 	private PatternDTO(){
 		
 	}
@@ -25,22 +25,37 @@ class PatternDTO implements IDTOAdapter {
 	}
 
 	@Override
-	public void write(Object obj, Document doc, String step) {
+	public Document write(Object obj, Document doc, String step, Element root) {
 		// TODO Auto-generated method stub
-		if(step != "pattern"){
-			nextInChain.write(obj, doc, step);
+		if(step != "pattern" && step != "pattern_name"){
+			nextInChain.write(obj, doc, step, root);
 		}
-		else{
+		else if (step == "pattern"){
 			Pattern pattern = (Pattern) obj;
 			//Root
-			Element patternElement = doc.createElement("pattern");
-			doc.appendChild(patternElement);
+			Element patternElement = doc.createElement("pattern" + index);
+			index++;
+			root.appendChild(patternElement);
 			
 				//Name
 				Element name = doc.createElement("name");
 				name.appendChild(doc.createTextNode(pattern.getName()));
 				patternElement.appendChild(name);
 				
+				//isPrimary
+				Element isPrimary = doc.createElement("isprimary");
+				if(pattern.isPrimary()){
+					isPrimary.appendChild(doc.createTextNode("true"));
+				}
+				else{
+					isPrimary.appendChild(doc.createTextNode("false"));
+				}
+				patternElement.appendChild(isPrimary);
+				
+				//Description
+				Element description = doc.createElement("description");
+				description.appendChild(doc.createTextNode(pattern.getDescription()));
+				patternElement.appendChild(description);
 				//AKA
 				
 				int lengthAKA = pattern.getAka().size();
@@ -54,9 +69,9 @@ class PatternDTO implements IDTOAdapter {
 				
 				
 				//diagram
-				/*Element diagram = doc.createElement("diagram");
+				Element diagram = doc.createElement("diagram");
 				diagram.appendChild(doc.createTextNode(pattern.getDiagram().getName()));
-				patternElement.appendChild(diagram);*/
+				patternElement.appendChild(diagram);
 				
 				//pros
 				
@@ -78,10 +93,20 @@ class PatternDTO implements IDTOAdapter {
 				}
 							
 		}
-		
+		else if(step == "pattern_name"){
+			Pattern pattern = (Pattern) obj;
+			//Root
+			Element patternElement = doc.createElement("pattern" + index);
+			index++;
+			root.appendChild(patternElement);
+			
+				//Name
+				Element name = doc.createElement("name");
+				name.appendChild(doc.createTextNode(pattern.getName()));
+				patternElement.appendChild(name);
+		}
+		return doc;
 	}
-
-
 
 	@Override
 	public void setNextInChain(IDTOAdapter adapter) {

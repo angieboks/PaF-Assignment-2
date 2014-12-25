@@ -5,12 +5,14 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import domain.Participant;
+
 public class ParticipantDAO implements IDAOAdapter {
 
 	private static ParticipantDAO instance;
 	private IDAOAdapter nextChain;
 	private Object obj;
-	
+	private static int index;
 	private ParticipantDAO(){
 		
 	}
@@ -26,28 +28,41 @@ public class ParticipantDAO implements IDAOAdapter {
 	}
 	@Override
 	public Object read(Document doc, String step) {
-		if(step == "participant_isclass" ){
-			NodeList nList = doc.getElementsByTagName("participant");
+		if(step == "participant" ){
+			boolean isClass = false;
+			String role = null;
+			NodeList nList = doc.getElementsByTagName("participant" + index);
+			if(nList == null){
+				System.out.println("leeg");
+				return null;
+			}
+			index++;
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("isclass").item(i).getTextContent();
+					String temp = null;
+					temp = element.getElementsByTagName("isclass").item(i).getTextContent();
+					if(temp == "true"){
+						isClass = true;
+					}
+					else{
+						isClass = false;
+					}
 				}
 			}
-		}
-		else if( step == "participant_role"){
-			NodeList nList = doc.getElementsByTagName("participant");
 			for (int i = 0; i < nList.getLength(); i++) {
 				Node node = nList.item(i);
 				if (node.getNodeType() == Node.ELEMENT_NODE) {
 					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("role").item(i).getTextContent();
+					role = element.getElementsByTagName("role").item(i).getTextContent();
 				}
 			}
+			obj = new Participant(isClass, role);
 		}
+		
 		else{
-			nextChain.read(doc, step);
+			obj = nextChain.read(doc, step);
 		}
 		return obj;
 		

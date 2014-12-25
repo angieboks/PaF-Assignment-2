@@ -1,28 +1,25 @@
 package datamanager.dto;
 
-import java.io.File;
+import java.util.ArrayList;
 
-import domain.Pattern;
+import domain.Context;
 
 public class DToTest {
 
 	public static void main(String[] args) {
-		Pattern pattern = new Pattern("Test", true, "test");
-		pattern.setAka("test1");
-		pattern.setAka("test2");
-		pattern.setAka("test3");
-		pattern.setPros("test1");
-		pattern.setPros("test2");
-		pattern.setPros("test3");
-		pattern.setCons("test1");
-		pattern.setCons("test2");
-		pattern.setCons("test3");
-		DTOFacade dtoFacade = new DTOFacade();
-		dtoFacade.createDocument();
-		dtoFacade.writeDocument( pattern, "pattern");
-		File file = new File("test.xml");
-		pattern.setDiagram(file);
-		dtoFacade.finishDocument(pattern.getDiagram());
+		Context p0 = new Context("description0", "example0");
+		Context p1 = new Context("description1", "example1");
+		Context p2 = new Context("description2", "example2");
+		Context p3 = new Context("description3", "example3");
+		Context p4 = new Context("description4", "example4");
+		ArrayList<Context> contexts = new ArrayList<Context>();
+		contexts.add(p0);
+		contexts.add(p1);
+		contexts.add(p2);
+		contexts.add(p3);
+		contexts.add(p4);
+		DTOFacade facade = new DTOFacade();
+		facade.writeAllContexts(contexts);
 	}
 
 }

@@ -13,7 +13,8 @@ import org.xml.sax.SAXException;
 public class DAOFactory {
 
 	IDAOAdapter pattern;
-	IDAOAdapter category;
+	IDAOAdapter scope;
+	IDAOAdapter purpose;
 	IDAOAdapter context;
 	IDAOAdapter participant;
 	IDAOAdapter solution;
@@ -40,15 +41,17 @@ public class DAOFactory {
 
 	private void createClasses() {
 		pattern = PatternDAO.getInstance();
-		category = CategoryDAO.getInstance();
+		scope = ScopeDAO.getInstance();
+		purpose = PurposeDAO.getInstance();
 		context = ContextDAO.getInstance();
 		participant = ParticipantDAO.getInstance();
 		solution = SolutionDAO.getInstance();
 		problem = ProblemDAO.getInstance();
 		force = ForceDAO.getInstance();
 
-		pattern.setNextInChain(category);
-		category.setNextInChain(context);
+		pattern.setNextInChain(scope);
+		scope.setNextInChain(purpose);
+		purpose.setNextInChain(context);
 		context.setNextInChain(participant);
 		participant.setNextInChain(solution);
 		solution.setNextInChain(problem);
@@ -56,7 +59,9 @@ public class DAOFactory {
 		force.setNextInChain(pattern);
 
 	}
-
+	protected Document getDocument(){
+		return doc;
+	}
 	public Document readDocument() {
 		try {
 			DocumentBuilderFactory dbFactory = DocumentBuilderFactory

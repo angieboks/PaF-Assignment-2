@@ -19,7 +19,19 @@ public class Pattern extends Solution {
 		super(iP, d);
 		this.name = name;
 	}
-
+	
+	public void setDiagram(File file){
+		diagram = file;
+	}
+	public void setAka(String aka){
+		this.aka.add(aka);
+	}
+	public void setPros(String pros){
+		this.pros.add(pros);
+	}
+	public void setCons(String cons){
+		this.cons.add(cons);
+	}
 	public String getName() {
 		return name;
 	}
