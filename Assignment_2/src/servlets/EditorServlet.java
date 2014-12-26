@@ -90,6 +90,7 @@ public class EditorServlet extends HttpServlet {
 				req.getSession().setAttribute("participant", participant);
 			}
 			else if(knop.equals("Save pattern")){
+				//patternname, patterndescription, isPrimary
 				boolean b;
 				if(req.getParameter("isPrimary").equals("true")){
 					b = true;
@@ -97,40 +98,80 @@ public class EditorServlet extends HttpServlet {
 				else{
 					b = false;
 				}
-				editor.makePattern(req.getParameter("patternName"), b, req.getParameter("patternDescription"));
-				//diagram
-				editor.addDia(new File( req.getParameter("diagram")));
-				//aka
-				for(String s : (ArrayList<String>) req.getSession().getAttribute("aka")){
-					editor.addAKA(s);
+				if(!req.getParameter("patternName").equals("") && !req.getParameter("patternDescription").equals("")){
+					editor.makePattern(req.getParameter("patternName"), b, req.getParameter("patternDescription"));
+					//diagram
+					if(!req.getParameter("diagram").equals("")){
+						editor.addDia(new File( req.getParameter("diagram")));
+						//aka
+						if(((ArrayList<String>)req.getSession().getAttribute("aka")).size() > 0){
+							for(String s : (ArrayList<String>) req.getSession().getAttribute("aka")){
+								editor.addAKA(s);
+							}
+							//relatedPatterns
+							for(String s : (ArrayList<String>) req.getSession().getAttribute("relatedPatterns")){
+								editor.addRelatedPattern(s);
+							}
+							//pro
+							if(((ArrayList<String>)req.getSession().getAttribute("pro")).size() > 0){
+								for(String s : (ArrayList<String>) req.getSession().getAttribute("pro")){
+									editor.addPro(s);
+								}
+								//con
+								if(((ArrayList<String>)req.getSession().getAttribute("con")).size() > 0){
+									for(String s : (ArrayList<String>) req.getSession().getAttribute("con")){
+										editor.addCon(s);
+									}
+									//category
+									if(((ArrayList<Category>)req.getSession().getAttribute("category")).size() > 0){
+										for(Category c : (ArrayList<Category>) req.getSession().getAttribute("category")){
+											editor.addCategory(c.getName(), c.getClass().getName());
+										}
+										//context
+										if(((ArrayList<Context>)req.getSession().getAttribute("context")).size() > 0){
+											for(Context c : (ArrayList<Context>) req.getSession().getAttribute("context")){
+												editor.addContext(c.getDescription(), c.getExample());
+											}
+											//participants
+											if(((ArrayList<Participant>)req.getSession().getAttribute("participant")).size() > 0){
+												for(Participant p : (ArrayList<Participant>) req.getSession().getAttribute("participant")){
+													editor.addParticipant(p.isClass(), p.getRole());
+												}
+												//save pattern
+												editor.savePattern();
+											}
+											else{
+												req.setAttribute("error", "Add at least one participant!");
+											}
+										}
+										else{
+											req.setAttribute("error", "Add at least one context!");
+										}
+									}
+									else{
+										req.setAttribute("error", "Add at least one category!");
+									}
+								}
+								else{
+									req.setAttribute("error", "Add at least one con!");
+								}
+							}
+							else{
+								req.setAttribute("error", "Add at least one pro!");
+							}
+						}
+						else{
+							req.setAttribute("error", "Add at least one also known as!");	
+						}
+					}
+					else{
+						req.setAttribute("error", "Enter a diagram!");
+					}
 				}
-				//relatedPatterns
-				for(String s : (ArrayList<String>) req.getSession().getAttribute("relatedPatterns")){
-					editor.addRelatedPattern(s);
+				else{
+					req.setAttribute("error", "Enter a patternname and description!");
 				}
-				//pro
-				for(String s : (ArrayList<String>) req.getSession().getAttribute("pro")){
-					editor.addPro(s);
-				}
-				//con
-				for(String s : (ArrayList<String>) req.getSession().getAttribute("con")){
-					editor.addCon(s);
-				}
-				//category
-				for(Category c : (ArrayList<Category>) req.getSession().getAttribute("category")){
-					editor.addCategory(c.getName(), c.getClass().getName());
-				}
-				//context
-				for(Context c : (ArrayList<Context>) req.getSession().getAttribute("context")){
-					editor.addContext(c.getDescription(), c.getExample());
-				}
-				//participants
-				for(Participant p : (ArrayList<Participant>) req.getSession().getAttribute("participant")){
-					editor.addParticipant(p.isClass(), p.getRole());
-				}
-				//save pattern
-				editor.savePattern();
-			}	
+			}
 		}
 		else if(req.getParameter("delKnopaka") != null){
 			ArrayList<String> aka = (ArrayList<String>) req.getSession().getAttribute("aka");
@@ -225,6 +266,9 @@ public class EditorServlet extends HttpServlet {
 			req.getSession().setAttribute("context", context);
 		}
 		else if(req.getParameter("editPattern") != null){
+			
+		}
+		else if(req.getParameter("newPattern") != null){
 			
 		}
 		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");

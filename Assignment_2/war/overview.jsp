@@ -13,23 +13,30 @@
 				request.getSession().setAttribute("editor", editor);
 			}
 			%>
-			<table>
-			<%
-			ArrayList<String> patterns = editor.getPatterns();
-			for(String s : patterns){
-			%>
-				<tr>
-					<td>
-						<input type="submit" name="editPattern" value="<%=s%>" />
-					</td>
-					<td>
-						<%=s %>
-					</td>
-				</tr>
-			<%
-			}
-			%>
-			</table>
+			<p>
+				New pattern <input type="submit" name="newPattern" value="New pattern"/>
+			</p>
+			<p>
+				<table>
+				<%
+				ArrayList<String> patterns = editor.getPatterns();
+				if(patterns.size() > 0){
+					for(String s : patterns){
+					%>
+						<tr>
+							<td>
+								<input type="submit" name="editPattern" value="<%=s%>" />
+							</td>
+							<td>
+								<%=s %>
+							</td>
+						</tr>
+					<%
+					}
+				}
+				%>
+				</table>
+			</p>
 		</div>
 	</form>
 

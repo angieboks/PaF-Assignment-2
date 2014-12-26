@@ -36,6 +36,7 @@ public class PatternEditorFacade {
 	}
 	
 	public void makePattern(String name, boolean isPrimary, String description){
+		boss = new PatternBuildDirector();
 		boss.getBuilder().makePattern(name, isPrimary, description);
 	}
 	

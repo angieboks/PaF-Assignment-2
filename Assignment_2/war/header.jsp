@@ -13,9 +13,19 @@
 		<ul>	
 			<li> <a href="index.jsp">Homepage</a> </li>
 			<li> <a href="selector.jsp">Find pattern </a> </li>
-			<li> <a href="overview.jsp">Edit pattern </a> </li>
-			<li> <a href="editor.jsp">Add pattern </a> </li>
+			<li> <a href="overview.jsp">New/edit pattern </a> </li>
 		</ul>
 	</div>
+	<%
+	Object error =  request.getAttribute("error");
+	if(error != null){
+	%>
+		<div id = "bericht">
+			<h3 class="error">Error! <br />
+			<%=error %>  </h3>
+		</div>
+	<%
+	}
+	%>
 	<div id="content">
 		

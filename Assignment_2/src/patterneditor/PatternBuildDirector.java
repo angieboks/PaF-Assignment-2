@@ -2,8 +2,11 @@ package patterneditor;
 
 class PatternBuildDirector {
 
-	private IPatternBuilder builder = new ConcretePatternBuilder();
+	private IPatternBuilder builder;
 
+	public PatternBuildDirector(){
+		builder = new ConcretePatternBuilder();
+	}
 	public IPatternBuilder getBuilder(){
 		return builder;
 	}
