@@ -26,6 +26,7 @@ public class EditorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		PatternEditorFacade editor = (PatternEditorFacade) req.getSession().getAttribute("editor");
+		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		if(editor == null){
 			editor = new PatternEditorFacade();
 		}		
@@ -140,6 +141,17 @@ public class EditorServlet extends HttpServlet {
 												}
 												//save pattern
 												editor.savePattern();
+												req.getSession().setAttribute("patternName", null);
+												req.getSession().setAttribute("patternDescription", null);
+												req.getSession().setAttribute("diagram", null);
+												req.getSession().setAttribute("relatedPattern", null);
+												req.getSession().setAttribute("aka", null);
+												req.getSession().setAttribute("pro", null);
+												req.getSession().setAttribute("con", null);
+												req.getSession().setAttribute("category", null);
+												req.getSession().setAttribute("context", null);
+												req.getSession().setAttribute("participant", null);
+												rd = req.getRequestDispatcher("overview.jsp");
 											}
 											else{
 												req.setAttribute("error", "Add at least one participant!");
@@ -296,9 +308,17 @@ public class EditorServlet extends HttpServlet {
 			
 		}
 		else if(req.getParameter("newPattern") != null){
-			
+			req.getSession().setAttribute("patternName", null);
+			req.getSession().setAttribute("patternDescription", null);
+			req.getSession().setAttribute("diagram", null);
+			req.getSession().setAttribute("relatedPattern", null);
+			req.getSession().setAttribute("aka", null);
+			req.getSession().setAttribute("pro", null);
+			req.getSession().setAttribute("con", null);
+			req.getSession().setAttribute("category", null);
+			req.getSession().setAttribute("context", null);
+			req.getSession().setAttribute("participant", null);
 		}
-		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		rd.forward(req, resp);
 		
 	}
