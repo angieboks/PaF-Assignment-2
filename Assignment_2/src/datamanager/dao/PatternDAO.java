@@ -146,6 +146,7 @@ public class PatternDAO implements IDAOAdapter {
 				pattern.setAka(arrayAKA);
 				pattern.setCons(arrayCons);
 				pattern.setPros(arrayPros);
+				obj = (Object) pattern;
 			}catch(NullPointerException e){
 				return null;
 			}
