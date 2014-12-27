@@ -18,6 +18,9 @@ public class ContextDAO implements IDAOAdapter {
 		
 	}
 	
+    public static void setIndex(int i){
+    	index = i;
+    }
 	public static ContextDAO getInstance(){
 		if(instance == null){
 			instance = new ContextDAO();
