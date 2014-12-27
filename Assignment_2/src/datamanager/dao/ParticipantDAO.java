@@ -29,36 +29,40 @@ public class ParticipantDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "participant" ){
-			boolean isClass = false;
-			String role = null;
-			NodeList nList = doc.getElementsByTagName("participant" + index);
-			if(nList == null){
-				System.out.println("leeg");
+			try{
+				boolean isClass = false;
+				String role = null;
+				NodeList nList = doc.getElementsByTagName("participant" + index);
+				if(nList == null){
+					System.out.println("leeg");
+					return null;
+				}
+				index++;
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						String temp = null;
+						temp = element.getElementsByTagName("isclass").item(i).getTextContent();
+						if(temp == "true"){
+							isClass = true;
+						}
+						else{
+							isClass = false;
+						}
+					}
+				}
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						role = element.getElementsByTagName("role").item(i).getTextContent();
+					}
+				}
+				obj = new Participant(isClass, role);
+			}catch(NullPointerException e){
 				return null;
 			}
-			index++;
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					String temp = null;
-					temp = element.getElementsByTagName("isclass").item(i).getTextContent();
-					if(temp == "true"){
-						isClass = true;
-					}
-					else{
-						isClass = false;
-					}
-				}
-			}
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					role = element.getElementsByTagName("role").item(i).getTextContent();
-				}
-			}
-			obj = new Participant(isClass, role);
 		}
 		
 		else{

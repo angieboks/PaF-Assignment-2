@@ -30,6 +30,7 @@ public class ForceDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "force_description"){
+			try{
 			NodeList nList = doc.getElementsByTagName("force" + index);
 			if(nList == null){
 				System.out.println("leeg");
@@ -43,6 +44,9 @@ public class ForceDAO implements IDAOAdapter {
 					String description = element.getElementsByTagName("description").item(i).getTextContent();
 					obj = new Force(description);
 				}
+			}
+			}catch(NullPointerException e){
+				return null;
 			}
 		}
 		else{

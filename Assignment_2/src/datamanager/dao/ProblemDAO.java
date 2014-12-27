@@ -30,21 +30,25 @@ public class ProblemDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "problem"){
-			String description = null;
-			NodeList nList = doc.getElementsByTagName("problem" + index);
-			if(nList == null){
-				System.out.println("leeg");
+			try{
+				String description = null;
+				NodeList nList = doc.getElementsByTagName("problem" + index);
+				if(nList == null){
+					System.out.println("leeg");
+					return null;
+				}
+				index++;
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						description = element.getElementsByTagName("description").item(i).getTextContent();
+					}
+				}
+				obj = new Problem(description);
+			}catch(NullPointerException e){
 				return null;
 			}
-			index++;
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					description = element.getElementsByTagName("description").item(i).getTextContent();
-				}
-			}
-			obj = new Problem(description);
 		}
 		else{
 			obj = nextChain.read(doc, step);

@@ -33,29 +33,33 @@ public class ContextDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "context"){
-			String description = null;
-			String example = null;
-			NodeList nList = doc.getElementsByTagName("context" + index);
-			if(nList == null){
-				System.out.println("leeg");
+			try{
+				String description = null;
+				String example = null;
+				NodeList nList = doc.getElementsByTagName("context" + index);
+				if(nList == null){
+					System.out.println("leeg");
+					return null;
+				}
+				index++;
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						description = element.getElementsByTagName("description").item(i).getTextContent();
+					}
+				}
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						example = element.getElementsByTagName("example").item(i).getTextContent();
+					}
+				}
+				obj = new Context(description, example);
+			}catch(NullPointerException e){
 				return null;
 			}
-			index++;
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					description = element.getElementsByTagName("description").item(i).getTextContent();
-				}
-			}
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					example = element.getElementsByTagName("example").item(i).getTextContent();
-				}
-			}
-			obj = new Context(description, example);
 		}
 		else{
 			obj = nextChain.read(doc, step);

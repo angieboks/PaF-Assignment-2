@@ -64,23 +64,46 @@ public class PatternDAO implements IDAOAdapter {
 			ArrayList<String> arrayPros = new ArrayList<String>();
 			ArrayList<String> arrayCons = new ArrayList<String>();
 			
+			try{
+				NodeList nList = doc.getElementsByTagName("pattern" + index);
+					index++;
+				
+				//name
+					for (int i = 0; i < nList.getLength(); i++) {
+						Node node = nList.item(i);
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+							Element element = (Element) node;
+							name = element.getElementsByTagName("name").item(i).getTextContent();
+						}
+					}
+				//aka
+					
+					for (int i = 0; i < nList.getLength(); i++) {
+						Node node = nList.item(i);
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+							Element element = (Element) node;
+							for(int index = 0; index < 5; index++){
+								try{
+									if(element.getElementsByTagName("aka" + index).item(i).getTextContent() != null){
+										arrayAKA.add(element.getElementsByTagName("aka" + index).item(i).getTextContent());
+									}
+								}catch(NullPointerException e){
+									System.out.println(e);
+								}
+							}
+						}
+					}
 			
-			NodeList nList = doc.getElementsByTagName("pattern" + index);
-			if(nList == null){
-				System.out.println("leeg");
-				return null;
-			}
-			index++;
-			
-			//name
+			//diagram
 				for (int i = 0; i < nList.getLength(); i++) {
 					Node node = nList.item(i);
 					if (node.getNodeType() == Node.ELEMENT_NODE) {
 						Element element = (Element) node;
-						name = element.getElementsByTagName("name").item(i).getTextContent();
+						String temp = element.getElementsByTagName("diagram").item(i).getTextContent();
+						diagram = new File(temp);
 					}
 				}
-			//aka
+			//pattern pros
 				
 				for (int i = 0; i < nList.getLength(); i++) {
 					Node node = nList.item(i);
@@ -88,68 +111,44 @@ public class PatternDAO implements IDAOAdapter {
 						Element element = (Element) node;
 						for(int index = 0; index < 5; index++){
 							try{
-								if(element.getElementsByTagName("aka" + index).item(i).getTextContent() != null){
-									arrayAKA.add(element.getElementsByTagName("aka" + index).item(i).getTextContent());
+								if(element.getElementsByTagName("pros" + index).item(i).getTextContent() != null){
+									arrayPros.add(element.getElementsByTagName("pros" + index).item(i).getTextContent());
 								}
 							}catch(NullPointerException e){
 								System.out.println(e);
 							}
 						}
+						
 					}
 				}
-		
-		//diagram
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					String temp = element.getElementsByTagName("diagram").item(i).getTextContent();
-					diagram = new File(temp);
-				}
-			}
-		//pattern pros
 			
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					for(int index = 0; index < 5; index++){
-						try{
-							if(element.getElementsByTagName("pros" + index).item(i).getTextContent() != null){
-								arrayPros.add(element.getElementsByTagName("pros" + index).item(i).getTextContent());
+			//pattern cons
+				
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						for(int index = 0; index < 5; index++){
+							try{
+								if(element.getElementsByTagName("cons" + index).item(i).getTextContent() != null){
+									arrayCons.add(element.getElementsByTagName("cons" + index).item(i).getTextContent());
+								}
+							}catch(NullPointerException e){
+								System.out.println(e);
 							}
-						}catch(NullPointerException e){
-							System.out.println(e);
 						}
+						
 					}
-					
 				}
+				
+				Pattern pattern = new Pattern(name, isPrimary, description);
+				pattern.setDiagram(diagram);
+				pattern.setAka(arrayAKA);
+				pattern.setCons(arrayCons);
+				pattern.setPros(arrayPros);
+			}catch(NullPointerException e){
+				return null;
 			}
-		
-		//pattern cons
-			
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					for(int index = 0; index < 5; index++){
-						try{
-							if(element.getElementsByTagName("cons" + index).item(i).getTextContent() != null){
-								arrayCons.add(element.getElementsByTagName("cons" + index).item(i).getTextContent());
-							}
-						}catch(NullPointerException e){
-							System.out.println(e);
-						}
-					}
-					
-				}
-			}
-			
-			Pattern pattern = new Pattern(name, isPrimary, description);
-			pattern.setDiagram(diagram);
-			pattern.setAka(arrayAKA);
-			pattern.setCons(arrayCons);
-			pattern.setPros(arrayPros);
 			
 		}
 		

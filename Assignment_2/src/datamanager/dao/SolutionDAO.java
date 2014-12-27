@@ -29,28 +29,32 @@ public class SolutionDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "solution"){
-			boolean isPrimary = false;
-			String description = null;
-			NodeList nList = doc.getElementsByTagName("solution");
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					String temp = null;
-					temp = element.getElementsByTagName("isprimary").item(i).getTextContent();
-					if(temp == "true"){
-						isPrimary = true;
+			try{
+				boolean isPrimary = false;
+				String description = null;
+				NodeList nList = doc.getElementsByTagName("solution");
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						String temp = null;
+						temp = element.getElementsByTagName("isprimary").item(i).getTextContent();
+						if(temp == "true"){
+							isPrimary = true;
+						}
 					}
 				}
-			}
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					description = element.getElementsByTagName("description").item(i).getTextContent();
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						description = element.getElementsByTagName("description").item(i).getTextContent();
+					}
 				}
+				obj = new Solution(isPrimary, description);
+			}catch(NullPointerException e){
+				return null;
 			}
-			obj = new Solution(isPrimary, description);
 		}
 		else{
 			obj = nextChain.read(doc, step);
