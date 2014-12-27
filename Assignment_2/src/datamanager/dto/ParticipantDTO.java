@@ -9,7 +9,6 @@ class ParticipantDTO implements IDTOAdapter {
 
 	private IDTOAdapter nextInChain;
 	private static ParticipantDTO instance;
-	private static int index;
 	private ParticipantDTO(){
 		
 	}
@@ -31,8 +30,8 @@ class ParticipantDTO implements IDTOAdapter {
 			
 			Participant participant = (Participant) obj;
 			//Root
-			Element participantElement = doc.createElement("participant" + index);
-			index++;
+			Element participantElement = doc.createElement("participant");
+		
 			root.appendChild(participantElement);
 			
 				//isClass

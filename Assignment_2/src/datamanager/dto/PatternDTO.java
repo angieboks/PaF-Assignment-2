@@ -33,8 +33,7 @@ class PatternDTO implements IDTOAdapter {
 		else if (step == "pattern"){
 			Pattern pattern = (Pattern) obj;
 			//Root
-			Element patternElement = doc.createElement("pattern" + index);
-			index++;
+			Element patternElement = doc.createElement("pattern");
 			root.appendChild(patternElement);
 			
 				//Name

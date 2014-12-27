@@ -8,7 +8,6 @@ import domain.Problem;
 class ProblemDTO implements IDTOAdapter {
 	private IDTOAdapter nextInChain;
 	private static ProblemDTO instance;
-	private static int index;
 	
 	private ProblemDTO(){
 		
@@ -28,8 +27,7 @@ class ProblemDTO implements IDTOAdapter {
 		else{
 			Problem problem = (Problem) obj;
 			//Root
-			Element problemElement = doc.createElement("problem" + index);
-			index++;
+			Element problemElement = doc.createElement("problem" );
 			root.appendChild(problemElement);
 			
 				//Description

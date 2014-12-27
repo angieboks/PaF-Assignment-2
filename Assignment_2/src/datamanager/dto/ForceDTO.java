@@ -31,8 +31,7 @@ class ForceDTO implements IDTOAdapter {
 		else{
 			Force force = (Force) obj;
 			//Root
-			Element forceElement = doc.createElement("force"+ index);
-			index++;
+			Element forceElement = doc.createElement("force");
 			root.appendChild(forceElement);
 			
 				//Description
