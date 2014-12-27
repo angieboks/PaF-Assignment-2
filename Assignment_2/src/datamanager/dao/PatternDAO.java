@@ -66,7 +66,6 @@ public class PatternDAO implements IDAOAdapter {
 			
 			try{
 				NodeList nList = doc.getElementsByTagName("pattern");
-					index++;
 				
 				//name
 					for (int i = 0; i < nList.getLength(); i++) {
