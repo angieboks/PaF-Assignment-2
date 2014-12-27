@@ -305,7 +305,7 @@ public class EditorServlet extends HttpServlet {
 			//}
 			//req.getSession().setAttribute("category", category);
 			//req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
-			//req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("participant"));
+			req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("participant"));
 			
 		}
 		else if(req.getParameter("newPattern") != null){
