@@ -29,8 +29,27 @@ public class DAOFacade {
 	}
 	
 	public Object readDocument(String step){
+
+		/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
+		 *
+		 * 	        Parameter String  		returns (in Object file);
+		 * 1.0 Step "pattern"				Pattern
+		 * 2.0 Step "scope"					ArrayList<Scope>
+		 * 3.0 Step "purpose"				ArrayList<Purpose>
+		 * 4.0 Step "context"			 	ArrayList<Context>
+		 * 5.0 Step "participant"		 	ArrayList<Participant>
+		 * 6.0 Step "solution" 				Solution
+		 * 7.0 Step "problem" 				Problem
+		 * 8.0 Step "force"				 	Force
+		 * 9.0 Step "all"					Everything
+		 */
+		
 		Object obj = null;
 		Document doc = DAOFactory.getInstance().readDocument();
+		if(step != "all" && step != "scope" && step != "purpose" && step != "problem" && step != "force" && step != "pattern" && step != "context" && step != "participant" && step != "solution"){
+			System.out.println("Foutieve invoer");
+			return null;
+		}
 		if(step == "all"){
 			ArrayList<Object> pattern = new ArrayList<Object>();
 			pattern.add(PatternDAO.getInstance().read(doc, "pattern"));
@@ -127,23 +146,10 @@ public class DAOFacade {
 			obj = (Object) participants;
 		}
 		else{
-			return PatternDAO.getInstance().read(doc, step);
+			return (Object) PatternDAO.getInstance().read(doc, step);
 		}
 		return obj;
 	
-		/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
-		 *
-		 * 	        Parameter String  		returns (in Object file);
-		 * 1.0 Step "pattern"				Pattern
-		 * 2.0 Step "scope"					ArrayList<Scope>
-		 * 3.0 Step "purpose"				ArrayList<Purpose>
-		 * 4.0 Step "context"			 	ArrayList<Context>
-		 * 5.0 Step "participant"		 	ArrayList<Participant>
-		 * 6.0 Step "solution" 				Solution
-		 * 7.0 Step "problem" 				Problem
-		 * 8.0 Step "force"				 	Force
-		 * 9.0 Step "all"					Everything
-		 */
 		
 	}
 	public ArrayList<Category> getAllCategories(){
