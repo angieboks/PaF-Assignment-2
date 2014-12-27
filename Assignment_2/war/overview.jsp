@@ -25,10 +25,7 @@
 					%>
 						<tr>
 							<td>
-								<input type="submit" name="editPattern" value="<%=s%>" />
-							</td>
-							<td>
-								<%=s %>
+								<input type="radio" name="editPatternValue" value="<%=s %>"><%=s %>
 							</td>
 						</tr>
 					<%
@@ -36,6 +33,7 @@
 				}
 				%>
 				</table>
+				<input type="submit" name="editPattern" value="Edit pattern" />
 			</p>
 		</div>
 	</form>

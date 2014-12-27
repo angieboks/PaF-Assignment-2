@@ -14,6 +14,7 @@ import patterneditor.PatternEditorFacade;
 import domain.Category;
 import domain.Context;
 import domain.Participant;
+import domain.Pattern;
 import domain.Purpose;
 import domain.Scope;
 
@@ -266,6 +267,20 @@ public class EditorServlet extends HttpServlet {
 			req.getSession().setAttribute("context", context);
 		}
 		else if(req.getParameter("editPattern") != null){
+			File f = new File(req.getAttribute("editPatternValue") + ".xml");
+			editor.getDAOFacade().createDocument(f);
+			Pattern p = (Pattern) editor.getDAOFacade().readDocument("pattern");
+			req.getSession().setAttribute("patternName", );
+			req.getSession().setAttribute("isPrimary", );
+			req.getSession().setAttribute("patternDescription", );
+			req.getSession().setAttribute("diagram", );
+			req.getSession().setAttribute("relatedPattern", );
+			req.getSession().setAttribute("aka", );
+			req.getSession().setAttribute("pro", );
+			req.getSession().setAttribute("con", );
+			req.getSession().setAttribute("category", );
+			req.getSession().setAttribute("context", );
+			req.getSession().setAttribute("participant", );
 			
 		}
 		else if(req.getParameter("newPattern") != null){

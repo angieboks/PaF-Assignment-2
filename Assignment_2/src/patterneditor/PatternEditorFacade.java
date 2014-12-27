@@ -22,17 +22,21 @@ public class PatternEditorFacade {
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Category> getCategorys(){
-		return (ArrayList<Category>) accessObjects.readDocument("category");
+		return (ArrayList<Category>) accessObjects.getAllCategories();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<Context> getContexts(){
-		return (ArrayList<Context>) accessObjects.readDocument("context");
+		return (ArrayList<Context>) accessObjects.getAllContexts();
 	}
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> getPatterns(){
-		return (ArrayList<String>) accessObjects.readDocument("patterns");
+		return (ArrayList<String>) accessObjects.getAllPatternNames();
+	}
+	
+	public DAOFacade getDAOFacade(){
+		return accessObjects;
 	}
 	
 	public void makePattern(String name, boolean isPrimary, String description){

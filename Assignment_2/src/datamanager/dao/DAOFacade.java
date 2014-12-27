@@ -114,6 +114,7 @@ public class DAOFacade {
 			}
 			
 		}
+		PatternDAO.setIndex(0);
 		return patternNames;
 	}
 	
