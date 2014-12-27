@@ -29,6 +29,18 @@ public class DAOFacade {
 	
 	public Object readDocument(String step){
 		Document doc = DAOFactory.getInstance().readDocument();
+		if(step == "all"){
+			ArrayList<Object> pattern = new ArrayList<Object>();
+			pattern.add(PatternDAO.getInstance().read(doc, "pattern"));
+			pattern.add(PatternDAO.getInstance().read(doc, "scope"));
+			pattern.add(PatternDAO.getInstance().read(doc, "purpose"));
+			pattern.add(PatternDAO.getInstance().read(doc, "context"));
+			pattern.add(PatternDAO.getInstance().read(doc, "participant"));
+			pattern.add(PatternDAO.getInstance().read(doc, "problem"));
+			pattern.add(PatternDAO.getInstance().read(doc, "force"));
+			return (Object) pattern;
+		}
+		
 		return PatternDAO.getInstance().read(doc, step);
 	
 		/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
@@ -42,6 +54,7 @@ public class DAOFacade {
 		 * 6.0 Step "solution" 				Solution
 		 * 7.0 Step "problem" 				Problem
 		 * 8.0 Step "force"				 	Force
+		 * 9.0 Step "all"					Everything
 		 */
 		
 	}
