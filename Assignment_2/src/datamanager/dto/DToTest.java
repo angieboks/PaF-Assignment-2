@@ -384,8 +384,26 @@ public class DToTest {
 				Context state_Context = new Context("description" , "example");
 				Context strategy_Context = new Context("description" , "example");
 				Context visitor_Context = new Context("description" , "example");
-				
 			
+				builder.addContext(builder_Context);
+				prototype.addContext(prototype_Context);
+				singleton.addContext(singleton_Context);
+				adapterObject.addContext(adapterObject_Context);
+				bridge.addContext(bridge_Context);
+				composite.addContext(composite_Context);
+				decorator.addContext(decorator_Context);
+				façade.addContext(façade_Context);
+				flyweight.addContext(flyweight_Context);
+				proxy.addContext(proxy_Context);
+				chain.addContext(chain_Context);
+				command.addContext(command_Context);
+				iterator.addContext(iterator_Context);
+				mediator.addContext(mediator_Context);
+				memento.addContext(memento_Context);
+				observer.addContext(observer_Context);
+				state.addContext(state_Context);
+				strategy.addContext(strategy_Context);
+				visitor.addContext(visitor_Context);
 			
 			
 		ArrayList<Pattern> patterns = new ArrayList<Pattern>();
