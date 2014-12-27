@@ -51,4 +51,9 @@ class ScopeDTO implements IDTOAdapter {
 		
 	}
 
+	public static void setIndex(int i) {
+		index = i;
+		
+	}
+
 }

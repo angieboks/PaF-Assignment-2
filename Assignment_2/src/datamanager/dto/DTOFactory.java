@@ -15,6 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+
 class DTOFactory {
 	DTOFacade writeFacade = new DTOFacade();
 	IDTOAdapter pattern;
@@ -78,6 +79,9 @@ class DTOFactory {
 			doc = docBuilder.newDocument();
 			root = doc.createElement("root");
 			doc.appendChild(root);
+			ContextDTO.setIndex(0);
+			ScopeDTO.setIndex(0);
+			PurposeDTO.setIndex(0);
 			
 						
 		} catch (ParserConfigurationException e) {

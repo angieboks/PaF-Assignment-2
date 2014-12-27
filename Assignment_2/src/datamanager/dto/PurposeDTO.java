@@ -52,4 +52,9 @@ class PurposeDTO implements IDTOAdapter {
 		
 	}
 
+	public static void setIndex(int i) {
+		index = i;
+		
+	}
+
 }
