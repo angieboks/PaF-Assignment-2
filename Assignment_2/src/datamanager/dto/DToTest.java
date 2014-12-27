@@ -14,17 +14,17 @@ public class DToTest {
 			//Creational - scopeClass
 			Pattern factoryMethod = new Pattern("Factory", true, "The factory class will deal with the problem of creating object without specifiying the exact class");
 			//Structural - scopeClass
-			Pattern adapterClass = new Pattern("Adapter (class)", true, "This pattern uses multiple polymophic interfaces to implementing or inheriting both the interface that is expected and the interface that is pre-existing");
+			Pattern adapterClass = new Pattern("Adapter(class)", true, "This pattern uses multiple polymophic interfaces to implementing or inheriting both the interface that is expected and the interface that is pre-existing");
 			//Behavioral - scopeClass
 			Pattern interpreter = new Pattern("Interpreter", true, "This pattern specifies how to evaluate sentences in a language");
-			Pattern templateMethod = new Pattern("Template Method", true, "This pattern defines the program skeleton of an algorithm in a method");
+			Pattern templateMethod = new Pattern("TemplateMethod", true, "This pattern defines the program skeleton of an algorithm in a method");
 			//Creational - scopeObject
-			Pattern abstractFactory = new Pattern("Abstract Factory", true, "This pattern provides a way to encapsulate a group of individual factories that have a common theme without specifiying their concrete classes");
+			Pattern abstractFactory = new Pattern("AbstractFactory", true, "This pattern provides a way to encapsulate a group of individual factories that have a common theme without specifiying their concrete classes");
 			Pattern builder = new Pattern("Builder", true, "This intention of this patern is to find a solution to the telescoping constructor anti-pattern");
 			Pattern prototype = new Pattern("Prototype", true, "This pattern is used when the type of objects to create is determined by a prototypical instance, which is cloned to produce new objects");
 			Pattern singleton = new Pattern("Singleton", true, "This pattern restricts the instantiation of a class to one object");
 			//Structual - scopeObject
-			Pattern adapterObject = new Pattern("Adapter (object)", true, "This pattern constains an instance of the class it wraps, the adapter makes class to the instance of the wrapped object");
+			Pattern adapterObject = new Pattern("Adapter(object)", true, "This pattern constains an instance of the class it wraps, the adapter makes class to the instance of the wrapped object");
 			Pattern bridge = new Pattern("Bridge", true, "This pattern is eant to decouple an abstraction from its implementation so that the two can vary independently");
 			Pattern composite = new Pattern("Composite", true, "This pattern describes that a group of objects is to be treated in the same way as a single intance of an object");
 			Pattern decorator = new Pattern("Decorator" , true, "This pattern allows behavior to be added to an individual object, either statically or dunamically, without affecting the behavior of other objects from the same class");
