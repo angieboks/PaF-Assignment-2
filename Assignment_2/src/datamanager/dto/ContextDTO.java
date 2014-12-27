@@ -53,4 +53,9 @@ class ContextDTO implements IDTOAdapter {
 		nextInChain = adapter;
 		
 	}
+
+	public static void setIndex(int i) {
+		index = i;
+		
+	}
 }
