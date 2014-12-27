@@ -77,6 +77,8 @@ public class PatternEditorFacade {
 	}
 	
 	public void savePattern(){
+		targetObjects.createDocument();
 		targetObjects.writeDocument(boss.getBuilder().getPattern(), "pattern");
+		targetObjects.finishDocument(new File("C:\\apache-tomcat-8.0.15\\bin\\" + boss.getBuilder().getPatternName()+  ".xml"));
 	}
 }

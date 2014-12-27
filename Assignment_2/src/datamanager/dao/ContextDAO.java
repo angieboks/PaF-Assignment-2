@@ -37,10 +37,6 @@ public class ContextDAO implements IDAOAdapter {
 				String description = null;
 				String example = null;
 				NodeList nList = doc.getElementsByTagName("context" + index);
-				if(nList == null){
-					System.out.println("leeg");
-					return null;
-				}
 				index++;
 				for (int i = 0; i < nList.getLength(); i++) {
 					Node node = nList.item(i);
@@ -55,6 +51,9 @@ public class ContextDAO implements IDAOAdapter {
 						Element element = (Element) node;
 						example = element.getElementsByTagName("example").item(i).getTextContent();
 					}
+				}
+				if(description == null){
+					return null;
 				}
 				obj = new Context(description, example);
 			}catch(NullPointerException e){

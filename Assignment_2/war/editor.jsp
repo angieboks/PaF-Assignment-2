@@ -27,7 +27,7 @@
 				%>
 					<tr>
 						<th>Name</th>
-						<td><input type="text" name=patternName" value="<%=patternName %>"/></td>
+						<td><input type="text" name="patternName" value="<%=patternName %>"/></td>
 					</tr>
 					<tr>
 						<th>Primary solution</th>
@@ -176,18 +176,6 @@
 		</div>
 		<div>
 			<h3>Category</h3>
-			<p>
-				Existing categories: <select name="relatedPattern">
-				<%
-				ArrayList<Category> existingCategory = editor.getCategorys();
-				for(Category c : existingCategory){
-				%>
-					<option value="<%=c.getName() %>"><%=c.getName() %></option>
-				<%
-				}
-				%>
-				</select>
-			</p>
 			<p>
 				Name: <input type="text" name="categoryName" />
 				Type: <select name="categoryType">

@@ -41,15 +41,20 @@ public class PurposeDAO implements IDAOAdapter {
 						return null;
 					}
 					index++;
-					for (int i = 0; i < nList.getLength(); i++) {
-						Node node = nList.item(i);
-						if (node.getNodeType() == Node.ELEMENT_NODE) {
-							Element element = (Element) node;
-							String name =  element.getElementsByTagName("name").item(i).getTextContent();
-							obj = new Purpose(name);
-						}
-					}	
-				}catch(NullPointerException e){
+					String name = null;
+						for (int i = 0; i < nList.getLength(); i++) {
+							Node node = nList.item(i);
+							if (node.getNodeType() == Node.ELEMENT_NODE) {
+								Element element = (Element) node;
+								name =  element.getElementsByTagName("name").item(i).getTextContent();
+								obj = new Purpose(name);
+							}
+						}	
+					if(name == null){
+						return null;
+					}
+				}
+				catch(NullPointerException e){
 					return null;
 				}
 			}

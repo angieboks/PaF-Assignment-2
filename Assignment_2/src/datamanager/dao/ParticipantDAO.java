@@ -59,6 +59,9 @@ public class ParticipantDAO implements IDAOAdapter {
 						role = element.getElementsByTagName("role").item(i).getTextContent();
 					}
 				}
+				if(role == null){
+					return null;
+				}
 				obj = new Participant(isClass, role);
 			}catch(NullPointerException e){
 				return null;
@@ -76,6 +79,10 @@ public class ParticipantDAO implements IDAOAdapter {
 	
 	public void setNextInChain(IDAOAdapter adapter) {
 		nextChain = adapter;
+	}
+
+	public static void setIndex(int i) {
+		index = i;
 	}
 
 }

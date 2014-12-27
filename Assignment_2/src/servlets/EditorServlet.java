@@ -91,7 +91,7 @@ public class EditorServlet extends HttpServlet {
 				participant.add(new Participant(b, req.getParameter("participantName")));
 				req.getSession().setAttribute("participant", participant);
 			}
-			else if(knop.equals("Save pattern")){
+			else if(knop.equals("Save")){
 				//patternname, patterndescription, isPrimary
 				boolean b;
 				if(req.getParameter("isPrimary").equals("true")){
@@ -100,42 +100,42 @@ public class EditorServlet extends HttpServlet {
 				else{
 					b = false;
 				}
-				if(!req.getParameter("patternName").equals("") && !req.getParameter("patternDescription").equals("")){
-					editor.makePattern(req.getParameter("patternName"), b, req.getParameter("patternDescription"));
+				//if(req.getParameter("patternName") != null && req.getParameter("patternDescription") != null){
+				editor.makePattern((String) req.getParameter("patternName"), b, (String) req.getParameter("patternDescription"));
 					//diagram
-					if(!req.getParameter("diagram").equals("")){
+					//if(!req.getParameter("diagram").equals("")){
 						editor.addDia(new File( req.getParameter("diagram")));
 						//aka
-						if(((ArrayList<String>)req.getSession().getAttribute("aka")).size() > 0){
+						//if(((ArrayList<String>)req.getSession().getAttribute("aka")).size() > 0){
 							for(String s : (ArrayList<String>) req.getSession().getAttribute("aka")){
 								editor.addAKA(s);
 							}
 							//relatedPatterns
-							for(String s : (ArrayList<String>) req.getSession().getAttribute("relatedPatterns")){
+							for(String s : (ArrayList<String>) req.getSession().getAttribute("relatedPattern")){
 								editor.addRelatedPattern(s);
 							}
 							//pro
-							if(((ArrayList<String>)req.getSession().getAttribute("pro")).size() > 0){
+							//if(((ArrayList<String>)req.getSession().getAttribute("pro")).size() > 0){
 								for(String s : (ArrayList<String>) req.getSession().getAttribute("pro")){
 									editor.addPro(s);
 								}
 								//con
-								if(((ArrayList<String>)req.getSession().getAttribute("con")).size() > 0){
+								//if(((ArrayList<String>)req.getSession().getAttribute("con")).size() > 0){
 									for(String s : (ArrayList<String>) req.getSession().getAttribute("con")){
 										editor.addCon(s);
 									}
 									//category
-									if(((ArrayList<Category>)req.getSession().getAttribute("category")).size() > 0){
+									//if(((ArrayList<Category>)req.getSession().getAttribute("category")).size() > 0){
 										for(Category c : (ArrayList<Category>) req.getSession().getAttribute("category")){
 											editor.addCategory(c.getName(), c.getClass().getName());
 										}
 										//context
-										if(((ArrayList<Context>)req.getSession().getAttribute("context")).size() > 0){
+										//if(((ArrayList<Context>)req.getSession().getAttribute("context")).size() > 0){
 											for(Context c : (ArrayList<Context>) req.getSession().getAttribute("context")){
 												editor.addContext(c.getDescription(), c.getExample());
 											}
 											//participants
-											if(((ArrayList<Participant>)req.getSession().getAttribute("participant")).size() > 0){
+											//if(((ArrayList<Participant>)req.getSession().getAttribute("participant")).size() > 0){
 												for(Participant p : (ArrayList<Participant>) req.getSession().getAttribute("participant")){
 													editor.addParticipant(p.isClass(), p.getRole());
 												}
@@ -152,7 +152,7 @@ public class EditorServlet extends HttpServlet {
 												req.getSession().setAttribute("context", null);
 												req.getSession().setAttribute("participant", null);
 												rd = req.getRequestDispatcher("overview.jsp");
-											}
+										/*	}
 											else{
 												req.setAttribute("error", "Add at least one participant!");
 											}
@@ -183,7 +183,7 @@ public class EditorServlet extends HttpServlet {
 				}
 				else{
 					req.setAttribute("error", "Enter a patternname and description!");
-				}
+				}*/
 			}
 		}
 		else if(req.getParameter("delKnopaka") != null){
@@ -296,17 +296,16 @@ public class EditorServlet extends HttpServlet {
 			req.getSession().setAttribute("aka", p.getAka());
 			req.getSession().setAttribute("pro", p.getPros());
 			req.getSession().setAttribute("con", p.getCons());
-			//ArrayList<Category> category = new ArrayList<Category>();
-			//for(Scope s : (ArrayList<Scope>) editor.getDAOFacade().readDocument("scope")){
-			//	category.add(s);
-			//}
-			//for(Purpose pu : (ArrayList<Purpose>) editor.getDAOFacade().readDocument("purpose")){
-			//	category.add(pu);
-			//}
-			//req.getSession().setAttribute("category", category);
-			//req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
+			ArrayList<Category> category = new ArrayList<Category>();
+			for(Scope s : (ArrayList<Scope>) editor.getDAOFacade().readDocument("scope")){
+				category.add(s);
+			}
+			for(Purpose pu : (ArrayList<Purpose>) editor.getDAOFacade().readDocument("purpose")){
+			category.add(pu);
+			}
+			req.getSession().setAttribute("category", category);
+			req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
 			req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("participant"));
-			
 		}
 		else if(req.getParameter("newPattern") != null){
 			req.getSession().setAttribute("patternName", null);

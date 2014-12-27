@@ -68,11 +68,15 @@ class ConcretePatternBuilder implements IPatternBuilder {
 
 	@Override
 	public Solution getPattern(){
-		if(product != null && product.isReady()){
+		if(product != null){
 			return product;
 		}
 		else{
 			return null;
 		}
+	}
+	
+	public String getPatternName(){
+		return product.getName();
 	}
 }

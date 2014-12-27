@@ -25,6 +25,10 @@ public class DAOFacade {
 	public void createDocument(File file){
 		DAOFactory.getInstance().setFile(file);
 		DAOFactory.getInstance().readDocument();
+		ContextDAO.setIndex(0);
+		PurposeDAO.setIndex(0);
+		ScopeDAO.setIndex(0);
+		ParticipantDAO.setIndex(0);
 		
 	}
 	
@@ -55,12 +59,12 @@ public class DAOFacade {
 			pattern.add(PatternDAO.getInstance().read(doc, "pattern"));
 			ArrayList<Scope> scopes = new ArrayList<Scope>();
 			while(true){
-				Object temp = PatternDAO.getInstance().read(doc, "scopes");
+				Object temp = PatternDAO.getInstance().read(doc, "scope");
 				if(temp == null) {
 					break;
 				}
 				else{
-					scopes.add((Scope) PatternDAO.getInstance().read(doc, "scope"));
+					scopes.add((Scope) temp);
 				}
 			}
 			pattern.add(scopes);
@@ -71,7 +75,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					purpose.add((Purpose) PatternDAO.getInstance().read(doc, "purpose"));
+					purpose.add((Purpose) temp);
 				}
 			}
 			pattern.add(purpose);
@@ -82,7 +86,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					context.add((Context) PatternDAO.getInstance().read(doc, "context"));
+					context.add((Context) temp);
 				}
 			}
 			pattern.add(context);
@@ -93,7 +97,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					participants.add((Participant) PatternDAO.getInstance().read(doc, "context"));
+					participants.add((Participant)temp);
 				}
 			}
 			pattern.add(participants);
@@ -109,7 +113,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					scopes.add((Scope) PatternDAO.getInstance().read(doc, step));
+					scopes.add((Scope) temp);
 				}
 			}
 			obj = (Object) scopes;
@@ -122,7 +126,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					purpose.add((Purpose) PatternDAO.getInstance().read(doc, step));
+					purpose.add((Purpose) temp);
 				}
 			}
 			obj = (Object) purpose;
@@ -135,7 +139,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					context.add((Context) PatternDAO.getInstance().read(doc, step));
+					context.add((Context) temp);
 				}
 			}
 			obj = (Object) context;
@@ -148,7 +152,7 @@ public class DAOFacade {
 					break;
 				}
 				else{
-					participants.add((Participant) PatternDAO.getInstance().read(doc, step));
+					participants.add((Participant) temp);
 				}
 			}
 			obj = (Object) participants;

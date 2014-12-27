@@ -18,4 +18,5 @@ interface IPatternBuilder {
 	void addContext(String de, String ex, DAOFacade accessObjects, DTOFacade targetObjects);
 	void addParticipant(boolean iC, String r, DAOFacade accessObjects, DTOFacade targetObjects);
 	Solution getPattern();
+	String getPatternName();
 }

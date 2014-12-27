@@ -36,15 +36,20 @@ public class ScopeDAO implements IDAOAdapter {
 				try{
 				NodeList nList = doc.getElementsByTagName("scope" + index);
 				index++;
-				for (int i = 0; i < nList.getLength(); i++) {
-					Node node = nList.item(i);
-					if (node.getNodeType() == Node.ELEMENT_NODE) {
-						Element element = (Element) node;
-						String name = element.getElementsByTagName("name").item(i).getTextContent();
-						obj = new Scope(name);
+				String name = null;
+					for (int i = 0; i < nList.getLength(); i++) {
+						Node node = nList.item(i);
+						if (node.getNodeType() == Node.ELEMENT_NODE) {
+							Element element = (Element) node;
+							name = element.getElementsByTagName("name").item(i).getTextContent();
+							obj = new Scope(name);
+						}
+					}
+					if(name == null){
+						return null;
 					}
 				}
-				}catch(NullPointerException e){
+				catch(NullPointerException e){
 					return null;
 				}
 			}
