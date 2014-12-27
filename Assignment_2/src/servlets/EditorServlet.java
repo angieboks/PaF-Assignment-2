@@ -26,6 +26,7 @@ public class EditorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		PatternEditorFacade editor = (PatternEditorFacade) req.getSession().getAttribute("editor");
+		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		if(editor == null){
 			editor = new PatternEditorFacade();
 		}		
@@ -140,6 +141,17 @@ public class EditorServlet extends HttpServlet {
 												}
 												//save pattern
 												editor.savePattern();
+												req.getSession().setAttribute("patternName", null);
+												req.getSession().setAttribute("patternDescription", null);
+												req.getSession().setAttribute("diagram", null);
+												req.getSession().setAttribute("relatedPattern", null);
+												req.getSession().setAttribute("aka", null);
+												req.getSession().setAttribute("pro", null);
+												req.getSession().setAttribute("con", null);
+												req.getSession().setAttribute("category", null);
+												req.getSession().setAttribute("context", null);
+												req.getSession().setAttribute("participant", null);
+												rd = req.getRequestDispatcher("overview.jsp");
 											}
 											else{
 												req.setAttribute("error", "Add at least one participant!");
@@ -270,23 +282,43 @@ public class EditorServlet extends HttpServlet {
 			File f = new File(req.getAttribute("editPatternValue") + ".xml");
 			editor.getDAOFacade().createDocument(f);
 			Pattern p = (Pattern) editor.getDAOFacade().readDocument("pattern");
-			req.getSession().setAttribute("patternName", );
-			req.getSession().setAttribute("isPrimary", );
-			req.getSession().setAttribute("patternDescription", );
-			req.getSession().setAttribute("diagram", );
-			req.getSession().setAttribute("relatedPattern", );
-			req.getSession().setAttribute("aka", );
-			req.getSession().setAttribute("pro", );
-			req.getSession().setAttribute("con", );
-			req.getSession().setAttribute("category", );
-			req.getSession().setAttribute("context", );
-			req.getSession().setAttribute("participant", );
+			req.getSession().setAttribute("patternName", p.getName());
+			if(p.isPrimary()){
+				req.getSession().setAttribute("isPrimary", "true");
+			}
+			else{
+				req.getSession().setAttribute("isPrimary", "false");
+			}
+			req.getSession().setAttribute("patternDescription", p.getDescription());
+			req.getSession().setAttribute("diagram", p.getDiagram().getPath());
+			req.getSession().setAttribute("relatedPattern", p.getRelatedPatterns());
+			req.getSession().setAttribute("aka", p.getAka());
+			req.getSession().setAttribute("pro", p.getPros());
+			req.getSession().setAttribute("con", p.getCons());
+			ArrayList<Category> category = new ArrayList<Category>();
+			for(Scope s : (ArrayList<Scope>) editor.getDAOFacade().readDocument("scope")){
+				category.add(s);
+			}
+			for(Purpose pu : (ArrayList<Purpose>) editor.getDAOFacade().readDocument("purpose")){
+				category.add(pu);
+			}
+			req.getSession().setAttribute("category", category);
+			req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
+			req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("particpant"));
 			
 		}
 		else if(req.getParameter("newPattern") != null){
-			
+			req.getSession().setAttribute("patternName", null);
+			req.getSession().setAttribute("patternDescription", null);
+			req.getSession().setAttribute("diagram", null);
+			req.getSession().setAttribute("relatedPattern", null);
+			req.getSession().setAttribute("aka", null);
+			req.getSession().setAttribute("pro", null);
+			req.getSession().setAttribute("con", null);
+			req.getSession().setAttribute("category", null);
+			req.getSession().setAttribute("context", null);
+			req.getSession().setAttribute("participant", null);
 		}
-		RequestDispatcher rd = req.getRequestDispatcher("editor.jsp");
 		rd.forward(req, resp);
 		
 	}
