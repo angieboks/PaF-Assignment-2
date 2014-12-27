@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.w3c.dom.Document;
 
 import domain.Category;
+import domain.Participant;
 import domain.Purpose;
 import domain.Scope;
 import domain.Context;
@@ -28,29 +29,116 @@ public class DAOFacade {
 	}
 	
 	public Object readDocument(String step){
+		Object obj = null;
 		Document doc = DAOFactory.getInstance().readDocument();
 		if(step == "all"){
 			ArrayList<Object> pattern = new ArrayList<Object>();
 			pattern.add(PatternDAO.getInstance().read(doc, "pattern"));
-			pattern.add(PatternDAO.getInstance().read(doc, "scope"));
-			pattern.add(PatternDAO.getInstance().read(doc, "purpose"));
-			pattern.add(PatternDAO.getInstance().read(doc, "context"));
-			pattern.add(PatternDAO.getInstance().read(doc, "participant"));
+			ArrayList<Scope> scopes = new ArrayList<Scope>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					scopes.add((Scope) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			pattern.add(scopes);
+			ArrayList<Purpose> purpose = new ArrayList<Purpose>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					purpose.add((Purpose) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			pattern.add(purpose);
+			ArrayList<Context> context = new ArrayList<Context>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					context.add((Context) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			pattern.add(context);
+			ArrayList<Participant> participants = new ArrayList<Participant>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					participants.add((Participant) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			pattern.add(participants);
 			pattern.add(PatternDAO.getInstance().read(doc, "problem"));
 			pattern.add(PatternDAO.getInstance().read(doc, "force"));
-			return (Object) pattern;
+			obj = (Object) pattern;
 		}
-		
-		return PatternDAO.getInstance().read(doc, step);
+		else if(step == "scope"){
+			ArrayList<Scope> scopes = new ArrayList<Scope>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					scopes.add((Scope) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			obj = (Object) scopes;
+		}
+		else if(step == "purpose"){
+			ArrayList<Purpose> purpose = new ArrayList<Purpose>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					purpose.add((Purpose) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			obj = (Object) purpose;
+		}
+		else if(step == "context"){
+			ArrayList<Context> context = new ArrayList<Context>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					context.add((Context) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			obj = (Object) context;
+		}
+		else if(step == "participant"){
+			ArrayList<Participant> participants = new ArrayList<Participant>();
+			while(true){
+				if(PatternDAO.getInstance().read(doc, step) == null) {
+					break;
+				}
+				else{
+					participants.add((Participant) PatternDAO.getInstance().read(doc, step));
+				}
+			}
+			obj = (Object) participants;
+		}
+		else{
+			return PatternDAO.getInstance().read(doc, step);
+		}
+		return obj;
 	
 		/*	!!!!! Als je iets meegeeft wat hier niet instaat, creëer je een infinitive loop!
 		 *
 		 * 	        Parameter String  		returns (in Object file);
 		 * 1.0 Step "pattern"				Pattern
-		 * 2.0 Step "scope"					Scope
-		 * 3.0 Step "purpose"				Purpose
-		 * 4.0 Step "context"			 	Context
-		 * 5.0 Step "participant"		 	Participant
+		 * 2.0 Step "scope"					ArrayList<Scope>
+		 * 3.0 Step "purpose"				ArrayList<Purpose>
+		 * 4.0 Step "context"			 	ArrayList<Context>
+		 * 5.0 Step "participant"		 	ArrayList<Participant>
 		 * 6.0 Step "solution" 				Solution
 		 * 7.0 Step "problem" 				Problem
 		 * 8.0 Step "force"				 	Force

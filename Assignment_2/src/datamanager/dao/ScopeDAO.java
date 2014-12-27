@@ -33,11 +33,8 @@ public class ScopeDAO implements IDAOAdapter {
 	@Override
 	public Object read(Document doc, String step) {
 			if(step == "scope"){
+				try{
 				NodeList nList = doc.getElementsByTagName("scope" + index);
-				if(nList == null){
-					System.out.println("leeg");
-					return null;
-				}
 				index++;
 				for (int i = 0; i < nList.getLength(); i++) {
 					Node node = nList.item(i);
@@ -46,7 +43,10 @@ public class ScopeDAO implements IDAOAdapter {
 						String name = element.getElementsByTagName("name").item(i).getTextContent();
 						obj = new Scope(name);
 					}
-				}		
+				}
+				}catch(NullPointerException e){
+					return null;
+				}
 			}
 			else{
 				obj = nextChain.read(doc, step);
