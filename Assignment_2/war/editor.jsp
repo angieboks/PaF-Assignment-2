@@ -177,17 +177,18 @@
 		<div>
 			<h3>Category</h3>
 			<p>
-				<select name="relatedPattern">
+				Existing categories: <select name="relatedPattern">
 				<%
 				ArrayList<Category> existingCategory = editor.getCategorys();
 				for(Category c : existingCategory){
 				%>
 					<option value="<%=c.getName() %>"><%=c.getName() %></option>
-					<input type="hidden" name="type" value="<%=c.getClass().getName() %>" />
 				<%
 				}
 				%>
 				</select>
+			</p>
+			<p>
 				Name: <input type="text" name="categoryName" />
 				Type: <select name="categoryType">
 				<option value="purpose">Purpose</option>
@@ -225,19 +226,6 @@
 		</div>
 		<div>
 			<h3>Context</h3>
-			<p>
-				<select name="context">
-				<%
-				ArrayList<Context> existingContext = editor.getContexts();
-				for(Context c : existingContext){
-				%>
-					<option value="<%=c.getDescription() %>"><%=c.getDescription() %></option>
-					<input type="hidden" name="example" value="<%=c.getExample()%>" />
-				<%
-				}
-				%>
-				</select>
-			</p>
 			<p>
 				Description: <input type="text" name="contextDescription" />
 				Example: <input type="text" name="contextExample" />

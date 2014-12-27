@@ -30,21 +30,27 @@ public class PatternDAO implements IDAOAdapter {
 			return instance;
 		}
 	}
+	
+	public static void setIndex(int i){
+		index = i;
+	}
 	@Override
 	public Object read(Document doc, String step) {
 		if(step == "patternNames"){
+			try{
 			NodeList nList = doc.getElementsByTagName("pattern" + index);
-			if(nList == null){
-				System.out.println("leeg");
-				return null;
-			}
-			index++;
-			for (int i = 0; i < nList.getLength(); i++) {
-				Node node = nList.item(i);
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element element = (Element) node;
-					obj = (Object) element.getElementsByTagName("name").item(i).getTextContent();
+				index++;
+				for (int i = 0; i < nList.getLength(); i++) {
+					Node node = nList.item(i);
+					if (node.getNodeType() == Node.ELEMENT_NODE) {
+						Element element = (Element) node;
+						obj = (Object) element.getElementsByTagName("name").item(i).getTextContent();
+					}
 				}
+			}
+			catch(Exception e){
+				System.out.println(e);
+				return null;
 			}
 		}
 		
