@@ -18,6 +18,10 @@ public class PurposeDAO implements IDAOAdapter {
 		
 	}
 	
+	public static void setIndex(int i){
+		index = i;
+	}
+	
 	public static PurposeDAO getInstance(){
 		if(instance == null){
 			instance = new PurposeDAO();

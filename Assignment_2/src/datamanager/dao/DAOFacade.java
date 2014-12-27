@@ -72,7 +72,7 @@ public class DAOFacade {
 			}
 			else{
 				categories.add((Scope)obj);
-			}
+			}	
 			
 		}
 		while(true){
@@ -84,6 +84,8 @@ public class DAOFacade {
 				categories.add((Purpose)obj);
 			}
 		}
+		ScopeDAO.setIndex(0);
+		PurposeDAO.setIndex(0);
 		return categories;
 	}
 	public ArrayList<Context> getAllContexts(){
@@ -107,7 +109,7 @@ public class DAOFacade {
 				contexts.add((Context)obj);
 			}			
 		}	
-		
+		ContextDAO.setIndex(0);
 		return contexts;
 	}
 	public ArrayList<String> getAllPatternNames(){
