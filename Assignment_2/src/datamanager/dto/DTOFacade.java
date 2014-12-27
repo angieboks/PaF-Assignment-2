@@ -58,7 +58,7 @@ public class DTOFacade {
 				factory.setDocument(doc);
 			}
 		}
-		File file = new File("categories.xml");
+		File file = new File("C:\\apache-tomcat-8.0.15\\bin\\categories.xml");
 		DTOFactory.getInstance().finishDocument(file);
 	}
 	
@@ -71,7 +71,7 @@ public class DTOFacade {
 				doc = PatternDTO.getInstance().write(contexts.get(i), doc, "context", root);
 				factory.setDocument(doc);			
 		}
-		File file = new File("contexts.xml");
+		File file = new File("C:\\apache-tomcat-8.0.15\\bin\\contexts.xml");
 		DTOFactory.getInstance().finishDocument(file);
 	}
 	public void writeAllPatternNames(ArrayList<Pattern> patterns){
@@ -83,7 +83,7 @@ public class DTOFacade {
 				doc = PatternDTO.getInstance().write(patterns.get(i), doc, "pattern_name", root);
 				factory.setDocument(doc);			
 		}
-		File file = new File("patterns.xml");
+		File file = new File("C:\\apache-tomcat-8.0.15\\bin\\patterns.xml");
 		DTOFactory.getInstance().finishDocument(file);
 	}
 	public void writeDocument(Object obj, String step){
