@@ -282,6 +282,7 @@ public class EditorServlet extends HttpServlet {
 			File f = new File(req.getParameter("editPatternValue") + ".xml");
 			editor.getDAOFacade().createDocument(f);
 			Pattern p = (Pattern) editor.getDAOFacade().readDocument("pattern");
+			System.out.println("Name: " + p.getName());
 			req.getSession().setAttribute("patternName", p.getName());
 			if(p.isPrimary()){
 				req.getSession().setAttribute("isPrimary", "true");
@@ -290,21 +291,21 @@ public class EditorServlet extends HttpServlet {
 				req.getSession().setAttribute("isPrimary", "false");
 			}
 			req.getSession().setAttribute("patternDescription", p.getDescription());
-			req.getSession().setAttribute("diagram", p.getDiagram().getPath());
+			//req.getSession().setAttribute("diagram", p.getDiagram().getPath());
 			req.getSession().setAttribute("relatedPattern", p.getRelatedPatterns());
 			req.getSession().setAttribute("aka", p.getAka());
 			req.getSession().setAttribute("pro", p.getPros());
 			req.getSession().setAttribute("con", p.getCons());
-			ArrayList<Category> category = new ArrayList<Category>();
-			for(Scope s : (ArrayList<Scope>) editor.getDAOFacade().readDocument("scope")){
-				category.add(s);
-			}
-			for(Purpose pu : (ArrayList<Purpose>) editor.getDAOFacade().readDocument("purpose")){
-				category.add(pu);
-			}
-			req.getSession().setAttribute("category", category);
-			req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
-			req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("participant"));
+			//ArrayList<Category> category = new ArrayList<Category>();
+			//for(Scope s : (ArrayList<Scope>) editor.getDAOFacade().readDocument("scope")){
+			//	category.add(s);
+			//}
+			//for(Purpose pu : (ArrayList<Purpose>) editor.getDAOFacade().readDocument("purpose")){
+			//	category.add(pu);
+			//}
+			//req.getSession().setAttribute("category", category);
+			//req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
+			//req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("participant"));
 			
 		}
 		else if(req.getParameter("newPattern") != null){
