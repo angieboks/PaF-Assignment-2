@@ -55,7 +55,8 @@ public class DAOFacade {
 			pattern.add(PatternDAO.getInstance().read(doc, "pattern"));
 			ArrayList<Scope> scopes = new ArrayList<Scope>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -65,7 +66,8 @@ public class DAOFacade {
 			pattern.add(scopes);
 			ArrayList<Purpose> purpose = new ArrayList<Purpose>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -75,7 +77,8 @@ public class DAOFacade {
 			pattern.add(purpose);
 			ArrayList<Context> context = new ArrayList<Context>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -85,7 +88,8 @@ public class DAOFacade {
 			pattern.add(context);
 			ArrayList<Participant> participants = new ArrayList<Participant>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -100,7 +104,8 @@ public class DAOFacade {
 		else if(step == "scope"){
 			ArrayList<Scope> scopes = new ArrayList<Scope>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -112,7 +117,8 @@ public class DAOFacade {
 		else if(step == "purpose"){
 			ArrayList<Purpose> purpose = new ArrayList<Purpose>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -124,7 +130,8 @@ public class DAOFacade {
 		else if(step == "context"){
 			ArrayList<Context> context = new ArrayList<Context>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
@@ -136,7 +143,8 @@ public class DAOFacade {
 		else if(step == "participant"){
 			ArrayList<Participant> participants = new ArrayList<Participant>();
 			while(true){
-				if(PatternDAO.getInstance().read(doc, step) == null) {
+				Object temp = PatternDAO.getInstance().read(doc, step);
+				if(temp == null) {
 					break;
 				}
 				else{
