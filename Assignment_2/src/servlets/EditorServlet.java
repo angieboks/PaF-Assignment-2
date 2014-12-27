@@ -290,7 +290,7 @@ public class EditorServlet extends HttpServlet {
 				req.getSession().setAttribute("isPrimary", "false");
 			}
 			req.getSession().setAttribute("patternDescription", p.getDescription());
-			//req.getSession().setAttribute("diagram", p.getDiagram().getPath());
+			req.getSession().setAttribute("diagram", p.getDiagram().getPath());
 			req.getSession().setAttribute("relatedPattern", p.getRelatedPatterns());
 			req.getSession().setAttribute("aka", p.getAka());
 			req.getSession().setAttribute("pro", p.getPros());
@@ -304,7 +304,7 @@ public class EditorServlet extends HttpServlet {
 			}
 			req.getSession().setAttribute("category", category);
 			req.getSession().setAttribute("context", (ArrayList<Context>) editor.getDAOFacade().readDocument("context"));
-			req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("particpant"));
+			req.getSession().setAttribute("participant", (ArrayList<Participant>) editor.getDAOFacade().readDocument("participant"));
 			
 		}
 		else if(req.getParameter("newPattern") != null){
