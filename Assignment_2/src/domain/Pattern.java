@@ -26,11 +26,20 @@ public class Pattern extends Solution {
 	public void setAka(String aka){
 		this.aka.add(aka);
 	}
+	public void setAka(ArrayList<String> aka){
+		this.aka = aka;
+	}
 	public void setPros(String pros){
 		this.pros.add(pros);
 	}
+	public void setPros(ArrayList<String> pros){
+		this.pros = pros;
+	}
 	public void setCons(String cons){
 		this.cons.add(cons);
+	}
+	public void setCons(ArrayList<String> cons){
+		this.cons = cons;
 	}
 	public String getName() {
 		return name;

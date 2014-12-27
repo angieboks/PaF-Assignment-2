@@ -7,14 +7,19 @@ public class Problem {
 	private String description;
 	private ArrayList<Solution> solutions = new ArrayList<Solution>();
 	private ArrayList<Force> forces = new ArrayList<Force>();
+	private static ArrayList<Problem> allProblems = new ArrayList<Problem>();
 	
 	public Problem(String description) {
 		super();
 		this.description = description;
+		allProblems.add(this);
 	}
 
 	public String getDescription() {
 		return description;
+	}
+	public static ArrayList<Problem> getAllProblems(){
+		return allProblems;
 	}
 
 	public ArrayList<Solution> getSolutions() {
