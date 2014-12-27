@@ -46,7 +46,7 @@ public class DToTest {
 				//Diagram
 				File factoryMethod_File = new File("C:\\apache-tomcat-8.0.15\\bin\\Factorymethod.xml");
 				factoryMethod.setDiagram(factoryMethod_File);
-				File adapterClass_File = new File("C:\\apache-tomcat-8.0.15\\bin\\AdapterClass.xml");
+				File adapterClass_File = new File("C:\\apache-tomcat-8.0.15\\bin\\Adapter(class).xml");
 				adapterClass.setDiagram(adapterClass_File);
 				File interpreter_File = new File("C:\\apache-tomcat-8.0.15\\bin\\Interpreter.xml");
 				interpreter.setDiagram(interpreter_File);
@@ -60,7 +60,7 @@ public class DToTest {
 				prototype.setDiagram(prototype_File);
 				File singleton_File = new File("C:\\apache-tomcat-8.0.15\\bin\\Singleton.xml");
 				singleton.setDiagram(singleton_File);
-				File adapterObject_File = new File("C:\\apache-tomcat-8.0.15\\bin\\AdapterObject.xml");
+				File adapterObject_File = new File("C:\\apache-tomcat-8.0.15\\bin\\Adapter(object).xml");
 				adapterObject.setDiagram(adapterObject_File);
 				File bridge_File = new File("C:\\apache-tomcat-8.0.15\\bin\\Bridge.xml");
 				bridge.setDiagram(bridge_File);
