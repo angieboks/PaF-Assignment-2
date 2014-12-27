@@ -44,53 +44,53 @@ public class DToTest {
 			
 			
 				//Diagram
-				File factoryMethod_File = new File("factorymethod.xml");
+				File factoryMethod_File = new File("C:\\apache-tomcat-8.0.15\\bin\\factorymethod.xml");
 				factoryMethod.setDiagram(factoryMethod_File);
-				File adapterClass_File = new File("adapterClass.xml");
+				File adapterClass_File = new File("C:\\apache-tomcat-8.0.15\\bin\\adapterClass.xml");
 				adapterClass.setDiagram(adapterClass_File);
-				File interpreter_File = new File("interpreter.xml");
+				File interpreter_File = new File("C:\\apache-tomcat-8.0.15\\bin\\interpreter.xml");
 				interpreter.setDiagram(interpreter_File);
-				File templateMethod_File = new File("templateMethod.xml");
+				File templateMethod_File = new File("C:\\apache-tomcat-8.0.15\\bin\\templateMethod.xml");
 				templateMethod.setDiagram(templateMethod_File);
-				File abstractFactory_File = new File("abstractFactory.xml");
+				File abstractFactory_File = new File("C:\\apache-tomcat-8.0.15\\bin\\abstractFactory.xml");
 				abstractFactory.setDiagram(abstractFactory_File);
-				File builder_File = new File("builder.xml");
+				File builder_File = new File("C:\\apache-tomcat-8.0.15\\bin\\builder.xml");
 				builder.setDiagram(builder_File);
-				File prototype_File = new File("prototype.xml");
+				File prototype_File = new File("C:\\apache-tomcat-8.0.15\\bin\\prototype.xml");
 				prototype.setDiagram(prototype_File);
-				File singleton_File = new File("singleton.xml");
+				File singleton_File = new File("C:\\apache-tomcat-8.0.15\\bin\\singleton.xml");
 				singleton.setDiagram(singleton_File);
-				File adapterObject_File = new File("adapterObject.xml");
+				File adapterObject_File = new File("C:\\apache-tomcat-8.0.15\\bin\\adapterObject.xml");
 				adapterObject.setDiagram(adapterObject_File);
-				File bridge_File = new File("bridge.xml");
+				File bridge_File = new File("C:\\apache-tomcat-8.0.15\\bin\\bridge.xml");
 				bridge.setDiagram(bridge_File);
-				File composite_File = new File("composite.xml");
+				File composite_File = new File("C:\\apache-tomcat-8.0.15\\bin\\composite.xml");
 				composite.setDiagram(composite_File);
-				File decorator_file = new File("decorator.xml");
+				File decorator_file = new File("C:\\apache-tomcat-8.0.15\\bin\\decorator.xml");
 				decorator.setDiagram(decorator_file);
-				File façade_file = new File("façade.xml");
+				File façade_file = new File("C:\\apache-tomcat-8.0.15\\bin\\façade.xml");
 				façade.setDiagram(façade_file);
-				File flyweight_File = new File("flyweight.xml");
+				File flyweight_File = new File("C:\\apache-tomcat-8.0.15\\bin\\flyweight.xml");
 				flyweight.setDiagram(flyweight_File);
-				File proxy_File = new File("proxy.xml");
+				File proxy_File = new File("C:\\apache-tomcat-8.0.15\\bin\\proxy.xml");
 				proxy.setDiagram(proxy_File);
-				File chain_File = new File("chain.xml");
+				File chain_File = new File("C:\\apache-tomcat-8.0.15\\bin\\chain.xml");
 				chain.setDiagram(chain_File);
-				File command_File = new File("command.xml");
+				File command_File = new File("C:\\apache-tomcat-8.0.15\\bin\\command.xml");
 				command.setDiagram(command_File);
-				File iterator_File = new File("iterator.xml");
+				File iterator_File = new File("C:\\apache-tomcat-8.0.15\\bin\\iterator.xml");
 				iterator.setDiagram(iterator_File);
-				File mediator_File = new File("mediator.xml");
+				File mediator_File = new File("C:\\apache-tomcat-8.0.15\\bin\\mediator.xml");
 				mediator.setDiagram(mediator_File);
-				File memento_File = new File("memento.xml");
+				File memento_File = new File("C:\\apache-tomcat-8.0.15\\bin\\memento.xml");
 				memento.setDiagram(memento_File);
-				File observer_File = new File("observer.xml");
+				File observer_File = new File("C:\\apache-tomcat-8.0.15\\bin\\observer.xml");
 				observer.setDiagram(observer_File);
-				File state_File = new File("state.xml");
+				File state_File = new File("C:\\apache-tomcat-8.0.15\\bin\\state.xml");
 				state.setDiagram(state_File);
-				File strategy_File = new File("strategy.xml");
+				File strategy_File = new File("C:\\apache-tomcat-8.0.15\\bin\\strategy.xml");
 				strategy.setDiagram(strategy_File);
-				File visitor_File = new File("visitor.xml");
+				File visitor_File = new File("C:\\apache-tomcat-8.0.15\\bin\\visitor.xml");
 				visitor.setDiagram(visitor_File);
 				
 				//AKA
@@ -503,11 +503,6 @@ public class DToTest {
 			}	
 			file = new File(path);
 			facade.finishDocument(file);
-		}
-			
-			
-			
-			
+		}			
 	}
-
 }
